@@ -1,0 +1,439 @@
+﻿<mah:MetroWindow 
+         
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        
+        xmlns:local="clr-namespace:FSMLauncher_3"
+        xmlns:controlzex="urn:controlzex"
+        mc:Ignorable="d"
+        x:Class="FSMLauncher_3.MetroWindow" 
+                 
+        
+        Title="FSM" Height="444" Width="800" IsTabStop="False" Icon="IMG_4304.PNG">
+    <mah:MetroWindow.Background>
+        <ImageBrush ImageSource="/GAAT_GO6Z3TYZ2IC(%$9JMM.jpg"/>
+    </mah:MetroWindow.Background>
+    <TabControl x:Name="Tab1" HorizontalAlignment="Center" Height="410" VerticalAlignment="Center" Width="792" Style="{DynamicResource MahApps.Styles.TabControl.Animated}" SelectionChanged="TabControl_SelectionChanged" TabStripPlacement="Top">
+
+        <TabControl.Background>
+            <SolidColorBrush Color="White" Opacity="0"/>
+        </TabControl.Background>
+        <TabItem Header="主页&#xA;" Margin="229,-186,-229,220" Background="white">
+            <Grid Margin="-4,-74,-5,-5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="56*"/>
+                    <RowDefinition Height="228*"/>
+                    <RowDefinition Height="127*"/>
+                </Grid.RowDefinitions>
+                <Grid.Background>
+                    <SolidColorBrush Color="White" Opacity="0"/>
+                </Grid.Background>
+
+                <Button Content="启动游戏" Grid.ColumnSpan="5" HorizontalAlignment="Left" Margin="13,31,0,10" Width="225" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" FontSize="24" FontFamily="Microsoft YaHei UI Light" Click="Button_Click_4" Grid.Row="2" >
+                    <Button.Background>
+                        <SolidColorBrush Color="#CC0078D7" Opacity="0.88"/>
+                    </Button.Background>
+                </Button>
+
+                <Button Content="插件" HorizontalAlignment="Left" Margin="248,76,0,10" Width="104" Style="{DynamicResource MahApps.Styles.Button.Square}" FontSize="16" FontFamily="Microsoft YaHei UI Light" Click="Button_Click_3" Grid.Row="2" >
+                    <Button.Background>
+                        <SolidColorBrush Color="White" Opacity="0.88"/>
+                    </Button.Background>
+                </Button>
+                <mah:Tile HorizontalAlignment="Left" Height="111" Margin="374,2,0,0" VerticalAlignment="Top" Width="211" FontSize="24" Click="Tile_Click_3" mah:ControlsHelper.ContentCharacterCasing="Normal" Grid.Row="1" >
+                    <mah:Tile.Background>
+                        <SolidColorBrush Color="#CC0012D7" Opacity="0.77"/>
+                    </mah:Tile.Background>
+                    <Label Content="设置" HorizontalAlignment="Left" Height="95" VerticalAlignment="Top" Width="194" FontSize="26" Foreground="White" FontWeight="Bold"/>
+
+                </mah:Tile>
+
+                <mah:Tile HorizontalAlignment="Left" Height="111" Margin="592,1,0,0" VerticalAlignment="Top" Width="179" FontSize="24" Click="Tile_Click_4" Grid.Row="1" >
+                    <mah:Tile.Background>
+                        <SolidColorBrush Color="Purple" Opacity="0.77"/>
+                    </mah:Tile.Background>
+                    <Image HorizontalAlignment="Left" Height="107" VerticalAlignment="Top" Width="171" Source="无线网 (1).png" RenderTransformOrigin="0.5,0.5"/>
+                </mah:Tile>
+
+
+
+                <mah:Tile HorizontalAlignment="Left" Height="111" Margin="560,122,0,0" VerticalAlignment="Top" Width="211" FontSize="26" Click="Tile_Click_2" Grid.Row="1" Grid.RowSpan="2">
+
+
+
+                    <mah:Tile.Background>
+                        <SolidColorBrush Color="Teal" Opacity="0.77"/>
+
+                    </mah:Tile.Background>
+                    <Image HorizontalAlignment="Left" Height="106" VerticalAlignment="Top" Width="192" Source="下载 (1).png" RenderTransformOrigin="0.5,0.5"/>
+
+                </mah:Tile>
+                <mah:Tile HorizontalAlignment="Left" Height="111" Margin="374,121,0,0" VerticalAlignment="Top" Width="179" FontSize="26" Click="Tile_Click_1" Grid.Row="1" Grid.RowSpan="2">
+
+
+                    <mah:Tile.Background>
+                        <SolidColorBrush Color="IndianRed" Opacity="0.77"/>
+
+                    </mah:Tile.Background>
+                    <Image HorizontalAlignment="Left" Height="102" VerticalAlignment="Top" Width="173" Source="更多.png"/>
+
+                </mah:Tile>
+                <Label x:Name="Label1" Content="您好！" Margin="447,47,12,13" FontSize="34" Grid.Row="2" FontStretch="Medium" FontStyle="Normal" FontWeight="Regular" Background="{x:Null}" Foreground="#FFFDFAFA"/>
+                <Button Content="版本选择" HorizontalAlignment="Left" Margin="248,31,0,55" Width="104" Style="{DynamicResource MahApps.Styles.Button.Square}" FontSize="16" FontFamily="Microsoft YaHei UI Light" Click="Button_Click_3" Grid.Row="2" >
+                    <Button.Background>
+                        <SolidColorBrush Color="White" Opacity="0.88"/>
+                    </Button.Background>
+                </Button>
+                <TabControl x:Name="IDTab" HorizontalAlignment="Left" Height="223" Margin="11,27,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="341" Grid.Row="1">
+                    <TabControl.Background>
+                        <SolidColorBrush Color="Black" Opacity="0"/>
+                    </TabControl.Background>
+                    <TabItem Header="TabItem" Margin="-73,-309,81,309">
+                        <Grid Margin="0,-230,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="284*"/>
+                                <ColumnDefinition Width="51*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.11"/>
+                            </Grid.Background>
+
+                            <Button Content="登录" HorizontalAlignment="Left" Height="38" Margin="208,187,0,0" VerticalAlignment="Top" Width="121" FontSize="20" Grid.ColumnSpan="2" Click="Button_Click_11" Foreground="#FF3C3535">
+                                <Button.BorderBrush>
+                                    <SolidColorBrush Color="#FFCCCCCC" Opacity="0.33"/>
+                                </Button.BorderBrush>
+                                <Button.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.33"/>
+                                </Button.Background>
+                            </Button>
+                            <TextBox x:Name="Mojang1" HorizontalAlignment="Left" Height="26" Margin="56,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228">
+                                <TextBox.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.43"/>
+                                </TextBox.Background>
+                            </TextBox>
+                            <Label Content="账号" HorizontalAlignment="Left" Height="28" Margin="8,97,0,0" VerticalAlignment="Top" Width="49"/>
+                            <Label Content="密码" HorizontalAlignment="Left" Height="28" Margin="8,130,0,0" VerticalAlignment="Top" Width="49"/>
+                            <PasswordBox x:Name="Mojang2" HorizontalAlignment="Left" Height="16" Margin="56,130,0,0" VerticalAlignment="Top" Width="228">
+                                <PasswordBox.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.44"/>
+                                </PasswordBox.Background>
+                            </PasswordBox>
+                            <Label Grid.ColumnSpan="2" Content="" HorizontalAlignment="Left" Height="60" Margin="113,20,0,0" VerticalAlignment="Top" Width="202" FontSize="18"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="LX1" Margin="-408,-343,510,343">
+                        <Grid Margin="0,-226,0,0">
+                            <Grid.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.11"/>
+                            </Grid.Background>
+                            <TextBox x:Name="OfflineName" HorizontalAlignment="Left" Height="33" Margin="80,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="241" FontSize="18">
+                                <TextBox.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.46"/>
+                                </TextBox.Background>
+                            </TextBox>
+                            <Label Content="游戏ID" HorizontalAlignment="Left" Height="33" Margin="13,133,0,0" VerticalAlignment="Top" Width="66" FontSize="18" Foreground="White"/>
+                            <Button x:Name="offlineb" Content="登录" HorizontalAlignment="Left" Height="38" Margin="199,182,0,0" VerticalAlignment="Top" Width="121" FontSize="20" Click="Button_Click_12">
+                                <Button.BorderBrush>
+                                    <SolidColorBrush Color="#FFCCCCCC" Opacity="0.33"/>
+                                </Button.BorderBrush>
+                                <Button.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.33"/>
+                                </Button.Background>
+                            </Button>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="LX1&#xA;" Margin="-478,-195,540,194">
+                        <Grid Margin="0,-230,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.11"/>
+                            </Grid.Background>
+                            <mah:Tile Content="Mojang登录界面" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="39" Margin="98,87,0,0" VerticalAlignment="Top" Width="202" Click="Tile_Click_6"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="TabItem" Margin="-167,-476,278,475">
+                        <Grid Margin="0,-232,0,0">
+                            <Grid.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.11"/>
+                            </Grid.Background>
+                            <mah:Tile Content="微软登陆界面" HorizontalAlignment="Left" Margin="131,52,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="TabItem" Margin="-516,-171,486,170">
+                        <Grid Margin="0,-210,0,0">
+                            <Grid.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.11"/>
+                            </Grid.Background>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="TabItem" Margin="-458,-173,453,172">
+
+                        <Grid Margin="0,-214,0,0">
+                            <Grid.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.11"/>
+                            </Grid.Background>
+                        </Grid>
+                    </TabItem>
+                    <Button Content="Button" Height="18" Width="83"/>
+                </TabControl>
+                <Button Content="Mojang" HorizontalAlignment="Left" Height="34" Margin="15,33,0,0" VerticalAlignment="Top" Width="106" Grid.RowSpan="2" BorderBrush="{x:Null}" Foreground="#FFF1F1F1" Click="Button_Click_6" FontSize="16"
+
+>
+                    <Button.Background>
+                        <SolidColorBrush Color="#FF3F3B3B" Opacity="0.66"/>
+                    </Button.Background>
+                </Button>
+                <Button Content="微软" HorizontalAlignment="Left" Height="34" Margin="129,33,0,0" VerticalAlignment="Top" Width="104" Grid.RowSpan="2" BorderBrush="{x:Null}" Foreground="White" FontSize="16" Click="Button_Click_7"
+
+>
+                    <Button.Background>
+                        <SolidColorBrush Color="#FF3F3B3B" Opacity="0.66"/>
+                    </Button.Background>
+                </Button>
+                <Button Content="离线" HorizontalAlignment="Left" Height="34" Margin="241,33,0,0" VerticalAlignment="Top" Width="108" Grid.RowSpan="2" Foreground="#FFF1F1F1" Click="Button_Click_8" BorderBrush="{x:Null}" FontSize="16"
+
+>
+                    <Button.Background>
+                        <SolidColorBrush Color="#FF3F3B3B" Opacity="0.66"/>
+                    </Button.Background>
+                </Button>
+                <Image HorizontalAlignment="Left" Height="109" Margin="455,4,0,0" VerticalAlignment="Top" Width="121" Source="设置.png" Grid.Row="1"/>
+                <Label Content="联机" HorizontalAlignment="Left" Height="38" Margin="706,65,0,0" VerticalAlignment="Top" Width="61" Foreground="White" FontSize="24" FontWeight="Bold" Grid.Row="1"/>
+                <Label Content="更多" HorizontalAlignment="Left" Height="38" Margin="488,181,0,0" VerticalAlignment="Top" Width="61" Foreground="White" FontSize="25" FontWeight="Bold" Grid.Row="1" />
+                <Label Content="下载" HorizontalAlignment="Left" Height="42" Margin="703,184,0,0" VerticalAlignment="Top" Width="67" Foreground="White" FontSize="26" FontWeight="Bold" Grid.Row="1"/>
+
+
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="下载" Margin="229,-118,-229,152">
+            <Grid Margin="-4,-66,0,-3">
+                <Grid.Background>
+                    <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                </Grid.Background>
+                <TabControl HorizontalAlignment="Center" Height="428" Margin="6,-23,1.4,-4" VerticalAlignment="Top" Width="783" Visibility="Visible" TabStripPlacement="Left" Background="{x:Null}" Style="{DynamicResource MahApps.Styles.TabControl.Animated}" >
+                    <TabItem Header="Minecraft" Margin="1,45,-1,-45.4">
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                            </Grid.Background>
+                            <ListBox x:Name="MCV" HorizontalAlignment="Left" Height="364" Margin="16,52,0,0" VerticalAlignment="Top" Width="600"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="CurseForge&#xD;&#xA;" FontSize="10" Margin="0,159.6,0,-161">
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                            </Grid.Background>
+                        </Grid>
+                    </TabItem>
+                    <Button Content="Button" Height="38" Width="47"/>
+                    <Button Content="Button" Height="32" Width="52"/>
+                    <Label Content="Java路径" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="92" FontSize="18"/>
+                    <Grid Height="422.4" Width="646.4">
+                        <Grid.Background>
+                            <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid Height="422.4" Width="646.4">
+                        <Grid.Background>
+                            <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                        </Grid.Background>
+                    </Grid>
+                    <TabItem Header="扩展选择" Margin="-71,-209.6,70.6,209">
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                            </Grid.Background>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+                <Button Content="&#xA;" HorizontalAlignment="Left" Height="43" Margin="12,349,0,0" VerticalAlignment="Top" Width= "43" Style="{DynamicResource MahApps.Styles.Button.Circle}" Click="Button_Click_5" Foreground="#FFF7F7F7" FontWeight="Bold" FontFamily="Microsoft YaHei UI Light" >
+                    <Button.Background>
+                        <ImageBrush ImageSource="返回 (4).png"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+        </TabItem>
+        <TabItem Header="设置" Margin="229,-118,-229,152">
+            <Grid x:Name="Grid" Margin="-4,-63,-4,-3">
+                <Grid.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.325"/>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0*"/>
+                </Grid.ColumnDefinitions>
+                <TabControl HorizontalAlignment="Center" Height="428" Margin="0,-33,0,0" VerticalAlignment="Top" Width="786" Visibility="Visible" TabStripPlacement="Left" Grid.Column="1" Background="{x:Null}" Style="{DynamicResource MahApps.Styles.TabControl.Animated}" >
+                    <TabItem Header="下载设置" Margin="1,45,-1,-45.4">
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                            </Grid.Background>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="离线设置" Margin="0,112.2,0,-111.6">
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                            </Grid.Background>
+                            <RadioButton Content="使用随机皮肤" HorizontalAlignment="Left" Height="37" Margin="23,107,0,0" VerticalAlignment="Top" Width="106" Background="{x:Null}" Foreground="White" Checked="RadioButton_Checked" IsChecked="True"/>
+                            <RadioButton Content="使用正版玩家皮肤" HorizontalAlignment="Left" Height="37" Margin="133,108,0,0" VerticalAlignment="Top" Width="135" Background="{x:Null}" Foreground="White" Checked="RadioButton_Checked_1"/>
+                            <Label Content="离线皮肤" HorizontalAlignment="Left" Height="67" Margin="19,45,0,0" VerticalAlignment="Top" Width="234" FontSize="36" Foreground="White"/>
+                            <Label x:Name="LabelOffline" Content="请输入一个正版玩家的名字" HorizontalAlignment="Left" Height="32" Margin="20,150,0,0" VerticalAlignment="Top" Width="157" Foreground="White" />
+                            <Button x:Name="OffLinebaocun" Content="保存" HorizontalAlignment="Left" Height="27" Margin="175,181,0,0" VerticalAlignment="Top" Width="101" Style="{DynamicResource MahApps.Styles.Button.Square}" Click="OffLinebaocun_Click" />
+                            <TextBox x:Name="TextBoxOffline" HorizontalAlignment="Left" Height="18" Margin="22,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="FSM更新" Margin="0,127.8,0,-128">
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                            </Grid.Background>
+                            <Label x:Name="UpdateLabel" Content="你使用的是最新版本的启动器" HorizontalAlignment="Left" Height="74" Margin="25,57,0,0" VerticalAlignment="Top" Width="569" FontSize="36" Background="{x:Null}" Foreground="#FFF0F0F0"/>
+                            <Button x:Name="UpdateButton" Content="更新启动器" HorizontalAlignment="Left" Height="73" Margin="384,336,0,0" VerticalAlignment="Top" Width="232" FontFamily="Microsoft JhengHei UI" FontSize="22" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Visibility="Visible" Click="UpdateButton_Click" />
+                            <Label x:Name="Update_Log" Content="" HorizontalAlignment="Left" Height="188" Margin="29,127,0,0" VerticalAlignment="Top" Width="569" FontSize="20" Background="{x:Null}" Foreground="#FFF0F0F0"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="个性化" Margin="-1,143,1,-142.4">
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                            </Grid.Background>
+                            <ComboBox x:Name="Java_list_Copy" HorizontalAlignment="Left" Height="35" Margin="90,59,0,0" VerticalAlignment="Top" Width="147" SelectedIndex="0" SelectionChanged="Java_list_Copy_SelectionChanged" FontSize="22" >
+                                <ComboBox.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.65"/>
+                                </ComboBox.Background>
+
+                                <mah:Badged Content="中国红" FontSize="18"/>
+                                <mah:Badged Content="苦力怕绿" FontSize="18"/>
+                                <mah:Badged Content="蓝屏蓝" FontSize="18"/>
+                                <mah:Badged Content="紫罗兰" FontSize="18"/>
+                                <mah:Badged Content="橘子橘" FontSize="18"/>
+                                <mah:Badged Content="高端灰" FontSize="18"/>
+                                <mah:Badged Content="青苹果" FontSize="18"/>
+                                <mah:Badged Content="猛男粉" FontSize="18"/>
+                                <mah:Badged Content="实力青" FontSize="18"/>
+                                <mah:Badged Content="大海蓝" FontSize="18"/>
+                                <mah:Badged Content="瓷器色" FontSize="18"/>
+                                <mah:Badged Content="小紫色" FontSize="18"/>
+                                <mah:Badged Content="小粉红" FontSize="18"/>
+                                <mah:Badged Content="深色红" FontSize="18"/>
+                                <mah:Badged Content="不知道" FontSize="18"/>
+                                <mah:Badged Content="你试试" FontSize="18"/>
+
+                            </ComboBox>
+                            <Label Content="主题色" HorizontalAlignment="Left" Height="32" Margin="32,60,0,0" VerticalAlignment="Top" Width="58" FontSize="16" Foreground="#FFDFDFDF"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="语言/lang" FontSize="10" Margin="0,159.6,0,-161">
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                            </Grid.Background>
+                        </Grid>
+                    </TabItem>
+                    <Button Content="Button" Height="38" Width="47"/>
+                    <Button Content="Button" Height="32" Width="52"/>
+                    <Label Content="Java路径" HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="92" FontSize="18"/>
+                    <Grid Height="422.4" Width="646.4">
+                        <Grid.Background>
+                            <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid Height="422.4" Width="646.4">
+                        <Grid.Background>
+                            <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                        </Grid.Background>
+                    </Grid>
+                    <TabItem Header="通用设置" Margin="0,-118,0,117.6">
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
+                            </Grid.Background>
+                            <ComboBox x:Name="Java_list" HorizontalAlignment="Left" Height="35" Margin="107,45,0,0" VerticalAlignment="Top" Width="303" SelectionChanged="Java_list_SelectionChanged" >
+                                <ComboBox.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.66"/>
+                                </ComboBox.Background>
+                            </ComboBox>
+                            <Label Content="Java路径" HorizontalAlignment="Left" Height="38" Margin="11,46,0,0" VerticalAlignment="Top" Width="92" FontSize="18" Foreground="#FFF0F0F0"/>
+                            <Button Content="手动选择" HorizontalAlignment="Left" Height="36" Margin="415,46,0,0" VerticalAlignment="Top" Width="79" Style="{DynamicResource MahApps.Styles.Button.Square}" FontSize="16" Click="Button_Click_10" />
+                            <Label Content="内存(MB)" HorizontalAlignment="Left" Height="38" Margin="12,83,0,0" VerticalAlignment="Top" Width="92" FontSize="18" Foreground="White"/>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+                <Button Content="" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="43" Margin="10,347,0,0" VerticalAlignment="Top" Width= "43" Style="{DynamicResource MahApps.Styles.Button.Circle}" Click="Button_Click_5" Foreground="#FFF7F7F7" FontWeight="Bold" FontFamily="Microsoft YaHei UI Light" >
+                    <Button.Background>
+                        <ImageBrush ImageSource="返回 (4).png"/>
+                    </Button.Background>
+                </Button>
+
+
+
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="联机" Margin="229,-118,-229,152">
+            <Grid Margin="-4,-61,-4,-3">
+                <Button Content="" HorizontalAlignment="Left" Height="43" Margin="10,347,0,0" VerticalAlignment="Top" Width= "43" Style="{DynamicResource MahApps.Styles.Button.Circle}" Click="Button_Click_5" Foreground="#FFF7F7F7" FontWeight="Bold" FontFamily="Microsoft YaHei UI Light" >
+                    <Button.Background>
+                        <ImageBrush ImageSource="返回 (3).png"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+        </TabItem>
+        <TabItem Header="更多" Margin="229,-118,-229,152">
+            <Grid Background="#123" Margin="-4,-71,-4,-3">
+                <Button Content="&#xA;" HorizontalAlignment="Left" Height="43" Margin="10,347,0,0" VerticalAlignment="Top" Width= "43" Style="{DynamicResource MahApps.Styles.Button.Circle}" Click="Button_Click_5" Foreground="#FFF7F7F7" FontWeight="Bold" FontFamily="Microsoft YaHei UI Light" >
+                    <Button.Background>
+                        <ImageBrush ImageSource="返回 (4).png"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+        </TabItem>
+        <TabItem Header="通用&#xA;" Margin="230,-116,-230,150">
+            <Grid Background="White" Margin="-4,-36,-4,-3"/>
+        </TabItem>
+
+        <TabItem Header="版本选择" Margin="229,-121,-229,155">
+            <Grid Margin="-4,-64,-3.6,-3">
+                <mah:ProgressRing HorizontalAlignment="Left" Height="89" Margin="346,121,0,0" VerticalAlignment="Top" Width="86" IsActive="True"/>
+                <Label Content="加载中..." HorizontalAlignment="Left" Height="53" Margin="329,235,0,0" VerticalAlignment="Top" Width="129" FontSize="31" Background="{x:Null}" Foreground="#FFE8E3E3" />
+            </Grid>
+        </TabItem>
+        <mah:FontIcon Height="118" Width="186"/>
+        <mah:FontIcon Height="70" Width="81"/>
+        <mah:FontIcon Height="68" Width="87"/>
+        <mah:MetroAnimatedSingleRowTabControl Height="82" Width="80">
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </mah:MetroAnimatedSingleRowTabControl>
+        <mah:SplitView Height="58" Width="57"/>
+        <mah:SplitView Height="100" Width="100"/>
+        <mah:Tile Content="Tile" Height="52" Margin="0" Width="149"/>
+        <mah:FontIcon Height="126" Width="267"/>
+        <mah:HamburgerMenu Content="HamburgerMenu" Height="52" Width="70"/>
+        <mah:FlipView Height="48" Width="74"/>
+        <mah:Tile Content="Tile" Height="100" Margin="0" Width="75"/>
+        <mah:SplitView Height="49" Width="141"/>
+        <TabItem Header="版本选择" Margin="229,-121,-229,155">
+            <Grid Margin="-4,-65,-3.6,-3"/>
+        </TabItem>
+
+    </TabControl>
+</mah:MetroWindow>
