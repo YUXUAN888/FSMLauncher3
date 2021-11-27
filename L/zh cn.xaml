@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+
+
+    <sys:String x:Key="GD">更多</sys:String>
+    <sys:String x:Key="line">联机</sys:String>
+    <sys:String x:Key="DL">下载</sys:String>
+    <sys:String x:Key="st">设置</sys:String>
+    <sys:String x:Key="MailL">邮箱</sys:String>
+    <sys:String x:Key="PassL">密码</sys:String>
+    <sys:String x:Key="BBXZ">版本选择</sys:String>
+    <sys:String x:Key="CJ">插件</sys:String>
+    <sys:String x:Key="StartGame">启动游戏</sys:String>
+    <sys:String x:Key="WRTS">请注意,免密登录指的是如果电脑系统登录&#xA;是微软账户且购买了MC,FSM则会识别出，&#xA;并直接登录&#xA;&#xA;</sys:String>
+    <sys:String x:Key="MMDL">免密登录</sys:String>
+    <sys:String x:Key="ZCDL">正常登录</sys:String>
+</ResourceDictionary>

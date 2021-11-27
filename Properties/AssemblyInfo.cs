@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("FSM3")]
 [assembly: AssemblyDescription("MinecraftLauncher！")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("宇轩yu_xuan,FanSh")]
+[assembly: AssemblyCompany("宇轩yu_xuan")]
 [assembly: AssemblyProduct("FSMLauncher_3")]
 [assembly: AssemblyCopyright("Copyright © 宇轩YU_XUAN. 2021")]
 [assembly: AssemblyTrademark("")]

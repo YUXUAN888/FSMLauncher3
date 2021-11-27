@@ -1,0 +1,14 @@
+﻿<UserControl x:Name="DownLoadItem" x:Class="FSMLauncher_3.Item"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FSMLauncher_3"
+             mc:Ignorable="d" Height="34.02" Width="502.8">
+    <Grid Margin="0,0,0,398.6">
+        <Image x:Name="Dimage" HorizontalAlignment="Left" Height="34" Margin="6,1,0,-35" VerticalAlignment="Top" Width="40" Source="/FSMLauncher_3;component/Image/0E885BB0.PNG"/>
+        <TextBlock x:Name="Dver" HorizontalAlignment="Left" Margin="62,2,0,-32" TextWrapping="Wrap" Text="Ver" VerticalAlignment="Top" Foreground="#FF8E8E8E" FontSize="22" Height="30"/>
+        <TextBlock x:Name="dbb" HorizontalAlignment="Left" Margin="383,2,0,-32" TextWrapping="Wrap" Text="正式版" VerticalAlignment="Top" Foreground="#FF8E8E8E" FontSize="22" Height="30" Width="112"/>
+
+    </Grid>
+</UserControl>
