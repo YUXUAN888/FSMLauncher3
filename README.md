@@ -1,5 +1,5 @@
-# NsisoLauncher(Master)
-A New Minecraft Launcher (unofficial) from Nsiso (Master)  
+# FSMLauncher3
+A Minecraft Launcher!
 
 此项目开源目的在于学习，错误排查，公开安全策略  
 作者：宇轩YUXUAN
