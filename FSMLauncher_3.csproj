@@ -381,6 +381,7 @@
     <Resource Include="Image\语言.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FFS.py" />
     <Content Include="Hello!FSM.py" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
