@@ -380,6 +380,9 @@
   <ItemGroup>
     <Resource Include="Image\语言.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Hello!FSM.py" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
