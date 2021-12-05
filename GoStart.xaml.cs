@@ -297,7 +297,7 @@ namespace FSMLauncher_3
 
 
             Application.Current.Dispatcher.Invoke(
-     delegate
+     async delegate
      {
          //Code
 
@@ -308,7 +308,7 @@ namespace FSMLauncher_3
          {
 
              Xbox XboxLogin = new Xbox();
-             var token = microsoftLogin.GetToken(microsoftLogin.Login(true));
+             var token = microsoftLogin.GetToken(await microsoftLogin.Login(true));
              wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
 
              string refresh_token = token.refresh_token;
@@ -361,7 +361,7 @@ namespace FSMLauncher_3
 
         }
 
-        private void Tile_Click_888(object sender, RoutedEventArgs e)
+        private async void Tile_Click_888(object sender, RoutedEventArgs e)
         {
             //正常登录
             MicrosoftLogin microsoftLogin = new MicrosoftLogin();
@@ -371,7 +371,7 @@ namespace FSMLauncher_3
             {
 
                 Xbox XboxLogin = new Xbox();
-                var token = microsoftLogin.GetToken(microsoftLogin.Login(false));
+                var token = microsoftLogin.GetToken(await microsoftLogin.Login(false));
                 wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
 
                 string refresh_token = token.refresh_token;

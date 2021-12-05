@@ -16,7 +16,13 @@
         Title="FSM" Height="444" Width="800" IsTabStop="False" Icon="Image\IMG_4304.PNG" Closing="MetroWindow_Closing" Loaded="load" WindowStartupLocation="CenterScreen" ShowMinButton="True" SizeChanged="Size">
 
     <mah:MetroWindow.Background>
-        <ImageBrush ImageSource="Image\3F4616C3F3B8E05D9AD8710DE44125B9.png"/>
+        <ImageBrush ImageSource="Image\3F4616C3F3B8E05D9AD8710DE44125B9.png">
+
+
+
+
+        </ImageBrush>
+
     </mah:MetroWindow.Background>
 
 
@@ -33,6 +39,11 @@
         </TabControl.Background>
         <TabItem Header="主页&#xA;" Margin="229,-186,-229,220" Background="white">
             <Grid Margin="-4,-74,-5,-5">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="731*"/>
+                    <ColumnDefinition Width="64*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="56*"/>
                     <RowDefinition Height="228*"/>
@@ -42,62 +53,23 @@
                     <SolidColorBrush Color="White" Opacity="0"/>
                 </Grid.Background>
 
-                <Button HorizontalAlignment="Left" Margin="14,0,0,10.2" Width="225" Style="{StaticResource MaterialDesignPaperDarkButton}"  FontSize="27" FontFamily="Microsoft YaHei UI Light" Click="Button_Click_start" Grid.Row="2" Height="86" VerticalAlignment="Bottom" Foreground="#FFEBEBEB" >
+                <Button HorizontalAlignment="Left" Margin="14,0,0,10.6" Width="225" Style="{StaticResource MaterialDesignPaperDarkButton}"  FontSize="27" FontFamily="Microsoft YaHei UI Light" Click="Button_Click_start" Grid.Row="2" Height="86" VerticalAlignment="Bottom" Foreground="#FFEBEBEB" >
 
                     <Button.Background>
                         <SolidColorBrush Color="#CC0BA7B0" Opacity="0.88"/>
                     </Button.Background>
                     <WrapPanel Height="74" Width="205">
-                        <Label Content="{DynamicResource StartGame}" Height="37" Width="191" FontSize="25.8" Foreground="White" HorizontalContentAlignment="Center" Margin="0,37.5,0,0" VerticalAlignment="Center"/>
+                        <Label Content="{DynamicResource StartGame}" Height="39" Width="191" FontSize="25.8" Foreground="White" HorizontalContentAlignment="Center" Margin="0,37.5,0,0" VerticalAlignment="Center"/>
                         <Label x:Name="NowV" Content="当前版本" Height="41" Width="190" FontSize="12.8" Foreground="#FFEAEAEA" HorizontalContentAlignment="Center" Margin="0,-110,0,0" FontFamily="Microsoft YaHei UI"/>
                     </WrapPanel>
                 </Button>
 
-                <Button Content="{DynamicResource CJ}" HorizontalAlignment="Left" Margin="248,78.4,0,10.6" Width="104" Style="{StaticResource MaterialDesignPaperButton}" FontSize="16" FontFamily="Microsoft YaHei UI Light" Click="Button_Click_3" Grid.Row="2" Height="Auto" >
+                <Button Content="小组件" HorizontalAlignment="Left" Margin="248,78.4,0,10.6" Width="104" Style="{StaticResource MaterialDesignPaperButton}" FontSize="16" FontFamily="Microsoft YaHei UI Light" Click="Button_Click_XZJ" Grid.Row="2" Height="Auto" >
                     <Button.Background>
                         <SolidColorBrush Color="White" Opacity="0.88"/>
                     </Button.Background>
                 </Button>
-                <mah:Tile HorizontalAlignment="Left" Height="133" Margin="374,36,0,0" VerticalAlignment="Top" Width="211" FontSize="24" Click="Tile_Click_3" mah:ControlsHelper.ContentCharacterCasing="Normal" Grid.RowSpan="2" >
-                    <mah:Tile.Background>
-                        <SolidColorBrush Color="#CC0012D7" Opacity="0.88"/>
-                    </mah:Tile.Background>
-                    <Image HorizontalAlignment="Left" Height="127" VerticalAlignment="Top" Width="200" Source="Image\设置.png"/>
-
-                </mah:Tile>
-
-                <mah:Tile x:Name="ONLINET" HorizontalAlignment="Left" Height="132" Margin="592,36,0,0" VerticalAlignment="Top" Width="179" FontSize="24" Click="Tile_Click_4" Loaded="tt" Grid.RowSpan="2" >
-                    <mah:Tile.Background>
-                        <SolidColorBrush Color="Purple" Opacity="0.88"/>
-                    </mah:Tile.Background>
-                    <Image HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="171" Source="Image\无线网 (1).png" RenderTransformOrigin="0.5,0.5"/>
-                </mah:Tile>
-
-
-
-                <mah:Tile HorizontalAlignment="Left" Height="124" Margin="560,122,0,0" VerticalAlignment="Top" Width="211" FontSize="26" Click="Tile_Click_2" Grid.Row="1" Grid.RowSpan="2">
-
-
-
-                    <mah:Tile.Background>
-                        <SolidColorBrush Color="Teal" Opacity="0.88"/>
-
-                    </mah:Tile.Background>
-                    <Image HorizontalAlignment="Left" Height="113" VerticalAlignment="Top" Width="192" Source="Image\下载 (1).png" RenderTransformOrigin="0.5,0.5"/>
-
-                </mah:Tile>
-                <mah:Tile HorizontalAlignment="Left" Height="125" Margin="374,121,0,0" VerticalAlignment="Top" Width="179" FontSize="26" Click="Tile_Click_1" Grid.Row="1" Grid.RowSpan="2">
-
-
-                    <mah:Tile.Background>
-
-                        <SolidColorBrush Color="IndianRed" Opacity="0.88"/>
-
-                    </mah:Tile.Background>
-                    <Image HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="167" Source="Image\更多.png"/>
-
-                </mah:Tile>
-                <Label x:Name="Label1" Content="您好!" Margin="0,53,12.4,26.2" FontSize="29.8" Grid.Row="2" FontStretch="Medium" FontStyle="Normal" FontWeight="Regular" Background="{x:Null}" Foreground="#FF3F3D3D" Width="331" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+                <Label x:Name="Label1" Content="您好!" Margin="0,53.4,12.4,26.6" FontSize="29.8" Grid.Row="2" FontStretch="Medium" FontStyle="Normal" FontWeight="Regular" Background="{x:Null}" Foreground="#FF3F3D3D" Width="331" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Grid.ColumnSpan="2"/>
 
                 <Button Content="{DynamicResource BBXZ}" HorizontalAlignment="Left" Margin="248,31.4,0,57.6" Width="104" Style="{StaticResource MaterialDesignPaperButton}" FontSize="16" FontFamily="Microsoft YaHei UI Light" Click="Button_Click_3" Grid.Row="2" Height="Auto" >
                     <Button.Background>
@@ -118,14 +90,14 @@
                             <Grid.Background>
                                 <SolidColorBrush Color="Black" Opacity="0.01"/>
                             </Grid.Background>
-                            <TextBox x:Name="Mojang1" HorizontalAlignment="Left" Height="38" Margin="56,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265" BorderBrush="Black" Grid.ColumnSpan="3" FontSize="18">
+                            <TextBox x:Name="Mojang1" HorizontalAlignment="Left" Height="38" Margin="56,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265" BorderBrush="Black" Grid.ColumnSpan="3" FontSize="16">
                                 <TextBox.Background>
                                     <SolidColorBrush Color="#FFE4E4E4" Opacity="0.43"/>
                                 </TextBox.Background>
                             </TextBox>
                             <Label x:Name="MailL" Content="邮箱:" HorizontalAlignment="Left" Height="34" Margin="7,58,0,0" VerticalAlignment="Top" Width="49" FontSize="18"/>
                             <Label x:Name="PassL" Content="密码:" HorizontalAlignment="Left" Height="34" Margin="8,106,0,0" VerticalAlignment="Top" Width="49" FontSize="18"/>
-                            <PasswordBox x:Name="Mojang2" HorizontalAlignment="Left" Height="39" Margin="56,101,0,0" VerticalAlignment="Top" Width="265" BorderBrush="Black" Grid.ColumnSpan="3" FontSize="18">
+                            <PasswordBox x:Name="Mojang2" HorizontalAlignment="Left" Height="39" Margin="56,101,0,0" VerticalAlignment="Top" Width="265" BorderBrush="Black" Grid.ColumnSpan="3" FontSize="16">
                                 <PasswordBox.Background>
                                     <SolidColorBrush Color="#FFEAEAEA" Opacity="0.44"/>
                                 </PasswordBox.Background>
@@ -148,7 +120,12 @@
                                 </TextBox.Background>
                             </TextBox>
                             <Label Content="ID:" HorizontalAlignment="Left" Height="33" Margin="6,146,0,0" VerticalAlignment="Top" Width="32" FontSize="18" Foreground="#FF383434"/>
-                            <Image HorizontalAlignment="Left" Height="101" Margin="118,14,0,0" VerticalAlignment="Top" Width="101" Source="IMG_4306.ico"/>
+                            <Image HorizontalAlignment="Left" Height="101" Margin="118,14,0,0" VerticalAlignment="Top" Width="101" Source="Image/u=3699317021,3596778976&amp;fm=26&amp;fmt=auto.png"/>
+                            <mah1:Tile Content="" HorizontalAlignment="Left" Height="36" Margin="285,187,0,0" VerticalAlignment="Top" Width="36" Click="Tile_Click_LXSkin">
+                                <mah1:Tile.Background>
+                                    <ImageBrush ImageSource="Image/皮肤.png"/>
+                                </mah1:Tile.Background>
+                            </mah1:Tile>
                         </Grid>
                     </TabItem>
                     <TabItem Header="LX1&#xA;" Margin="-290,-195,351.8,194">
@@ -162,7 +139,7 @@
                             <Grid.Background>
                                 <SolidColorBrush Color="#FF999999" Opacity="0.11"/>
                             </Grid.Background>
-                            <Image x:Name="IM" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="116,35,0,0" VerticalAlignment="Top" Width="100" Source="Image\QQ图片20210815151126.png" Stretch="Fill"/>
+                            <Image x:Name="IM" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="116,35,0,0" VerticalAlignment="Top" Width="100" Source="Image/wxb账户.png" Stretch="Fill"/>
                             <Label x:Name="LB" Grid.ColumnSpan="2" Content="OHHHHHHHHH" HorizontalAlignment="Left" Height="35" Margin="37,139,0,0" VerticalAlignment="Top" Width="260" HorizontalContentAlignment="Center" FontSize="18" Background="{x:Null}" Foreground="#FF545151" />
                             <mah:Tile Grid.ColumnSpan="2" Content="" HorizontalAlignment="Left" Height="36" Margin="12,189,0,0" VerticalAlignment="Top" Width="36" Click="Tile_Click_exit">
                                 <mah:Tile.Background>
@@ -181,8 +158,8 @@
                             <Grid.Background>
                                 <SolidColorBrush Color="Black" Opacity="0.01"/>
                             </Grid.Background>
-                            <mah:Tile Content = "{DynamicResource MMDL}" HorizontalAlignment="Left" Height="56" Margin="10,107,0,0" VerticalAlignment="Top" Width="152" Click="Tile_Click_8" Background="#CCD74600" FontSize="24"/>
-                            <mah:Tile Content = "{DynamicResource ZCDL}" HorizontalAlignment="Left" Height="56" Margin="172,108,0,0" VerticalAlignment="Top" Width="152" Click="Tile_Click_888" Background="#CC005FD7" FontSize="24"/>
+                            <Button Content = "{DynamicResource MMDL}" HorizontalAlignment="Left" Height="56" Margin="10,107,0,0" VerticalAlignment="Top" Width="152" Click="Tile_Click_8" Background="#CCD74600" FontSize="24"/>
+                            <Button Content = "{DynamicResource ZCDL}" HorizontalAlignment="Left" Height="56" Margin="172,107,0,0" VerticalAlignment="Top" Width="152" Click="Tile_Click_888" Background="#CC005FD7" FontSize="24"/>
                             <Label HorizontalAlignment="Left" Height="90" Margin="15,14,0,0" VerticalAlignment="Top" Width="304" Background="{x:Null}" Foreground="#FF4E4949" FontSize="16">
                                 <TextBlock TextWrapping="Wrap"
 Text="{DynamicResource WRTS}" Height="85" >
@@ -235,10 +212,6 @@ Text="{DynamicResource WRTS}" Height="85" >
                     </TabItem>
                     <Button Content="Button" Height="18" Width="83"/>
                 </TabControl>
-                <Label x:Name="line" Content="{DynamicResource line}" HorizontalAlignment="Left" Height="38" Margin="660,65,0,0" VerticalAlignment="Top" Width="107" Foreground="White" FontSize="24" FontWeight="Bold" Grid.Row="1" HorizontalContentAlignment="Right"/>
-                <Label x:Name="GD" Content="{DynamicResource GD}" HorizontalAlignment="Left" Height="38" Margin="475,201,0,0" VerticalAlignment="Top" Width="76" Foreground="White" FontSize="25" FontWeight="Bold" Grid.Row="1" Grid.RowSpan="2" HorizontalContentAlignment="Right" />
-                <Label x:Name="DL" Content="{DynamicResource DL}" HorizontalAlignment="Left" Height="42" Margin="621,193,0,0" VerticalAlignment="Top" Width="146" Foreground="White" FontSize="26" FontWeight="Bold" Grid.Row="1" Grid.RowSpan="2" HorizontalContentAlignment="Right"/>
-                <Label x:Name="st" Content="{DynamicResource st}" HorizontalAlignment="Left" Height="39" Margin="445,65,0,0" VerticalAlignment="Top" Width="131" Foreground="White" FontSize="24" FontWeight="Bold" Grid.Row="1" HorizontalContentAlignment="Right"/>
                 <mah:Tile Content="&#xA;" HorizontalAlignment="Left" Height="56" Margin="190,18,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="55" Click="Tile_Click_9" ToolTip="离线登录">
                     <mah:Tile.Background>
                         <ImageBrush ImageSource="Image\离线.png"/>
@@ -254,7 +227,7 @@ Text="{DynamicResource WRTS}" Height="85" >
                         <ImageBrush ImageSource="Image\src=http___www.underconsideration.com_brandnew_archives_mojang_studios_logo_stacked.png&amp;refer=http___www.underconsideration.png" Stretch="UniformToFill"/>
                     </mah:Tile.Background>
                 </mah:Tile>
-                <Button Content="" HorizontalAlignment="Left" Height="73" Margin="373,39,0,0" Grid.Row="2" VerticalAlignment="Top" Width="71" Style="{DynamicResource MahApps.Styles.Button.Circle}" Click="Button_Click_13">
+                <Button Content="" HorizontalAlignment="Left" Height="73" Margin="373,39.4,0,0" Grid.Row="2" VerticalAlignment="Top" Width="71" Style="{DynamicResource MahApps.Styles.Button.Circle}" Click="Button_Click_13">
                     <Button.Foreground>
                         <ImageBrush/>
                     </Button.Foreground>
@@ -270,6 +243,42 @@ Text="{DynamicResource WRTS}" Height="85" >
                         <ImageBrush ImageSource="Image\第三方.png"/>
                     </mah:Tile.Background>
                 </mah:Tile>
+                <Button x:Name="ONLINET" HorizontalAlignment="Left" Height="109" Margin="574,54,0,0" VerticalAlignment="Top" Width="191" BorderBrush="#FF303134" Click="Tile_Click_4" Foreground="White" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <Button.Background>
+                        <SolidColorBrush Color="#FFD6E2EB" Opacity="0.92"/>
+                    </Button.Background>
+                    <WrapPanel Height="97" Width="156">
+                        <Image HorizontalAlignment="Left" Height="94" VerticalAlignment="Top" Width="88" Source="Image\无线网.png" RenderTransformOrigin="0.51,0.527"/>
+                        <Label  Content="{DynamicResource line}" HorizontalAlignment="Left" Height="37" Margin="0,59,-210.6,0" VerticalAlignment="Top" Width="77" Foreground="Black" FontSize="24" FontWeight="Normal" HorizontalContentAlignment="Right" FontFamily="Microsoft YaHei UI Light"/>
+                    </WrapPanel>
+                </Button>
+                <Button HorizontalAlignment="Left" Height="110" Margin="387,54,0,0" VerticalAlignment="Top" Width="181" BorderBrush="#FF303134"  Click="Tile_Click_3" Foreground="White" Grid.RowSpan="2">
+                    <Button.Background>
+                        <SolidColorBrush Color="#FFCFDCE4" Opacity="0.935"/>
+                    </Button.Background>
+                    <WrapPanel Height="107" Width="172">
+                        <Image HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="84" Source="Image/设置，更多.png" RenderTransformOrigin="0.51,0.527" Margin="0,11,0,0"/>
+                        <Label  Content="{DynamicResource st}" HorizontalAlignment="Left" Height="35" Margin="0,62,-210.6,0" VerticalAlignment="Top" Width="70" Foreground="Black" FontSize="24" FontWeight="Normal" HorizontalContentAlignment="Right" FontFamily="Microsoft YaHei UI Light"/>
+                    </WrapPanel>
+                </Button>
+                <Button HorizontalAlignment="Left" Height="107" Margin="574,114,0,0" VerticalAlignment="Top" Width="191" BorderBrush="#FF303134"   Click="Tile_Click_2" Foreground="White" Grid.Row="1" Grid.ColumnSpan="2">
+                    <Button.Background>
+                        <SolidColorBrush Color="#FFCFDCE4" Opacity="0.935"/>
+                    </Button.Background>
+                    <WrapPanel Height="107" Width="172">
+                        <Image HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="91" Source="Image/下载 (4).png" RenderTransformOrigin="0.51,0.527" Margin="0,8,0,0"/>
+                        <Label x:Name="DL" Content="{DynamicResource DL}" HorizontalAlignment="Left" Height="36" Margin="0,60.5,-210.6,0" VerticalAlignment="Top" Width="72" Foreground="Black" FontSize="24" FontWeight="Normal" HorizontalContentAlignment="Right" FontFamily="Microsoft YaHei UI Light"/>
+                    </WrapPanel>
+                </Button>
+                <Button x:Name="ONLINET_Copy" HorizontalAlignment="Left" Height="107" Margin="387,114,0,0" VerticalAlignment="Top" Width="181" BorderBrush="#FF303134" Click="Tile_Click_1" Foreground="White" Grid.Row="1">
+                    <Button.Background>
+                        <SolidColorBrush Color="#FFCAD8DF" Opacity="0.935"/>
+                    </Button.Background>
+                    <WrapPanel Height="97" Width="156">
+                        <Image HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="78" Source="Image/更多 (2).png" RenderTransformOrigin="0.51,0.527" Margin="0,10,0,0"/>
+                        <Label x:Name="GD" Content="{DynamicResource GD}" HorizontalAlignment="Left" Height="37" Margin="0,57,-210.6,0" VerticalAlignment="Top" Width="74" Foreground="Black" FontSize="24" FontWeight="Normal" HorizontalContentAlignment="Right" FontFamily="Microsoft YaHei UI Light"/>
+                    </WrapPanel>
+                </Button>
 
 
             </Grid>
@@ -329,7 +338,8 @@ Text="{DynamicResource WRTS}" Height="85" >
                             </Button>
                             <Image HorizontalAlignment="Left" Height="42" Margin="12,211,0,0" VerticalAlignment="Top" Width="37" Source="Image\MI82IUM36N{2L{N@%_9_Q26.png"/>
                             <Image HorizontalAlignment="Left" Height="42" Margin="-11,61,0,0" VerticalAlignment="Top" Width="59" Source="Image\20140521134310.png" Stretch="UniformToFill"/>
-                            <Image HorizontalAlignment="Left" Height="42" Margin="-7,110,0,0" VerticalAlignment="Top" Width="59"  Stretch="UniformToFill"/>
+                            <Image HorizontalAlignment="Left" Height="42" Margin="-7,110,0,0" VerticalAlignment="Top" Width="59"  Stretch="UniformToFill" Source="Image/Fabric.png"/>
+                            <Image HorizontalAlignment="Left" Height="34" Margin="10,165,0,0" VerticalAlignment="Top" Width="35" Source="Image/OptifineLogo.png"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="Forge" Margin="75.6,63,-76,-63.4">
@@ -397,8 +407,8 @@ Text="{DynamicResource WRTS}" Height="85" >
                     <ColumnDefinition/>
                     <ColumnDefinition Width="0*"/>
                 </Grid.ColumnDefinitions>
-                <mah:MetroAnimatedTabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="408" Margin="5,7,0,0" VerticalAlignment="Top" Width="785" Background="{x:Null}" TabStripPlacement="Left">
-                    <TabItem Header="通用设置">
+                <mah:MetroAnimatedTabControl x:Name="SetTab" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="408" Margin="5,7,0,0" VerticalAlignment="Top" Width="785" Background="{x:Null}" TabStripPlacement="Left">
+                    <TabItem Header="通用设置" Margin="-158,0,158,-0.6">
                         <Grid Height="402" Margin="0,0,-0.2,-0.4" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="653">
                             <Grid.Background>
                                 <ImageBrush/>
@@ -446,14 +456,16 @@ Text="{DynamicResource WRTS}" Height="85" >
                             </ScrollViewer>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="下载设置" Margin="0,2.4,0,-3.6">
+                    <TabItem Header="下载设置" Margin="-158,2.6,158,-4">
                         <Grid>
+                            <!-- simplest form -->
                             <Grid.Background>
                                 <ImageBrush/>
                             </Grid.Background>
+                            <Border x:Name="Bod1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="68" Margin="199,91,0,0" VerticalAlignment="Top" Width="260"/>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="软件更新" Margin="0,5.2,0,-4.6">
+                    <TabItem Header="软件更新" Margin="-158,4.8,158,-4.2">
                         <TabItem.Background>
                             <ImageBrush/>
                         </TabItem.Background>
@@ -466,7 +478,7 @@ Text="{DynamicResource WRTS}" Height="85" >
                             <Label x:Name="Update_Log" Content="" HorizontalAlignment="Left" Height="188" Margin="29,83,0,0" VerticalAlignment="Top" Width="614" FontSize="20" Background="{x:Null}" Foreground="#FFF0F0F0"/>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="个性化" Margin="0,6.6,0,-7">
+                    <TabItem Header="个性化" Margin="-158,6.4,158,-7.8">
                         <Grid>
                             <Grid.Background>
                                 <ImageBrush/>
@@ -518,12 +530,13 @@ Text="{DynamicResource WRTS}" Height="85" >
                             </Expander>
                         </Grid>
                     </TabItem>
-                    <TabItem Header="语言\lang" Height="38" Margin="0,6.8,0,-6.4" VerticalAlignment="Top">
+                    <TabItem Header="语言\lang" Height="38" Margin="-158,6.6,158,-6.2" VerticalAlignment="Top">
                         <Grid>
                             <Grid.Background>
                                 <ImageBrush/>
                             </Grid.Background>
-                            <mah:Tile Content="测试用的别点就对了" HorizontalAlignment="Left" Height="53" Margin="326,78,0,0" VerticalAlignment="Top" Width="177" Click="Tile_Click_23"/>
+                            <mah:Tile Content="测试用的别点就对了" HorizontalAlignment="Left" Height="53" Margin="474,2,0,0" VerticalAlignment="Top" Width="177" Click="Tile_Click_23"/>
+                            <TextBlock HorizontalAlignment="Left" Height="32" Margin="275,186,0,0" TextWrapping="Wrap" Text="暂时没有语言包..." VerticalAlignment="Top" Width="225" Foreground="#FFB0B0B0"/>
                         </Grid>
                     </TabItem>
                 </mah:MetroAnimatedTabControl>
@@ -532,6 +545,9 @@ Text="{DynamicResource WRTS}" Height="85" >
                         <ImageBrush ImageSource="Image\返回 (4).png"/>
                     </Button.Background>
                 </Button>
+                <Grid Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="338" Margin="9,13,0,0" VerticalAlignment="Top" Width="133">
+                    <ListBox x:Name="SetBox" HorizontalAlignment="Left" Height="328" Margin="0,3,0,0" VerticalAlignment="Top" Width="132" SelectionChanged="SetBox_SelectionChanged"/>
+                </Grid>
 
 
 
@@ -549,7 +565,6 @@ Text="{DynamicResource WRTS}" Height="85" >
                         <ImageBrush ImageSource="Image\返回 (3).png"/>
                     </Button.Background>
                 </Button>
-                <mah:Tile Content="Tile" HorizontalAlignment="Left" Margin="364.6,388,-378.6,0" Width="14" Height="10" VerticalAlignment="Top" RenderTransformOrigin="1.5,-1" Click="e" Grid.Column="1"/>
                 <TabControl HorizontalAlignment="Left" Height="392" Margin="6,8,0,0" VerticalAlignment="Top" Width="775" TabStripPlacement="Left" Style="{DynamicResource MahApps.Styles.TabControl.Animated}">
                     <TabControl.Background>
                         <ImageBrush/>
@@ -562,7 +577,7 @@ Text="{DynamicResource WRTS}" Height="85" >
                             <Button x:Name="Stat" Content="开始创建房间" HorizontalAlignment="Left" Height="46" Margin="9,8,0,0" VerticalAlignment="Top" Width="634" Click="Button_Click_22" FontSize="16"/>
                             <Button x:Name="OpenOnline" Content="开启房间" HorizontalAlignment="Left" Height="46" Margin="9,66,0,0" VerticalAlignment="Top" Width="634" Click="Button_Click_23" Background="#FF48BD38" FontSize="18"/>
                             <TextBlock x:Name="OnlineTEXT" HorizontalAlignment="Left" Height="206" Margin="11,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="631" FontSize="22" Foreground="#FF656565"/>
-                            <TextBlock HorizontalAlignment="Left" Height="22" Margin="259,359,0,0" TextWrapping="Wrap" Text="联机服务由初梦提供" VerticalAlignment="Top" Width="129" FontSize="14" FontFamily="Microsoft YaHei UI Light"/>
+                            <TextBlock HorizontalAlignment="Left" Height="22" Margin="259,365,0,-0.6" TextWrapping="Wrap" Text="联机服务由初梦提供" VerticalAlignment="Top" Width="129" FontSize="14" FontFamily="Microsoft YaHei UI Light"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="加入房间">
@@ -573,7 +588,7 @@ Text="{DynamicResource WRTS}" Height="85" >
                             <Button x:Name="dfjr" Content="加入房间" HorizontalAlignment="Left" Height="46" Margin="9,8,0,0" VerticalAlignment="Top" Width="634" Click="Button_Click_25" FontSize="18"/>
                             <Label x:Name="fjm" Content="" HorizontalAlignment="Left" Height="34" Margin="12,61,0,0" VerticalAlignment="Top" Width="626" Foreground="#DD030303" FontSize="22"/>
                             <Button x:Name="drfz" Content="复制地址" HorizontalAlignment="Left" Height="46" Margin="9,101,0,0" VerticalAlignment="Top" Width="634" Click="Button_Click_26" Background="#FF3FB595" FontSize="18"/>
-                            <TextBlock HorizontalAlignment="Left" Height="22" Margin="259,359,0,0" TextWrapping="Wrap" Text="联机服务由初梦提供" VerticalAlignment="Top" Width="129" FontSize="14" FontFamily="Microsoft YaHei UI Light"/>
+                            <TextBlock HorizontalAlignment="Left" Height="22" Margin="259,364,0,0" TextWrapping="Wrap" Text="联机服务由初梦提供" VerticalAlignment="Top" Width="129" FontSize="14" FontFamily="Microsoft YaHei UI Light"/>
                         </Grid>
                     </TabItem>
                 </TabControl>
@@ -586,7 +601,7 @@ Text="{DynamicResource WRTS}" Height="85" >
                         <ImageBrush ImageSource="Image\返回 (4).png"/>
                     </Button.Background>
                 </Button>
-                <mah:MetroTabControl HorizontalAlignment="Left" Height="397" Margin="5,8,0,0" VerticalAlignment="Top" Width="784" TabStripPlacement="Left" Background="{x:Null}">
+                <mah:MetroTabControl x:Name="MoreTab" HorizontalAlignment="Left" Height="397" Margin="5,8,0,0" VerticalAlignment="Top" Width="784" TabStripPlacement="Left" Background="{x:Null}">
                     <TabItem Header="小组件">
                         <TabItem.Background>
                             <ImageBrush/>
@@ -595,6 +610,7 @@ Text="{DynamicResource WRTS}" Height="85" >
                             <Grid.Background>
                                 <ImageBrush/>
                             </Grid.Background>
+                            <TextBlock HorizontalAlignment="Left" Height="32" Margin="294,181,0,0" TextWrapping="Wrap" Text="暂时没有小组件..." VerticalAlignment="Top" Width="225" Foreground="#FFB0B0B0"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="反馈">
@@ -617,10 +633,10 @@ Text="{DynamicResource WRTS}" Height="85" >
                                 <ImageBrush/>
                             </Grid.Background>
                             <Grid HorizontalAlignment="Left" Height="112" Margin="60,259,0,0" VerticalAlignment="Top" Width="616"/>
-                            <ScrollViewer HorizontalAlignment="Left" Height="386" Margin="5,5,0,0" VerticalAlignment="Top" Width="683">
+                            <ScrollViewer HorizontalAlignment="Left" Height="390" Margin="5,5,0,0" VerticalAlignment="Top" Width="683">
                                 <Grid Height="2017" Width="676">
                                     <Image HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="190" Source="Image\IMG_4304.PNG" Margin="244,13,0,0" MouseDown="ImageMosedown"/>
-                                    <Label Content="FSMLauncher3(Debug0.3.6)" HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="550" Foreground="#FFD6D6D6" FontSize="43" FontFamily="Leelawadee UI" Margin="67,155,0,0"/>
+                                    <Label Content="FSMLauncher3|Beta2" HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="550" Foreground="#FFD6D6D6" FontSize="43" FontFamily="Leelawadee UI" Margin="66,155,0,0" HorizontalContentAlignment="Center"/>
                                     <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image\22.jpg" Margin="68,234,0,0"/>
                                     <Label Content="开发者:宇轩YU_XUAN" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="529" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="136,240,-5,0"/>
                                     <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image\33.jpg" Margin="68,303,0,0"/>
@@ -628,7 +644,7 @@ Text="{DynamicResource WRTS}" Height="85" >
                                     <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image\44.jpg" Margin="68,373,0,0"/>
                                     <Label Content="网络服务:Fansh" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="529" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="136,379,-5,0"/>
                                     <GroupBox Header="赞助者" HorizontalAlignment="Left" Height="104" Margin="5,440,0,0" VerticalAlignment="Top" Width="651" FontSize="22">
-                                        <Label Content="战神福尔康,Nunzio520,Himcd,苦逼的老何" HorizontalAlignment="Left" Height="35" Margin="0,3,0,0" VerticalAlignment="Top" Width="628" Foreground="#FFF1F1F1"/>
+                                        <Label Content="战神福尔康,Nunzio520,Himcd,苦逼的老何,ShanZhiXiaoZhu" HorizontalAlignment="Left" Height="35" Margin="0,3,0,0" VerticalAlignment="Top" Width="628" Foreground="#FFF1F1F1"/>
                                     </GroupBox>
                                     <GroupBox Header="特别鸣谢" HorizontalAlignment="Left" Height="251" Margin="5,549,0,0" VerticalAlignment="Top" Width="651" FontSize="22"/>
                                     <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image\ss.png" Margin="18,598,0,0"/>
@@ -673,14 +689,14 @@ Text="{DynamicResource WRTS}" Height="85" >
                         <Label x:Name="EFSMV" Content="" HorizontalAlignment="Left" Height="31" Margin="3,145,0,0" VerticalAlignment="Top" Width="311" FontSize="16" Foreground="#DDFFFFFF"/>
                     </Grid>
                 </GroupBox>
-                <GroupBox Header="大概异常分析" HorizontalAlignment="Left" Height="111" Margin="346,5,0,0" VerticalAlignment="Top" Width="438" FontSize="14">
-                    <Grid Height="72" Margin="0,-7,0,-6.6" VerticalAlignment="Top" Width="428">
-                        <Label x:Name="DGYC" Content="DGYC" HorizontalAlignment="Left" Height="59" Margin="2,6,0,0" VerticalAlignment="Top" Width="419" FontSize="14" Foreground="#DDFFFFFF" HorizontalContentAlignment="Center"/>
+                <GroupBox Header="大概异常分析" HorizontalAlignment="Left" Height="81" Margin="346,5,0,0" VerticalAlignment="Top" Width="438" FontSize="14">
+                    <Grid Height="42" Margin="0,-7,0,0" VerticalAlignment="Top" Width="428">
+                        <Label x:Name="DGYC" Content="DGYC" HorizontalAlignment="Left" Height="34" Margin="2,4,0,0" VerticalAlignment="Top" Width="419" FontSize="14" Foreground="#DDFFFFFF" HorizontalContentAlignment="Center"/>
                     </Grid>
                 </GroupBox>
-                <GroupBox Header="异常抛出信息" HorizontalAlignment="Left" Height="254" Margin="346,119,0,0" VerticalAlignment="Top" Width="438" FontSize="14">
-                    <Grid Height="213" Margin="0,-7,0,-4.4" VerticalAlignment="Top" Width="428">
-                        <TextBlock x:Name="YCPC" HorizontalAlignment="Left" Margin="4,3,0,0" TextWrapping="Wrap" Text="YCPC" VerticalAlignment="Top" Height="203" Width="416" FontSize="12" Foreground="White"/>
+                <GroupBox Header="异常抛出信息" HorizontalAlignment="Left" Height="284" Margin="346,87,0,0" VerticalAlignment="Top" Width="438" FontSize="14">
+                    <Grid Height="233" Margin="0,0,0,-1.8" VerticalAlignment="Top" Width="428">
+                        <TextBlock x:Name="YCPC" HorizontalAlignment="Left" Margin="4,1,0,0" TextWrapping="Wrap" Text="YCPC" VerticalAlignment="Top" Height="225" Width="416" FontSize="12" Foreground="White"/>
                     </Grid>
                 </GroupBox>
                 <Button Content="" HorizontalAlignment="Left" Height="33" Margin="754,375,0,0" VerticalAlignment="Top" Width= "33" Style="{DynamicResource MahApps.Styles.Button.Circle}" Click="Button_Click_5" Foreground="#FFF7F7F7" FontWeight="Bold" FontFamily="Microsoft YaHei UI Light" >
@@ -713,14 +729,14 @@ Text="{DynamicResource WRTS}" Height="85" >
                     <TextBlock x:Name="dminecraft_text" Text="默认路径(启动器父文件夹.minecraft)"/>
                 </ListBox>
                 <Button Content="新增&#xA;.minecraft文件夹" HorizontalAlignment="Left" Height="46" Margin="68,357,0,0" VerticalAlignment="Top" Width="141" Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}" Foreground="Black" Click="Button_Click_15" BorderBrush="#FF545454" Background="#FFC7C7C7"/>
-                <ListView x:Name="vlist" HorizontalAlignment="Left" Height="346" Margin="389,4,0,0" VerticalAlignment="Top" Width="396" SelectionChanged="ListView_SelectionChanged" DisplayMemberPath="version" FontSize="18" ScrollViewer.HorizontalScrollBarVisibility="Auto">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="名字" Width="196" DisplayMemberBinding="{Binding version}"/>
-                            <GridViewColumn Header="版本" Width="192" DisplayMemberBinding="{Binding IdVersion}"/>
-                        </GridView>
-                    </ListView.View>
+                <ListView x:Name="vlist" HorizontalAlignment="Left" Height="346" Margin="389,4,0,0" VerticalAlignment="Top" Width="396" SelectionChanged="ListView_SelectionChanged"  FontSize="18" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                    <ListView.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.55"/>
+                    </ListView.Background>
                 </ListView>
+
+
+
                 <Button Content="" HorizontalAlignment="Left" Height="43" Margin="11,359,0,0" VerticalAlignment="Top" Width= "43" Style="{DynamicResource MahApps.Styles.Button.Circle}" Click="Button_Click_5" Foreground="#FFF7F7F7" FontWeight="Bold" FontFamily="Microsoft YaHei UI Light" >
                     <Button.Background>
                         <ImageBrush ImageSource="Image\返回 (4).png"/>
@@ -732,66 +748,18 @@ Text="{DynamicResource WRTS}" Height="85" >
         <TabItem Header="更多" Margin="229,-118,-229,152">
             <Grid Margin="-4,-77,-3.6,-3">
                 <Grid.Background>
-                    <SolidColorBrush Color="Black" Opacity="0.44"/>
+                    <ImageBrush/>
                 </Grid.Background>
-                <TabControl HorizontalAlignment="Center" Height="436" Margin="0,-27,1,0" VerticalAlignment="Top" Width="793" Visibility="Visible" TabStripPlacement="Left" Background="{x:Null}" Style="{DynamicResource MahApps.Styles.TabControl.Animated}" >
-                    <TabItem Header="下载设置" Margin="1,45,-1,-45.4">
-                        <Grid Margin="0,40,0.4,-10.6">
-
-                            <Grid.Background>
-                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
-                            </Grid.Background>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="离线设置" Margin="0,112.2,0,-111.6">
-                        <Grid Margin="0,38,0.4,0.4">
-                            <Grid.Background>
-                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
-                            </Grid.Background>
-                            <RadioButton Content="使用随机皮肤" HorizontalAlignment="Left" Height="37" Margin="-180,-152,0,0" VerticalAlignment="Top" Width="106" Background="{x:Null}" Foreground="White" Checked="RadioButton_Checked" IsChecked="True"/>
-                            <RadioButton Content="使用正版玩家皮肤" HorizontalAlignment="Left" Height="37" Margin="-70,-151,0,0" VerticalAlignment="Top" Width="135" Background="{x:Null}" Foreground="White" Checked="RadioButton_Checked_1"/>
-                            <Label Content="离线皮肤" HorizontalAlignment="Left" Height="67" Margin="-184,-214,0,0" VerticalAlignment="Top" Width="234" FontSize="36" Foreground="White"/>
-                            <Label x:Name="LabelOffline" Content="请输入一个正版玩家的名字" HorizontalAlignment="Left" Height="32" Margin="-183,-109,0,0" VerticalAlignment="Top" Width="157" Foreground="White" />
-                            <Button x:Name="OffLinebaocun" Content="保存" HorizontalAlignment="Left" Height="27" Margin="-28,-78,0,0" VerticalAlignment="Top" Width="101" Style="{DynamicResource MahApps.Styles.Button.Square}" Click="OffLinebaocun_Click" />
-                            <TextBox x:Name="TextBoxOffline" HorizontalAlignment="Left" Height="18" Margin="-181,-78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="149" />
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="软件更新" Margin="0,127.8,0,-128">
-                        <Grid Margin="0,33,0.4,-13.6">
-                            <Grid.Background>
-                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
-                            </Grid.Background>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="个性化" Margin="-1,143,1,-142.4">
-                        <Grid Margin="0,30,0.4,-17.6">
-                            <Grid.Background>
-                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
-                            </Grid.Background>
-                        </Grid>
-                    </TabItem>
-                    <TabItem Header="语言/lang" FontSize="10" Margin="0,159.6,0,-161">
-                        <Grid Margin="0,34,0.4,-10.6">
-                            <Grid.Background>
-                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
-                            </Grid.Background>
-                        </Grid>
-                    </TabItem>
-
-
-                    <TabItem Header="通用设置" Margin="0,-91.8,0,91.4">
-                        <Grid Margin="0,31,0.4,-10.6">
-                            <Grid.Background>
-                                <SolidColorBrush Color="#FFE5E5E5" Opacity="0"/>
-                            </Grid.Background>
-                        </Grid>
-                    </TabItem>
-                </TabControl>
-                <Button Content="" HorizontalAlignment="Left" Height="43" Margin="11,362,0,0" VerticalAlignment="Top" Width= "43" Style="{DynamicResource MahApps.Styles.Button.Circle}" Click="Button_Click_5" Foreground="#FFF7F7F7" FontWeight="Bold" FontFamily="Microsoft YaHei UI Light" >
-                    <Button.Background>
-                        <ImageBrush ImageSource="Image\返回 (4).png"/>
-                    </Button.Background>
-                </Button>
+                <ProgressBar x:Name="DownPro" HorizontalAlignment="Left" Height="19" Margin="13,384,0,0" VerticalAlignment="Top" Width="768" Style="{DynamicResource MahApps.Styles.ProgressBar}" Background="#FFD5D5D9"/>
+                <mah:MetroProgressBar
+            Width="767"
+            Height="20"
+            Margin="13,0,0,34.4"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            IsIndeterminate="True"
+            Visibility="Visible" />
+                <Label Content="正在安装Minecraft" HorizontalAlignment="Left" Margin="26,24,0,0" VerticalAlignment="Top" Foreground="#DD000000" FontSize="22"/>
             </Grid>
         </TabItem>
 

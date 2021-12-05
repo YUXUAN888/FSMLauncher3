@@ -127,8 +127,8 @@
     <Reference Include="SharpGL.WPF, Version=3.1.1.0, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
       <HintPath>packages\SharpGL.WPF.3.1.1\lib\net45\SharpGL.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="SquareMinecraftLauncherCore, Version=3.8.1.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>packages\SquareMinecraftLauncher.Core.3.9.0\lib\net452\SquareMinecraftLauncherCore.dll</HintPath>
+    <Reference Include="SquareMinecraftLauncherCore">
+      <HintPath>C:\Users\26903\Desktop\SquareMinecraftLauncherCore.dll</HintPath>
     </Reference>
     <Reference Include="SquareMinecraftLauncherSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\SquareMinecraftLauncher.Skin.1.0.2\lib\net452\SquareMinecraftLauncherSkin.dll</HintPath>
@@ -167,7 +167,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="About List\DoItem.xaml.cs">
+      <DependentUpon>DoItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="About List\SetsItem.xaml.cs">
+      <DependentUpon>SetsItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Core.cs" />
+    <Compile Include="EaseMoveAnimation.cs" />
     <Compile Include="GacDownload.cs" />
     <Compile Include="GoStart.xaml.cs">
       <DependentUpon>GoStart.xaml</DependentUpon>
@@ -182,7 +189,15 @@
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="var.cs" />
+    <Page Include="About List\DoItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="About List\Item.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="About List\SetsItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -277,43 +292,31 @@
     <Resource Include="About List\草方块.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\%286%29K%40E~J8XYT%24%29AH`3GFQ%40M.jpg" />
-    <Resource Include="Image\%28UBDRORRQJW6%25Z%25`BJS%28I25.png" />
     <Resource Include="Image\20140521134310.png" />
     <Resource Include="Image\22.jpg" />
     <Resource Include="Image\222.jpg" />
     <Resource Include="Image\2222.jpg" />
-    <Resource Include="Image\279皮肤、个性化、主题-线性.png" />
     <Resource Include="Image\33.jpg" />
     <Resource Include="Image\3F4616C3F3B8E05D9AD8710DE44125B9.png" />
     <Resource Include="Image\44.jpg" />
-    <Resource Include="Image\880D6497794FA5A0A41026BED221A35C.png" />
-    <Resource Include="Image\8B368993A291565C7483F97DFFFA1F1F.png" />
     <Resource Include="Image\C{%40A%24~~7_W%25IKVQYSRC~~W8.png" />
     <Resource Include="Image\Image1.png" />
     <Resource Include="Image\IMG_4304.PNG" />
     <Resource Include="Image\java.png" />
-    <Resource Include="Image\KB~AH4EF[9J`W%246%40MJ9`4AY.png" />
     <Resource Include="Image\MI82IUM36N{2L{N%40%25_9_Q26.png" />
-    <Resource Include="Image\QQT[%40W9NEK%25TVL0%400{V967R.png" />
     <Resource Include="Image\QQ图片20210815151126.png" />
     <Resource Include="Image\SharpGL.png" />
     <Resource Include="Image\src=http___msdnshared.blob.core.windows.net_media_2015_12_MS-Logo-transparent-background.png&amp;refer=http___msdnshared.blob.core.windows.jpg" />
     <Resource Include="Image\src=http___www.underconsideration.com_brandnew_archives_mojang_studios_logo_stacked.png&amp;refer=http___www.underconsideration.png" />
     <Resource Include="Image\ss.png" />
     <Resource Include="Image\wxb账户.png" />
-    <Resource Include="Image\下载 %281%29.png" />
     <Resource Include="Image\云端,云,云服务.png" />
     <Resource Include="Image\完成.png" />
-    <Resource Include="Image\无线网 %281%29.png" />
-    <Resource Include="Image\无线网络 %281%29.png" />
-    <Resource Include="Image\更多.png" />
     <Resource Include="Image\登录 %281%29.png" />
     <Resource Include="Image\登录.png" />
     <Resource Include="Image\皮肤.png" />
     <Resource Include="Image\离线.png" />
     <Resource Include="Image\第三方.png" />
-    <Resource Include="Image\网络 %281%29.png" />
     <Resource Include="Image\草方块.png" />
     <Resource Include="Image\设置.png" />
     <Resource Include="Image\返回 %283%29.png" />
@@ -331,6 +334,51 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\0E826620.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\u=3699317021,3596778976&amp;fm=26&amp;fmt=auto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\设置 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\设置 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\设置，更多.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\下载 %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\无线网.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\下载 %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Fabric.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\OptifineLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\更多 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\通用设置.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\下载 %285%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\更新.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\个性化模板.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\语言.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

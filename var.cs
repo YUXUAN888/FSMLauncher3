@@ -51,7 +51,7 @@ namespace FSMLauncher_3
         internal static SquareMinecraftLauncher.Minecraft.AllTheExistingVersion[] ForgeGameVersion = new AllTheExistingVersion[0];
         internal static MetroWindow Main = new MetroWindow();
         internal static List<Item> l = new List<Item>();
-
+        internal static List<DoItem> lw = new List<DoItem>();
 
 
 
