@@ -5,7 +5,7 @@ A Minecraft Launcher!
 作者：宇轩YUXUAN
 请注意该项目遵循GNU GPL-3.0开源协议  
   
-## 使用组件（由名字字母排序）：
+## 使用：
 
 #### BMCLAPI
 bangbang93's minecraft launcher api  
@@ -40,7 +40,7 @@ A MinecraftCore By Baibao132
 
 ------------
 
-# NsisoLauncher开源代码许可  
+# 开源代码许可  
 
 ## MahApps.Metro  
 
