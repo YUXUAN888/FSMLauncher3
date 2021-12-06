@@ -22,7 +22,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SquareMinecraftLauncher;
-using SquareMinecraftLauncher;
 using Microsoft.Win32;
 
 namespace FSMLauncher_3

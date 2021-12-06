@@ -1,7 +1,5 @@
 ﻿using ControlzEx.Theming;
 using Gac;
-using KMCCC.Authentication;
-using KMCCC.Launcher;
 using MahApps;
 using MahApps.Metro;
 using MahApps.Metro.Accessibility;
@@ -57,7 +55,6 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using static FSMLauncher_3.Core;
 using static FSMLauncher_3.DIYvar;
-using SquareMinecraftLauncher;
 using System.Windows.Media.Animation;
 using static FSMLauncher_3.MyAni;
 using System.Windows.Media.Effects;
@@ -77,7 +74,6 @@ namespace FSMLauncher_3
 
 
     {
-        public static LauncherCore Core = LauncherCore.Create();
         SquareMinecraftLauncher.Minecraft.Tools tools = new SquareMinecraftLauncher.Minecraft.Tools();
 
         public bool OffLineSkin;
@@ -976,8 +972,8 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
 
 
-            Application.Current.Dispatcher.Invoke(
-     async delegate
+            await Application.Current.Dispatcher.Invoke(
+      async delegate
      {
          //Code
 
@@ -1082,35 +1078,6 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
          }
 
      });
-        }
-
-
-
-
-
-
-
-
-
-        private void WR1()
-        {
-
-
-
-            Application.Current.Dispatcher.Invoke(
-        async delegate
-     {
-         //Code
-         
-
-
-
-
-     });
-
-
-
-
         }
         private void ThreadSendKey()
         {
@@ -1861,11 +1828,9 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         private void Button_Click_10(object sender, RoutedEventArgs e)
         {
-
-
             OpenFileDialog fileDialog = new OpenFileDialog();//提示用户打开文件窗体
             fileDialog.Title = "选择Java路径";//文件对话框标题
-            fileDialog.Filter = "Java路径|*javaw.exe";//文件格式筛选字符串
+            fileDialog.Filter = "Java路径|javaw.exe";//文件格式筛选字符串
             if (fileDialog.ShowDialog() == true)//判断对话框返回值，点击打开
             {
                 //fileDialog.FileName.ToString()
@@ -1875,8 +1840,6 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 //listBoxSS.DataContext = this;
                 Java_list.Text = fileDialog.FileName.ToString();
                 //MessageBox.Show(fileDialog.FileName.ToString());
-
-
             }
         }
 
@@ -2408,10 +2371,10 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
 
 
-                did1 = Download(File_, "OnLine", "http://fsm.ft2.club/Server/frpc.exe");
-                did2 = Download(File__, "OnLine", "http://fsm.ft2.club/Client/frpc.exe");
-                did3 = Download(File___, "OnLine", "http://fsm.ft2.club/Client/StartForFSM.exe");
-                did4 = Download(File____, "OnLine", "http://fsm.ft2.club/Client/StartForFSM.exe");
+                did1 = Download(File_, "OnLine", "http://www.baibaoblog.cn:81/frpc/Server/frpc.exe");
+                did2 = Download(File__, "OnLine", "http://www.baibaoblog.cn:81/frpc/Client/frpc.exe");
+                did3 = Download(File___, "OnLine", "http://www.baibaoblog.cn:81/frpc/Client/StartForFSM.exe");
+                did4 = Download(File____, "OnLine", "http://www.baibaoblog.cn:81/frpc/Client/StartForFSM.exe");
                 ONLINEW = Core5.timer(OnLineI, 5555);
                 ONLINEW.Start();
                 Gac.DownLoadFile downLoadFile = new Gac.DownLoadFile();
@@ -3387,7 +3350,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             {
                 MinecraftDownload minecraft = new MinecraftDownload();
                 AllTheExistingVersion[] t = new AllTheExistingVersion[0];
-                string mcPath = (pathlist as ListBox).SelectedItem.ToString();
+                string mcPath = (pathlist.Items[pathlist.SelectedIndex] as TextBlock).Text;
                 tools.SetMinecraftFilesPath(mcPath);
                 t = tools.GetAllTheExistingVersion();
                 String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
@@ -3781,7 +3744,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         }
         static int libraries1 = 0;
         static int libraries2 = 0;
-        private async void Button_Click_20(object sender, RoutedEventArgs e)
+        private void Button_Click_20(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -4191,7 +4154,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         }
 
-        private async void Button_Click_30(object sender, RoutedEventArgs e)
+        private void Button_Click_30(object sender, RoutedEventArgs e)
         {
             
         }
@@ -4254,7 +4217,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             MoreTab.SelectedIndex = 0;
         }
 
-        private async void Button_Click_32(object sender, RoutedEventArgs e)
+        private void Button_Click_32(object sender, RoutedEventArgs e)
         {
             
         }

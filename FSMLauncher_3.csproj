@@ -91,9 +91,6 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="KMCCC.Pro">
-      <HintPath>..\..\..\KMCCC-master\KMCCC-master\bin\Debug\KMCCC.Pro.dll</HintPath>
-    </Reference>
     <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
       <HintPath>packages\MahApps.Metro.2.4.9\lib\net452\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -127,8 +124,8 @@
     <Reference Include="SharpGL.WPF, Version=3.1.1.0, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
       <HintPath>packages\SharpGL.WPF.3.1.1\lib\net45\SharpGL.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="SquareMinecraftLauncherCore">
-      <HintPath>C:\Users\26903\Desktop\SquareMinecraftLauncherCore.dll</HintPath>
+    <Reference Include="SquareMinecraftLauncherCore, Version=3.9.1.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>packages\SquareMinecraftLauncher.Core.3.9.1\lib\net452\SquareMinecraftLauncherCore.dll</HintPath>
     </Reference>
     <Reference Include="SquareMinecraftLauncherSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\SquareMinecraftLauncher.Skin.1.0.2\lib\net452\SquareMinecraftLauncherSkin.dll</HintPath>
