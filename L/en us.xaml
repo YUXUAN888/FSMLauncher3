@@ -14,4 +14,10 @@
     <sys:String x:Key="WRTS">Please note that password free login means that if the computer system login is a Microsoft account and the MC is purchased, FSM will recognize it and log in directly</sys:String>
     <sys:String x:Key="MMDL">Passfree</sys:String>
     <sys:String x:Key="ZCDL">NormalLogin</sys:String>
+    <sys:String x:Key="N1">DownLoad</sys:String>
+    <sys:String x:Key="N2">Java:</sys:String>
+    <sys:String x:Key="N3">RAM(MB):</sys:String>
+    <sys:String x:Key="N4">Advanced settings (generally not required)</sys:String>
+    <sys:String x:Key="N5">Additional:</sys:String>
+    <sys:String x:Key="N6">JVM:</sys:String>
 </ResourceDictionary>

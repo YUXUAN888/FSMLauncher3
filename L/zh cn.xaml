@@ -10,9 +10,15 @@
     <sys:String x:Key="MailL">邮箱</sys:String>
     <sys:String x:Key="PassL">密码</sys:String>
     <sys:String x:Key="BBXZ">版本选择</sys:String>
-    <sys:String x:Key="CJ">插件</sys:String>
+    <sys:String x:Key="CJ">小组件</sys:String>
     <sys:String x:Key="StartGame">启动游戏</sys:String>
     <sys:String x:Key="WRTS">请注意,免密登录指的是如果电脑系统登录&#xA;是微软账户且购买了MC,FSM则会识别出，&#xA;并直接登录&#xA;&#xA;</sys:String>
     <sys:String x:Key="MMDL">免密登录</sys:String>
     <sys:String x:Key="ZCDL">正常登录</sys:String>
+    <sys:String x:Key="N1">开始安装</sys:String>
+    <sys:String x:Key="N2">Java路径:</sys:String>
+    <sys:String x:Key="N3">内存(MB):</sys:String>
+    <sys:String x:Key="N4">高级设置(一般无需设置)</sys:String>
+    <sys:String x:Key="N5">额外参数:</sys:String>
+    <sys:String x:Key="N6">JVM参数:</sys:String>
 </ResourceDictionary>

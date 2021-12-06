@@ -64,7 +64,7 @@
                     </WrapPanel>
                 </Button>
 
-                <Button Content="小组件" HorizontalAlignment="Left" Margin="248,78.4,0,10.6" Width="104" Style="{StaticResource MaterialDesignPaperButton}" FontSize="16" FontFamily="Microsoft YaHei UI Light" Click="Button_Click_XZJ" Grid.Row="2" Height="Auto" >
+                <Button Content="{DynamicResource CJ}" HorizontalAlignment="Left" Margin="248,78.4,0,10.6" Width="104" Style="{StaticResource MaterialDesignPaperButton}" FontSize="16" FontFamily="Microsoft YaHei UI Light" Click="Button_Click_XZJ" Grid.Row="2" Height="Auto" >
                     <Button.Background>
                         <SolidColorBrush Color="White" Opacity="0.88"/>
                     </Button.Background>
@@ -323,14 +323,14 @@ Text="{DynamicResource WRTS}" Height="85" >
                                 </ListView.Background>
 
                             </ListView>
-                            <mah:Tile x:Name="ForgeB" Content="安装Forge&#xA;当前未选择" HorizontalAlignment="Left" Height="39" Margin="54,61,0,0" VerticalAlignment="Top" Width="149" Background="#CC4F5356" Click="Tile_Click_25"/>
-                            <mah:Tile x:Name="FabricB" Content="安装Fabric&#xA;当前未选择" HorizontalAlignment="Left" Height="39" Margin="54,111,0,0" VerticalAlignment="Top" Width="149" Background="#FFD9CEB2" Foreground="#FF4E4E4E" Click="Tile_Click_26"/>
-                            <mah:Tile x:Name="OptifineB" Content="安装Optifine&#xA;当前未选择" HorizontalAlignment="Left" Height="39" Margin="54,161,0,0" VerticalAlignment="Top" Width="149" Background="#FF313E7C" Click="Tile_Click_17"/>
-                            <mah:Tile x:Name="LiteB" Content="安装LiteLoader&#xA;当前未选择" HorizontalAlignment="Left" Height="39" Margin="54,211,0,0" VerticalAlignment="Top" Width="149" Background="#FF805CA0" Click="Tile_Click_17" ToolTip="选择要安装的LiteLoader"/>
+                            <Button x:Name="ForgeB" Content="Forge&#xA;当前未选择" HorizontalAlignment="Left" Height="40" Margin="54,61,0,0" VerticalAlignment="Top" Width="149" Background="#CC4F5356" Click="Tile_Click_25" FontSize="12" HorizontalContentAlignment="Left"/>
+                            <Button x:Name="FabricB" Content="Fabric&#xA;当前未选择" HorizontalAlignment="Left" Height="40" Margin="54,111,0,0" VerticalAlignment="Top" Width="149" Background="#FFD9CEB2" Foreground="#FF4E4E4E" Click="Tile_Click_26" FontSize="12" HorizontalContentAlignment="Left"/>
+                            <Button x:Name="OptifineB" Content="Optifine&#xA;当前未选择" HorizontalAlignment="Left" Height="40" Margin="54,161,0,0" VerticalAlignment="Top" Width="149" Background="#FF313E7C" Click="Tile_Click_17" FontSize="12" HorizontalContentAlignment="Left"/>
+                            <Button x:Name="LiteB" Content="LiteLoader&#xA;当前未选择" HorizontalAlignment="Left" Height="40" Margin="54,211,0,0" VerticalAlignment="Top" Width="149" Background="#FF805CA0" Click="Tile_Click_17" ToolTip="选择要安装的LiteLoader" FontSize="12" HorizontalContentAlignment="Left"/>
                             <Button x:Name="StartDownLoad"
   Style="{StaticResource MaterialDesignPaperDarkButton}"
   ToolTip="安装版本"
-  Content="开始安装"
+  Content="{DynamicResource N1}"
   IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="17,273,21.2,13" Height="Auto" FontSize="18" Click="Button_Click_20" >
                                 <Button.Background>
                                     <SolidColorBrush Color="#FF79BDF4" Opacity="0.23"/>
@@ -423,25 +423,25 @@ Text="{DynamicResource WRTS}" Height="85" >
                                         </ComboBox.Background>
                                     </ComboBox>
 
-                                    <Label Content="Java路径:" HorizontalAlignment="Left" Height="38" Margin="18,16,0,0" VerticalAlignment="Top" Width="92" FontSize="18" Foreground="#FFF0F0F0"/>
+                                    <Label Content="{DynamicResource N2}" HorizontalAlignment="Left" Height="38" Margin="18,16,0,0" VerticalAlignment="Top" Width="92" FontSize="18" Foreground="#FFF0F0F0"/>
                                     <Button x:Name="SDXZ" Content="手动选择" HorizontalAlignment="Left" Height="35" Margin="513,15,0,0" VerticalAlignment="Top" Width="86" Style="{DynamicResource MahApps.Styles.Button.Flat}" FontSize="16" Click="Button_Click_10" Foreground="Black" />
-                                    <Label Content="内存(MB):" HorizontalAlignment="Left" Height="38" Margin="17,93,0,0" VerticalAlignment="Top" Width="92" FontSize="18" Foreground="White"/>
+                                    <Label Content="{DynamicResource N3}" HorizontalAlignment="Left" Height="38" Margin="17,93,0,0" VerticalAlignment="Top" Width="92" FontSize="18" Foreground="White"/>
                                     <TextBox x:Name="Bit"
   materialDesign:HintAssist.Hint="内存大小"
   materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
   materialDesign:HintAssist.FloatingScale="0.50"
   Style="{StaticResource MaterialDesignFloatingHintTextBox}"
   FontSize="22" Margin="113,57,39,1219" Text="4096" ToolTip="游戏分配最大内存" Foreground="White" TextChanged="Bit_TextChanged" CaretBrush="#FF7388FF" BorderBrush="#892AD0BB" />
-                                    <GroupBox x:Name="GJSZK" Header="高级设置(一般无需设置)" HorizontalAlignment="Left" Height="211" Margin="19,161,0,0" VerticalAlignment="Top" Width="582" FontSize="14">
+                                    <GroupBox x:Name="GJSZK" Header="{DynamicResource N4}" HorizontalAlignment="Left" Height="211" Margin="19,161,0,0" VerticalAlignment="Top" Width="582" FontSize="14">
                                         <Grid Height="170" Margin="0,-7,0,-2.2" VerticalAlignment="Top" Width="567">
-                                            <Label Content="额外参数:" HorizontalAlignment="Left" Height="38" Margin="2,38,0,0" VerticalAlignment="Top" Width="92" FontSize="18" Foreground="White"/>
+                                            <Label Content="{DynamicResource N5}" HorizontalAlignment="Left" Height="38" Margin="2,38,0,0" VerticalAlignment="Top" Width="92" FontSize="18" Foreground="White"/>
                                             <TextBox x:Name="EY"
                                         materialDesign:HintAssist.Hint="额外参数"
                                         materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
                                         materialDesign:HintAssist.FloatingScale="0.50"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         FontSize="22" Margin="94,17,6,91" ToolTip="额外参数,默认不用" Foreground="White" TextChanged="JVM_TextChanged" />
-                                            <Label Content="JVM参数:" HorizontalAlignment="Left" Height="38" Margin="2,102,0,0" VerticalAlignment="Top" Width="92" FontSize="18" Foreground="White"/>
+                                            <Label Content="{DynamicResource N6}" HorizontalAlignment="Left" Height="38" Margin="2,102,0,0" VerticalAlignment="Top" Width="92" FontSize="18" Foreground="White"/>
                                             <TextBox x:Name="JVM"
                                         materialDesign:HintAssist.Hint="Jvm参数"
                                         materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
@@ -636,13 +636,13 @@ Text="{DynamicResource WRTS}" Height="85" >
                             <ScrollViewer HorizontalAlignment="Left" Height="390" Margin="5,5,0,0" VerticalAlignment="Top" Width="683">
                                 <Grid Height="2017" Width="676">
                                     <Image HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="190" Source="Image\IMG_4304.PNG" Margin="244,13,0,0" MouseDown="ImageMosedown"/>
-                                    <Label Content="FSMLauncher3|Beta2" HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="550" Foreground="#FFD6D6D6" FontSize="43" FontFamily="Leelawadee UI" Margin="66,155,0,0" HorizontalContentAlignment="Center"/>
+                                    <Label Content="FSMLauncher3|Beta3" HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="550" Foreground="#FFD6D6D6" FontSize="43" FontFamily="Leelawadee UI" Margin="66,155,0,0" HorizontalContentAlignment="Center"/>
                                     <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image\22.jpg" Margin="68,234,0,0"/>
-                                    <Label Content="开发者:宇轩YU_XUAN" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="529" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="136,240,-5,0"/>
+                                    <Label Content="开发者:宇轩YU_XUAN" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="256" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="136,240,0,0"/>
                                     <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image\33.jpg" Margin="68,303,0,0"/>
-                                    <Label Content="联机服务:初梦" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="529" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="136,309,-5,0"/>
+                                    <Label Content="联机服务:初梦" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="212" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="136,309,0,0"/>
                                     <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image\44.jpg" Margin="68,373,0,0"/>
-                                    <Label Content="网络服务:Fansh" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="529" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="136,379,-5,0"/>
+                                    <Label Content="网络服务:Fansh" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="224" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="136,379,0,0"/>
                                     <GroupBox Header="赞助者" HorizontalAlignment="Left" Height="104" Margin="5,440,0,0" VerticalAlignment="Top" Width="651" FontSize="22">
                                         <Label Content="战神福尔康,Nunzio520,Himcd,苦逼的老何,ShanZhiXiaoZhu" HorizontalAlignment="Left" Height="35" Margin="0,3,0,0" VerticalAlignment="Top" Width="628" Foreground="#FFF1F1F1"/>
                                     </GroupBox>
