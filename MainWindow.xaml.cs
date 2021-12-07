@@ -971,13 +971,13 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         }
         public string wratoken;
 
-        private async void WRD()
+        private void WRD()
         {
 
 
 
             Application.Current.Dispatcher.Invoke(
-     async delegate
+    async delegate
      {
          //Code
 
@@ -988,17 +988,24 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
          }
          else
          {
+             String Minecraft_Token;
              try
              {
                  MicrosoftLogin microsoftLogin = new MicrosoftLogin();
                  Xbox XboxLogin = new Xbox();
-                 string Minecraft_Token = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(microsoftLogin.RefreshingTokens(WR.GetValue("Atoken").ToString()))));
-                 MinecraftLogin minecraftlogin = new MinecraftLogin();
-                 var Minecraft = minecraftlogin.GetMincraftuuid(Minecraft_Token);
-                 IDTab.SelectedIndex = 2;
-                 wruuid = Minecraft.uuid;
-                 wrname = Minecraft.name;
-                 wrtoken = Minecraft_Token;
+                 await Task.Run(() =>
+                 {
+                     Minecraft_Token = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(microsoftLogin.RefreshingTokens(WR.GetValue("Atoken").ToString()))));
+                     MinecraftLogin minecraftlogin = new MinecraftLogin();
+                     var Minecraft = minecraftlogin.GetMincraftuuid(Minecraft_Token);
+                     IDTab.SelectedIndex = 2;
+                     wruuid = Minecraft.uuid;
+                     wrname = Minecraft.name;
+                     wrtoken = Minecraft_Token;
+                 });
+                 
+                 
+                 
                  LB.Content = wrname;
                  loginmode = "wr";
                  wryes = "888";
@@ -2446,6 +2453,30 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         }
         private async void load(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                WebClient MyWebClient = new WebClient();
+                
+                String pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://yuxuanbbs.cn/FSM/FSMGX.txt")); //从指定网站下载数据
+                String pageHtml = pageData;
+                
+                byte[] c = Convert.FromBase64String(pageHtml);
+                String ww = System.Text.Encoding.Default.GetString(c);
+                string ggxx = IniReadValue("GG", "DQGG");
+                if (ggxx == ww)
+                {
+
+                }
+                else
+                {
+                    this.ShowModalMessageExternal("新公告", "公告内容:" + ww);
+                    WritePrivateProfileString("GG", "DQGG", ww, FileS);
+                }
+            }
+            catch
+            {
+
+            }
             //this.Test_Resize += new EventHandler(Test_Resize);
             MetroDialogSettings settings = new MetroDialogSettings();
             if(XK.GetValue("XK") == null )
@@ -2511,23 +2542,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
                 }
             }
-                try
-                {
-                    string ggxx = IniReadValue("GG", "DQGG");
-                    if (ggxx == up.GetUpdateNotice("acdbe11aceff42a599113997cbb74103"))
-                    {
-
-                    }
-                    else
-                    {
-                        this.ShowModalMessageExternal("新公告", "公告内容:" + up.GetUpdateNotice("acdbe11aceff42a599113997cbb74103"));
-                        WritePrivateProfileString("GG", "DQGG", up.GetUpdateNotice("acdbe11aceff42a599113997cbb74103"), FileS);
-                    }
-                }
-                catch
-                {
-
-                }
+                
 
                 Thread WRD1 = new Thread(WRD);
                 WRD1.Start();
@@ -4281,6 +4296,13 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             {
                 SetTab.SelectedIndex = 4;
             }
+        }
+
+        private void BT1B_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] b = System.Text.Encoding.Default.GetBytes(BT1.Text);
+
+            Clipboard.SetDataObject(Convert.ToBase64String(b));
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)

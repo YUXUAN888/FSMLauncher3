@@ -463,6 +463,8 @@ Text="{DynamicResource WRTS}" Height="85" >
                                 <ImageBrush/>
                             </Grid.Background>
                             <Border x:Name="Bod1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="68" Margin="199,91,0,0" VerticalAlignment="Top" Width="260"/>
+                            <Button x:Name="BT1B" Content="Button" HorizontalAlignment="Left" Margin="325,267,0,0" VerticalAlignment="Top" Width="75" Click="BT1B_Click"/>
+                            <TextBox x:Name="BT1" HorizontalAlignment="Left" Height="29" Margin="130,216,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="479"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="软件更新" Margin="-158,4.8,158,-4.2">
