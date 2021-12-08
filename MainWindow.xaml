@@ -323,10 +323,10 @@ Text="{DynamicResource WRTS}" Height="85" >
                                 </ListView.Background>
 
                             </ListView>
-                            <Button x:Name="ForgeB" Content="Forge&#xA;当前未选择" HorizontalAlignment="Left" Height="40" Margin="54,61,0,0" VerticalAlignment="Top" Width="149" Background="#CC4F5356" Click="Tile_Click_25" FontSize="12" HorizontalContentAlignment="Left"/>
-                            <Button x:Name="FabricB" Content="Fabric&#xA;当前未选择" HorizontalAlignment="Left" Height="40" Margin="54,111,0,0" VerticalAlignment="Top" Width="149" Background="#FFD9CEB2" Foreground="#FF4E4E4E" Click="Tile_Click_26" FontSize="12" HorizontalContentAlignment="Left"/>
-                            <Button x:Name="OptifineB" Content="Optifine&#xA;当前未选择" HorizontalAlignment="Left" Height="40" Margin="54,161,0,0" VerticalAlignment="Top" Width="149" Background="#FF313E7C" Click="Tile_Click_17" FontSize="12" HorizontalContentAlignment="Left"/>
-                            <Button x:Name="LiteB" Content="LiteLoader&#xA;当前未选择" HorizontalAlignment="Left" Height="40" Margin="54,211,0,0" VerticalAlignment="Top" Width="149" Background="#FF805CA0" Click="Tile_Click_17" ToolTip="选择要安装的LiteLoader" FontSize="12" HorizontalContentAlignment="Left"/>
+                            <Button x:Name="ForgeB" Content="Forge&#xA;当前未选择" HorizontalAlignment="Left" Height="41" Margin="54,61,0,0" VerticalAlignment="Top" Width="149" Background="#CC4F5356" Click="Tile_Click_25" FontSize="12" HorizontalContentAlignment="Left"/>
+                            <Button x:Name="FabricB" Content="Fabric&#xA;当前未选择" HorizontalAlignment="Left" Height="41" Margin="54,111,0,0" VerticalAlignment="Top" Width="149" Background="#FFD9CEB2" Foreground="#FF4E4E4E" Click="Tile_Click_26" FontSize="12" HorizontalContentAlignment="Left"/>
+                            <Button x:Name="OptifineB" Content="Optifine&#xA;当前未选择" HorizontalAlignment="Left" Height="41" Margin="54,162,0,0" VerticalAlignment="Top" Width="149" Background="#FF313E7C" Click="Tile_Click_17" FontSize="12" HorizontalContentAlignment="Left"/>
+                            <Button x:Name="LiteB" Content="LiteLoader&#xA;当前未选择" HorizontalAlignment="Left" Height="41" Margin="54,211,0,0" VerticalAlignment="Top" Width="149" Background="#FF805CA0" Click="Tile_Click_17" ToolTip="选择要安装的LiteLoader" FontSize="12" HorizontalContentAlignment="Left"/>
                             <Button x:Name="StartDownLoad"
   Style="{StaticResource MaterialDesignPaperDarkButton}"
   ToolTip="安装版本"
@@ -462,9 +462,7 @@ Text="{DynamicResource WRTS}" Height="85" >
                             <Grid.Background>
                                 <ImageBrush/>
                             </Grid.Background>
-                            <Border x:Name="Bod1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="68" Margin="199,91,0,0" VerticalAlignment="Top" Width="260"/>
-                            <Button x:Name="BT1B" Content="Button" HorizontalAlignment="Left" Margin="325,267,0,0" VerticalAlignment="Top" Width="75" Click="BT1B_Click"/>
-                            <TextBox x:Name="BT1" HorizontalAlignment="Left" Height="29" Margin="130,216,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="479"/>
+                            
                         </Grid>
                     </TabItem>
                     <TabItem Header="软件更新" Margin="-158,4.8,158,-4.2">

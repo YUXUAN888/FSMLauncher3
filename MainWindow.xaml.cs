@@ -469,7 +469,7 @@ namespace FSMLauncher_3
             //Thread y = new Thread(yy);
             //y.Start();
             ServicePointManager.DefaultConnectionLimit = 512;
-            Update = "Beta2";///每次更新启动器设置，启动器当前版本号
+            Update = "Beta3";///每次更新启动器设置，启动器当前版本号
             Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM");
             String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM";
             StringBuilder temp = new StringBuilder();
@@ -647,7 +647,7 @@ namespace FSMLauncher_3
             //this.ShowMessageAsync("欢迎测试(Debug0.4.1)(Beta1铺垫版本)!", "很高兴您能参加FSM3的早期测试(Debug)！\n此版本可以实现：联机的多线程完整初始化，下载列表获取，Mojang完整登录，微软完整登录(免密,正常),关于,个性化,版本列表的算法以及获取,开始向导,内存获取,外置登录,公告获取,启动游戏,启动错误跟踪器,下载补全游戏(不稳定),联机!!,背景音乐,一点点小动画\nDebug版本是功能完全没有开发好的版本，请多多向交流群举报Bug");
             Border border = new Border();
             VisualBrush brush = new VisualBrush();
-            brush.Visual = Bod1;
+            
             brush.Stretch = Stretch.Uniform;
             border.Background = brush;
             border.Effect = new BlurEffect()
@@ -1515,10 +1515,10 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             {
                 mc = await tools.GetMCVersionList();
             }
-            catch
+            catch(Exception ex)
             {
 
-                await this.ShowMessageAsync("未获取到游戏下载列表，请重试", "请检查网络，或重试一遍");
+                await this.ShowMessageAsync("未获取到游戏下载列表，请重试", "请检查网络，或重试一遍\n"+ex.Message);
 
                 return;
             }
@@ -3369,26 +3369,35 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 else
                 {
                     WritePrivateProfileString("Vlist", "Path", pathlist.SelectedIndex.ToString(), File_);
-                    string mcPath = ((sender as ListBox).SelectedItem as TextBlock).Text;
-                    tools.SetMinecraftFilesPath(mcPath);
-                    t = tools.GetAllTheExistingVersion();
-                    List<DoItem> user1 = new List<DoItem>();
-                    for (int i = 0; i < t.Length; i++)
+                    string mcPath = (sender as ListBox).SelectedItem.ToString();
+                    if(mcPath == "")
                     {
-                        DoItem user = new DoItem();
-                        user.DverV.Content = t[i].version;
-                        user1.Add(user);
+                        vlist.ItemsSource = "找不到任何版本";
                     }
-                    DIYvar.lw = user1;
-                    vlist.ItemsSource = user1.ToArray();
+                    else
+                    {
+                        tools.SetMinecraftFilesPath(mcPath);
+                        t = tools.GetAllTheExistingVersion();
+                        List<DoItem> user1 = new List<DoItem>();
+                        for (int i = 0; i < t.Length; i++)
+                        {
+
+                            DoItem user = new DoItem();
+                            user.DverV.Content = t[i].version;
+                            user1.Add(user);
+                        }
+                        DIYvar.lw = user1;
+                        vlist.ItemsSource = user1.ToArray();
+                    }
+                    
                 }
                // string mcPath = (sender as ListBox).SelectedItem.ToString();
                 
 
             }
-            catch
+            catch(Exception ex)
             {
-
+                
             }
         }
 
@@ -4294,12 +4303,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             }
         }
 
-        private void BT1B_Click(object sender, RoutedEventArgs e)
-        {
-            byte[] b = System.Text.Encoding.Default.GetBytes(BT1.Text);
-
-            Clipboard.SetDataObject(Convert.ToBase64String(b));
-        }
+        
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
