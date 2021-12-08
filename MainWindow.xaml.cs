@@ -1,7 +1,5 @@
 ﻿using ControlzEx.Theming;
 using Gac;
-using KMCCC.Authentication;
-using KMCCC.Launcher;
 using MahApps;
 using MahApps.Metro;
 using MahApps.Metro.Accessibility;
@@ -22,7 +20,6 @@ using SquareMinecraftLauncher.Core.fabricmc;
 using SquareMinecraftLauncher.Core.OAuth;
 using SquareMinecraftLauncher.Minecraft;
 using SquareMinecraftLauncher.Minecraft.MCServerPing;
-using SquareMinecraftLauncherSkin;
 using SquareMinecraftLauncherWPF;
 using System;
 using System.Collections.Generic;
@@ -77,7 +74,6 @@ namespace FSMLauncher_3
 
 
     {
-        public static LauncherCore Core = LauncherCore.Create();
         SquareMinecraftLauncher.Minecraft.Tools tools = new SquareMinecraftLauncher.Minecraft.Tools();
 
         public bool OffLineSkin;
@@ -2408,10 +2404,10 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
 
 
-                did1 = Download(File_, "OnLine", "http://fsm.ft2.club/Server/frpc.exe");
-                did2 = Download(File__, "OnLine", "http://fsm.ft2.club/Client/frpc.exe");
-                did3 = Download(File___, "OnLine", "http://fsm.ft2.club/Client/StartForFSM.exe");
-                did4 = Download(File____, "OnLine", "http://fsm.ft2.club/Client/StartForFSM.exe");
+                did1 = Download(File_, "OnLine", "http://www.baibaoblog.cn:81/frpc/Server/frpc.exe");
+                did2 = Download(File__, "OnLine", "http://www.baibaoblog.cn:81/frpc/Client/frpc.exe");
+                did3 = Download(File___, "OnLine", "http://www.baibaoblog.cn:81/frpc/Client/StartForFSM.exe");
+                did4 = Download(File____, "OnLine", "http://www.baibaoblog.cn:81/frpc/Client/StartForFSM.exe");
                 ONLINEW = Core5.timer(OnLineI, 5555);
                 ONLINEW.Start();
                 Gac.DownLoadFile downLoadFile = new Gac.DownLoadFile();
@@ -3358,7 +3354,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 else
                 {
                     WritePrivateProfileString("Vlist", "Path", pathlist.SelectedIndex.ToString(), File_);
-                    string mcPath = (sender as ListBox).SelectedItem.ToString();
+                    string mcPath = ((sender as ListBox).SelectedItem as TextBlock).Text;
                     tools.SetMinecraftFilesPath(mcPath);
                     t = tools.GetAllTheExistingVersion();
                     List<DoItem> user1 = new List<DoItem>();
@@ -3387,7 +3383,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             {
                 MinecraftDownload minecraft = new MinecraftDownload();
                 AllTheExistingVersion[] t = new AllTheExistingVersion[0];
-                string mcPath = (pathlist as ListBox).SelectedItem.ToString();
+                string mcPath = (pathlist.SelectedItem as TextBlock).Text;
                 tools.SetMinecraftFilesPath(mcPath);
                 t = tools.GetAllTheExistingVersion();
                 String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";

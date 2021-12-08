@@ -398,7 +398,7 @@ Text="{DynamicResource WRTS}" Height="85" >
             </Grid>
         </TabItem>
         <TabItem Header="设置" Margin="229,-118,-229,152">
-            <Grid x:Name="Grid" Margin="-9,-76,-4.6,-8.6" Height="419" >
+            <Grid x:Name="Grid" Margin="-9,-76,-4.6,-8.6" >
                 <Grid.Background>
                     <SolidColorBrush Color="Black" Opacity="0.66"/>
                 </Grid.Background>
@@ -407,9 +407,9 @@ Text="{DynamicResource WRTS}" Height="85" >
                     <ColumnDefinition/>
                     <ColumnDefinition Width="0*"/>
                 </Grid.ColumnDefinitions>
-                <mah:MetroAnimatedTabControl x:Name="SetTab" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="408" Margin="5,7,0,0" VerticalAlignment="Top" Width="785" Background="{x:Null}" TabStripPlacement="Left">
+                <mah:MetroAnimatedTabControl x:Name="SetTab" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="5,7,0,0" VerticalAlignment="Top" Background="{x:Null}" TabStripPlacement="Left">
                     <TabItem Header="通用设置" Margin="-158,0,158,-0.6">
-                        <Grid Height="402" Margin="0,0,-0.2,-0.4" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="653">
+                        <Grid Height="Auto" Margin="0,0,-0.2,-0.4" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="Auto">
                             <Grid.Background>
                                 <ImageBrush/>
                             </Grid.Background>
