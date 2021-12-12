@@ -60,6 +60,8 @@ using static FSMLauncher_3.MyAni;
 using System.Windows.Media.Effects;
 using EaseMoveDemo;
 using FSMLauncher_3.About_List;
+using FSMLauncher_3.About_Message;
+using System.Security.Cryptography;
 
 namespace FSMLauncher_3
 {
@@ -320,7 +322,7 @@ namespace FSMLauncher_3
                 }
             }
         }
-            public static BitmapImage BitmapToBitmapImage(Bitmap bitmap)
+        public static BitmapImage BitmapToBitmapImage(Bitmap bitmap)
         {
             using (MemoryStream stream = new MemoryStream())
             {
@@ -469,7 +471,7 @@ namespace FSMLauncher_3
             //Thread y = new Thread(yy);
             //y.Start();
             ServicePointManager.DefaultConnectionLimit = 512;
-            Update = "Beta3";///每次更新启动器设置，启动器当前版本号
+            Update = "Beta5";///每次更新启动器设置，启动器当前版本号
             Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM");
             String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM";
             StringBuilder temp = new StringBuilder();
@@ -479,8 +481,11 @@ namespace FSMLauncher_3
 
             this.ResizeMode = ResizeMode.CanMinimize;
             InitializeComponent();
-
-
+                             FixJS.Visibility = Visibility.Hidden;
+                           Fix__.Visibility = Visibility.Hidden;
+                         TSZ.Visibility = Visibility.Hidden;
+                       MWL.Visibility = Visibility.Hidden;
+                    YFL.Visibility = Visibility.Hidden;
             software = hkim.OpenSubKey("SOFTWARE", true);
             FSM = software.CreateSubKey("FSM");
             Mojang = FSM.CreateSubKey("Mojang");
@@ -530,7 +535,7 @@ namespace FSMLauncher_3
                 {
 
                     AllTheExistingVersion[] t = new AllTheExistingVersion[0];
-                    if(pathlist.SelectedIndex == 0)
+                    if (pathlist.SelectedIndex == 0)
                     {
                         tools.SetMinecraftFilesPath(dminecraft_text.Text);
                         t = tools.GetAllTheExistingVersion();
@@ -579,9 +584,9 @@ namespace FSMLauncher_3
 
             }
             List<SetsItem> itemw = new List<SetsItem>();
-            for (int i = 0;i <= 5;++i)
+            for (int i = 0; i <= 5; ++i)
             {
-                if(i == 1)
+                if (i == 1)
                 {
                     SetsItem item = new SetsItem();
                     item.SetName.Content = "通用";
@@ -647,7 +652,7 @@ namespace FSMLauncher_3
             //this.ShowMessageAsync("欢迎测试(Debug0.4.1)(Beta1铺垫版本)!", "很高兴您能参加FSM3的早期测试(Debug)！\n此版本可以实现：联机的多线程完整初始化，下载列表获取，Mojang完整登录，微软完整登录(免密,正常),关于,个性化,版本列表的算法以及获取,开始向导,内存获取,外置登录,公告获取,启动游戏,启动错误跟踪器,下载补全游戏(不稳定),联机!!,背景音乐,一点点小动画\nDebug版本是功能完全没有开发好的版本，请多多向交流群举报Bug");
             Border border = new Border();
             VisualBrush brush = new VisualBrush();
-            
+
             brush.Stretch = Stretch.Uniform;
             border.Background = brush;
             border.Effect = new BlurEffect()
@@ -655,9 +660,9 @@ namespace FSMLauncher_3
                 Radius = 80,
                 RenderingBias = RenderingBias.Performance
             };
-border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
+            border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
-
+            
 
 
             if (IniReadValue("Start", "Start") == "1")
@@ -714,8 +719,10 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             }
             */
             List<JavaVersion> aa = tools.GetJavaPath();
-            Java_list.ItemsSource = aa;
-
+            for (int i = 0; i < aa.Count; i++)
+            {
+                Java_list.Items.Add(aa[i].Path);
+            }
             NZDM[0] = "FSM的第一个内部版本发布于2021年7月3日!";
             NZDM[1] = "FSM的联机由初梦的端口映射提供";
             NZDM[2] = "FSM的联机测试最低延迟是18ms!";
@@ -725,8 +732,8 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             NZDM[6] = "FSM最早在2020年2月发布";
 
             //获取UUID  MessageBox.Show(KMCCC.Pro.Modules.MojangAPI.MojangAPI.NameToUUID("CHINA_YUXUAN").ToString());
-
-            tools.DownloadSourceInitialization(DownloadSource.MCBBSSource);
+            
+            
 
 
             Label1.Content = "您好！" + Environment.UserName;
@@ -745,55 +752,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
 
 
-            try
-            {
-                WebClient MyWebClient = new WebClient();
-                MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
-                StringBuilder sb = new StringBuilder();
-                String pageData = MyWebClient.DownloadString("http://2018k.cn/api/checkVersion?id=acdbe11aceff42a599113997cbb74103&version=" + Update); //从指定网站下载数据
-                pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/checkVersion?id=acdbe11aceff42a599113997cbb74103&version=" + Update));
 
-                String pageHtml = pageData;
-
-
-                String pageData1 = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/getExample?id=acdbe11aceff42a599113997cbb74103&data=remark|notice")); //从指定网站下载数据
-                String pageHtml1 = pageData1;
-                String pageData2 = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/getExample?id=acdbe11aceff42a599113997cbb74103&data=url")); //从指定网站下载数据
-                String pageHtml2 = pageData2;
-                String pageData3 = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/getExample?id=acdbe11aceff42a599113997cbb74103&data=notice")); //从指定网站下载数据
-                String pageHtml3 = pageData3;
-                after = pageHtml.Split(new char[] { '|' });
-                UpLog_and_GG = pageHtml1.Split(new char[] { '|' });
-                UpdateD = pageHtml2;
-                String pageData4 = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/getExample?id=acdbe11aceff42a599113997cbb74103&data=force")); //从指定网站下载数据
-                String pageHtml4 = pageData4;
-            
-                String pageData5 = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/getExample?id=acdbe11aceff42a599113997cbb74103&data=version")); //从指定网站下载数据
-                String pageHtml5 = pageData5;
-                if (after[0] == "true")
-                {
-                    this.ShowMessageAsync("检测到启动器有新的版本！", "新版本为:" + after[4] + "\n" + "请到设置进行更新！");
-                    Thread th = new Thread(ThreadSendKey);
-                    th.Start(); //启动线程 
-
-                }
-                else if(pageHtml4 == "true" && pageHtml5 != Update)
-                {
-                    this.ShowMessageAsync("检测到启动器有新的版本！", "新版本为:" + after[4] + "\n" + "请到设置进行更新！");
-                    Thread th = new Thread(ThreadSendKey);
-                    th.Start(); //启动线程
-
-                }
-                else
-                {
-                    UpdateButton.Visibility = System.Windows.Visibility.Hidden;
-                }
-            }
-            catch
-            {
-                UpdateButton.Visibility = System.Windows.Visibility.Hidden;
-                this.ShowMessageAsync("未能与FSM服务器建立通信", "这可能是是网络未连接导致" + "\n" + "可能会导致无法下载游戏，无法更新启动器等问题");
-            }
             //StringBuilder temp = new StringBuilder();
             //GetPrivateProfileString("ZTSY", "ZTSY", "", temp, 255, IntFilePath);
 
@@ -999,9 +958,9 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                      wrname = Minecraft.name;
                      wrtoken = Minecraft_Token;
                  });
-                 
-                 
-                 
+
+
+
                  LB.Content = wrname;
                  loginmode = "wr";
                  wryes = "888";
@@ -1051,13 +1010,13 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
          try
          {
 
-             
-                 var login = tools.MinecraftLogin(Mojang1.Text, Mojang2.Password);
-                 Mojangname = login.name;
-                 MojangUUID = login.uuid;
-                 MojangToken = login.token;
-             
-             
+
+             var login = tools.MinecraftLogin(Mojang1.Text, Mojang2.Password);
+             Mojangname = login.name;
+             MojangUUID = login.uuid;
+             MojangToken = login.token;
+
+
 
              Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin");
 
@@ -1104,7 +1063,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         async delegate
      {
          //Code
-         
+
 
 
 
@@ -1160,7 +1119,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
      delegate
      {
          //Code
-         
+
 
      });
 
@@ -1249,7 +1208,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
      delegate
      {
          //Code
-         
+
 
      });
 
@@ -1271,7 +1230,8 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
          Tab1.SelectedIndex = 6;
          String File_ = System.AppDomain.CurrentDomain.BaseDirectory + "[Update]FSM.exe";
          Tab1.SelectedIndex = 6;
-         wa = Download(File_, "QWQ", UpdateD);
+         dlf.doSendMsg += new DownLoadFile.dlgSendMsg(SendMsgHander);
+         wa = Download(File_, "", UpdateD);
          UPDATEW = Core5.timer(UPDATEWW, 2333);
          UPDATEW.Start();
          ///string aa = DIYvar.xzItems[wa].xzwz;
@@ -1300,9 +1260,10 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-
+            pathlist.SelectedIndex = pathlist.SelectedIndex;
+            
             Tab1.SelectedIndex = 7;
-
+            
             var palette = new PaletteHelper();
 
 
@@ -1508,21 +1469,21 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             OptifineB.BeginAnimation(WidthProperty, CatC(0, 149, 1.2));
             //Thread.Sleep(555);
             LiteB.BeginAnimation(WidthProperty, CatC(0, 149, 1.4));
-            StartDownLoad.BeginAnimation(WidthProperty, CatC(0, 183.2,1.5)) ;
+            StartDownLoad.BeginAnimation(WidthProperty, CatC(0, 183.2, 1.5));
             Tools tools = new Tools();
             MCVersionList[] mc = new MCVersionList[0];
             try
             {
                 mc = await tools.GetMCVersionList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
-                await this.ShowMessageAsync("未获取到游戏下载列表，请重试", "请检查网络，或重试一遍\n"+ex.Message);
+                await this.ShowMessageAsync("未获取到游戏下载列表，请重试", "请检查网络，或重试一遍\n" + ex.Message);
 
                 return;
             }
-            
+
             foreach (var i in mc)
             {
                 switch (i.type)
@@ -1572,6 +1533,29 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         private void Tile_Click_3(object sender, RoutedEventArgs e)
         {
             SetBox.SelectedIndex = 0;
+            switch (IniReadValue("DownLoad", "Source"))
+            {
+                case "":
+                    QJDown = DownloadSource.MCBBSSource;
+                    tools.DownloadSourceInitialization(QJDown);
+                    DownS.SelectedIndex = 0;
+                    break;
+                case "MCBBS":
+                    QJDown = DownloadSource.MCBBSSource;
+                    tools.DownloadSourceInitialization(QJDown);
+                    DownS.SelectedIndex = 0;
+                    break;
+                case "BMCLAPI":
+                    QJDown = DownloadSource.bmclapiSource;
+                    tools.DownloadSourceInitialization(QJDown);
+                    DownS.SelectedIndex = 1;
+                    break;
+                case "Minecraft":
+                    QJDown = DownloadSource.MinecraftSource;
+                    tools.DownloadSourceInitialization(QJDown);
+                    DownS.SelectedIndex = 2;
+                    break;
+            }
             Java_list.BeginAnimation(WidthProperty, CatC(0, 396, 0.8));
             //Thread.Sleep(555);
             //Bit.BeginAnimation(WidthProperty, CatC(0, 486.4, 1));
@@ -1763,6 +1747,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         {
             Tab1.SelectedIndex = 6;
 
+
             Thread th = new Thread(UpdateLauncher);
             th.Start(); //启动线程 
 
@@ -1793,7 +1778,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             Process process = new Process();
             ProcessStartInfo processStartInfo = new ProcessStartInfo(NewFileName);
             process.StartInfo = processStartInfo;
-#region 下面这段被注释掉代码（可以用来全屏打开代码）
+            #region 下面这段被注释掉代码（可以用来全屏打开代码）
             //建立新的系统进程
             //System.Diagnostics.Process process = new System.Diagnostics.Process();
             //设置文件名，此处为图片的真实路径 + 文件名（需要有后缀）    
@@ -1802,7 +1787,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             //process.StartInfo.Arguments = "rundll32.exe C://WINDOWS//system32//shimgvw.dll,ImageView_Fullscreen";
             //此项为是否使用Shell执行程序，因系统默认为true，此项也可不设，但若设置必须为true
             //process.StartInfo.UseShellExecute = true;
-#endregion
+            #endregion
             try
             {
                 process.Start();
@@ -1876,7 +1861,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 Java_list.IsEditable = false;
 
                 //listBoxSS.DataContext = this;
-                Java_list.Text = fileDialog.FileName.ToString();
+                Java_list.Items.Add(fileDialog.FileName.ToString());
                 //MessageBox.Show(fileDialog.FileName.ToString());
 
 
@@ -1902,7 +1887,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         private void OffLinebaocun_Click(object sender, RoutedEventArgs e)
         {
-            
+
             //开发中...
 
 
@@ -2313,8 +2298,8 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 if (tag == DownStatus.Error)
                 {
                     xzItems[msg.Id].xzwz = msg.ErrMessage;
-
-
+                    this.ShowMessageAsync("下载错误",msg.ErrMessage+"\n请尝试更换下载源");
+                    Tab1.SelectedIndex = 0;
 
                     return;
                 }
@@ -2333,13 +2318,13 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         private void IniTest()
         {
 
-            
 
-            
+
+
 
 
         }
-        public System.Windows.Media.Animation.DoubleAnimation CatC (int From,double To,double Time)
+        public System.Windows.Media.Animation.DoubleAnimation CatC(int From, double To, double Time)
         {
             var widthAnimation = new DoubleAnimation()
             {
@@ -2369,10 +2354,51 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 //Application.DoEvents();
             }
         }
+
+        double rWidth = 0.0;
+        public short TransitionPanelExample()
+        {
+            Loaded += TransitionPanelExample_Loaded;
+            return 0;
+        }
+        private void TransitionPanelExample_Loaded(object sender, RoutedEventArgs e)
+        {
+            rWidth = this.ActualWidth / 8;
+            Height = this.ActualWidth;
+            var leftX = 0.0;
+            // PART_Canvas.Height = ActualHeight * 0.8;
+            var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#FF5858F1");
+            for (int i = 0; i < 10; i++)
+            {
+                var name = $"PART_Rectangle_{i}";
+                var rect = new System.Windows.Shapes.Rectangle
+                {
+                    Width = rWidth,
+                    Height = ActualHeight,
+                    Fill = new SolidColorBrush(color),
+                    RenderTransformOrigin = new System.Windows.Point(0.5, 0.5),
+                    Name = name
+                };
+                rect.RenderTransform = new SkewTransform
+                {
+                    AngleX = -25
+                };
+                //  PART_Canvas.Children.Add(rect);
+                if (!leftX.Equals(0.0))
+                    leftX = leftX + rWidth - 1;
+                else
+                    leftX = -rWidth - 4;
+                Canvas.SetLeft(rect, leftX);
+
+
+
+            }
+        }
+
         private void Tile_Click_4(object sender, RoutedEventArgs e)
         {
-            
-            
+
+
             OpenOnline.Visibility = Visibility.Hidden;
             dfjr.Visibility = Visibility.Visible;
             try
@@ -2390,12 +2416,14 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             if (File.Exists(File_) == true && File.Exists(File__) == true)
             {
                 Tab1.SelectedIndex = 3;
-                Stat.BeginAnimation(WidthProperty, CatC(0, 634,0.8));
-                
+                Stat.BeginAnimation(WidthProperty, CatC(0, 634, 0.8));
+
                 //OpenOnline.Visibility = Visibility.Visible;
-             //   OpenOnline.BeginAnimation(WidthProperty, CatC(0, 634));
+                //   OpenOnline.BeginAnimation(WidthProperty, CatC(0, 634));
                 //Thread.Sleep(666);
                 OnlineTEXT.BeginAnimation(WidthProperty, CatC(0, 634, 0.8));
+
+
             }
             else
             {
@@ -2432,6 +2460,27 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         static System.Windows.Threading.DispatcherTimer ONLINEW = new System.Windows.Threading.DispatcherTimer();
         static System.Windows.Threading.DispatcherTimer UPDATEW = new System.Windows.Threading.DispatcherTimer();
         static int did1, did2, did3, did4;
+        void DoubleAnimationDuration(DoubleAnimation doubleAnimation, string[] names)
+        {
+            if (names[2].Equals("7") || names[2].Equals("2"))
+            {
+                doubleAnimation.Duration = TimeSpan.FromMilliseconds(200);
+            }
+            else if (names[2].Equals("0") || names[2].Equals("6"))
+            {
+                doubleAnimation.Duration = TimeSpan.FromMilliseconds(250);
+            }
+            else if (names[2].Equals("4") || names[2].Equals("9"))
+            {
+                doubleAnimation.Duration = TimeSpan.FromMilliseconds(300);
+            }
+            else if (names[2].Equals("1") || names[2].Equals("5"))
+            {
+                doubleAnimation.Duration = TimeSpan.FromMilliseconds(400);
+            }
+            else
+                doubleAnimation.Duration = TimeSpan.FromMilliseconds(500);
+        }
         private void Test_Resize(object sender, EventArgs e)
         {
             if (XX == 0)
@@ -2452,10 +2501,10 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             try
             {
                 WebClient MyWebClient = new WebClient();
-                
+
                 String pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://yuxuanbbs.cn/FSM/FSMGX.txt")); //从指定网站下载数据
                 String pageHtml = pageData;
-                
+
                 byte[] c = Convert.FromBase64String(pageHtml);
                 String ww = System.Text.Encoding.Default.GetString(c);
                 string ggxx = IniReadValue("GG", "DQGG");
@@ -2475,7 +2524,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             }
             //this.Test_Resize += new EventHandler(Test_Resize);
             MetroDialogSettings settings = new MetroDialogSettings();
-            if(XK.GetValue("XK") == null )
+            if (XK.GetValue("XK") == null)
             {
                 settings.NegativeButtonText = "同意";
                 settings.AffirmativeButtonText = "拒绝";
@@ -2496,12 +2545,59 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             }
             else
             {
-                
+
             }
-            
-            
-            
-            
+
+            switch (IniReadValue("DownLoad", "Source"))
+            {
+                case "":
+                    QJDown = DownloadSource.MCBBSSource;
+                    tools.DownloadSourceInitialization(QJDown);
+                    DownS.SelectedIndex = 0;
+                    break;
+                case "MCBBS":
+                    QJDown = DownloadSource.MCBBSSource;
+                    tools.DownloadSourceInitialization(QJDown);
+                    DownS.SelectedIndex = 0;
+                    break;
+                case "BMCLAPI":
+                    QJDown = DownloadSource.bmclapiSource;
+                    tools.DownloadSourceInitialization(QJDown);
+                    DownS.SelectedIndex = 1;
+                    break;
+                case "Minecraft":
+                    QJDown = DownloadSource.MinecraftSource;
+                    tools.DownloadSourceInitialization(QJDown);
+                    DownS.SelectedIndex = 2;
+                    break;
+            }
+            try
+            {
+                string aa = DecryptDES(IniReadValue("JSM", "JSM"), "87654321");
+                string code = null;
+                SelectQuery query = new SelectQuery("select * from Win32_ComputerSystemProduct");
+                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
+                {
+                    foreach (var item in searcher.Get())
+                    {
+                        using (item) code = item["UUID"].ToString();
+                    }
+
+                }
+                if (aa == code)
+                {
+                    ThemeManager.Current.ChangeTheme(this, "Light." + IniReadValue("JSM", "Color"));
+                    TSZ.Visibility = Visibility.Visible;
+                    MWL.Visibility = Visibility.Visible;
+                    YFL.Visibility = Visibility.Visible;
+                }
+            }
+            catch
+            {
+
+            }
+
+
             XX = (float)this.Width;
 
             YY = (float)this.Height;
@@ -2538,56 +2634,152 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
                 }
             }
-                
+            
+            try
+            {
+                WebClient MyWebClient = new WebClient();
+                MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                StringBuilder sb = new StringBuilder();
+                String pageData = MyWebClient.DownloadString("http://2018k.cn/api/checkVersion?id=acdbe11aceff42a599113997cbb74103&version=" + Update); //从指定网站下载数据
+                pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/checkVersion?id=acdbe11aceff42a599113997cbb74103&version=" + Update));
 
-                Thread WRD1 = new Thread(WRD);
-                WRD1.Start();
-                Thread y = new Thread(yy);
-                y.Start();
-                if (Mojang.GetValue("Mail") == null)
+                String pageHtml = pageData;
+
+
+                String pageData1 = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/getExample?id=acdbe11aceff42a599113997cbb74103&data=remark|notice")); //从指定网站下载数据
+                String pageHtml1 = pageData1;
+                String pageData2 = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/getExample?id=acdbe11aceff42a599113997cbb74103&data=url")); //从指定网站下载数据
+                String pageHtml2 = pageData2;
+                String pageData3 = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/getExample?id=acdbe11aceff42a599113997cbb74103&data=notice")); //从指定网站下载数据
+                String pageHtml3 = pageData3;
+                after = pageHtml.Split(new char[] { '|' });
+                UpLog_and_GG = pageHtml1.Split(new char[] { '|' });
+                UpdateD = pageHtml2;
+                String pageData4 = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/getExample?id=acdbe11aceff42a599113997cbb74103&data=force")); //从指定网站下载数据
+                String pageHtml4 = pageData4;
+
+                String pageData5 = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://2018k.cn/api/getExample?id=acdbe11aceff42a599113997cbb74103&data=version")); //从指定网站下载数据
+                String pageHtml5 = pageData5;
+
+                if (pageHtml4 == "true" && pageHtml5 != Update)
                 {
+                    await this.ShowMessageAsync("检测到启动器有新的版本！", "新版本为:" + after[4] + "\n" + "请到设置进行更新！");
+                    Thread th = new Thread(ThreadSendKey);
+                    th.Start(); //启动线程
 
                 }
                 else
                 {
-                    try
-                    {
-                        MojangMail = Mojang.GetValue("Mail").ToString();
+                    UpdateButton.Visibility = System.Windows.Visibility.Hidden;
+                }
+            }
+            catch (Exception ex)
+            {
+                UpdateButton.Visibility = System.Windows.Visibility.Hidden;
+                await this.ShowMessageAsync("未能与FSM服务器建立通信", "这可能是是网络未连接导致" + "\n" + "可能会导致无法下载游戏，无法更新启动器等问题\n" + ex.Message);
+            }
+            Thread WRD1 = new Thread(WRD);
+            WRD1.Start();
+            Thread y = new Thread(yy);
+            y.Start();
+            if (Mojang.GetValue("Mail") == null)
+            {
 
-                        MojangPassWord = Mojang.GetValue("PassWord").ToString();
-                        var login = tools.MinecraftLogin(MojangMail, MojangPassWord);
+            }
+            else
+            {
+                try
+                {
+                    MojangMail = Mojang.GetValue("Mail").ToString();
 
-                        Mojangname = login.name;
-                        MojangUUID = login.uuid;
-                        MojangToken = login.token;
-                        LB.Content = Mojangname;
-                        loginmode = "mojang";
-                        mojangyes = "888";
-                        HttpDownloadFile(tools.GetMinecraftSkin(MojangUUID), System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
-                        System.Drawing.Point point = new System.Drawing.Point(8, 8);
-                        System.Drawing.Size size = new System.Drawing.Size(8, 8);
-                        Bitmap bitmap = new Bitmap(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
-                        var i = crop(bitmap, new System.Drawing.Point(8, 8), new System.Drawing.Size(8, 8));
-                        Zoom(i, 258, 258, out i, ZoomType.NearestNeighborInterpolation);
+                    MojangPassWord = Mojang.GetValue("PassWord").ToString();
+                    var login = tools.MinecraftLogin(MojangMail, MojangPassWord);
 
-                        //i.Save(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\steven.png");
-                        System.Drawing.Image img = i;
+                    Mojangname = login.name;
+                    MojangUUID = login.uuid;
+                    MojangToken = login.token;
+                    LB.Content = Mojangname;
+                    loginmode = "mojang";
+                    mojangyes = "888";
+                    HttpDownloadFile(tools.GetMinecraftSkin(MojangUUID), System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
+                    System.Drawing.Point point = new System.Drawing.Point(8, 8);
+                    System.Drawing.Size size = new System.Drawing.Size(8, 8);
+                    Bitmap bitmap = new Bitmap(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
+                    var i = crop(bitmap, new System.Drawing.Point(8, 8), new System.Drawing.Size(8, 8));
+                    Zoom(i, 258, 258, out i, ZoomType.NearestNeighborInterpolation);
 
-                        IM.Source = BitmapToBitmapImage(i);
+                    //i.Save(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\steven.png");
+                    System.Drawing.Image img = i;
 
-                        IDTab.SelectedIndex = 2;
-                    }
-                    catch
-                    {
+                    IM.Source = BitmapToBitmapImage(i);
 
-                    }
+                    IDTab.SelectedIndex = 2;
+                }
+                catch
+                {
 
-                
+                }
+
+
             }
         }
         public string wrtoken;
         public string wruuid;
         public string wrname;
+        private static byte[] Keys = { 0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF };
+
+        /// <summary>
+        /// DES加密字符串
+        /// </summary>
+        /// <param name="encryptString">待加密的字符串</param>
+        /// <param name="encryptKey">加密密钥,要求为8位</param>
+        /// <returns>加密成功返回加密后的字符串，失败返回源串 </returns>
+        public static string EncryptDES(string encryptString, string encryptKey)
+        {
+            try
+            {
+                byte[] rgbKey = Encoding.UTF8.GetBytes(encryptKey.Substring(0, 8));//转换为字节
+                byte[] rgbIV = Keys;
+                byte[] inputByteArray = Encoding.UTF8.GetBytes(encryptString);
+                DESCryptoServiceProvider dCSP = new DESCryptoServiceProvider();//实例化数据加密标准
+                MemoryStream mStream = new MemoryStream();//实例化内存流
+                //将数据流链接到加密转换的流
+                CryptoStream cStream = new CryptoStream(mStream, dCSP.CreateEncryptor(rgbKey, rgbIV), CryptoStreamMode.Write);
+                cStream.Write(inputByteArray, 0, inputByteArray.Length);
+                cStream.FlushFinalBlock();
+                return Convert.ToBase64String(mStream.ToArray());
+            }
+            catch
+            {
+                return encryptString;
+            }
+        }
+
+        /// <summary>
+        /// DES解密字符串
+        /// </summary>
+        /// <param name="decryptString">待解密的字符串</param>
+        /// <param name="decryptKey">解密密钥,要求为8位,和加密密钥相同</param>
+        /// <returns>解密成功返回解密后的字符串，失败返源串</returns>
+        public static string DecryptDES(string decryptString, string decryptKey)
+        {
+            try
+            {
+                byte[] rgbKey = Encoding.UTF8.GetBytes(decryptKey);
+                byte[] rgbIV = Keys;
+                byte[] inputByteArray = Convert.FromBase64String(decryptString);
+                DESCryptoServiceProvider DCSP = new DESCryptoServiceProvider();
+                MemoryStream mStream = new MemoryStream();
+                CryptoStream cStream = new CryptoStream(mStream, DCSP.CreateDecryptor(rgbKey, rgbIV), CryptoStreamMode.Write);
+                cStream.Write(inputByteArray, 0, inputByteArray.Length);
+                cStream.FlushFinalBlock();
+                return Encoding.UTF8.GetString(mStream.ToArray());
+            }
+            catch
+            {
+                return decryptString;
+            }
+        }
         private async void Tile_Click_8(object sender, RoutedEventArgs e)
         {
             //免密登录
@@ -2596,48 +2788,48 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             {
                 var loading = await this.ShowProgressAsync("正在微软登录", "请稍后...");
                 MicrosoftLogin microsoftLogin = new MicrosoftLogin();
-                    MinecraftLogin minecraftlogin = new MinecraftLogin();
-                 loading.SetIndeterminate();
-                    加载L.Content = "正在登录...";
-                    try
-                    {
+                MinecraftLogin minecraftlogin = new MinecraftLogin();
+                loading.SetIndeterminate();
+                加载L.Content = "正在登录...";
+                try
+                {
 
-                        Xbox XboxLogin = new Xbox();
-                    
-                        var token = microsoftLogin.GetToken(await microsoftLogin.Login(true));
-                        wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
-                        string refresh_token = token.refresh_token;
-                        WR.SetValue("Atoken", refresh_token);
-                   
+                    Xbox XboxLogin = new Xbox();
+
+                    var token = microsoftLogin.GetToken(await microsoftLogin.Login(true));
+                    wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
+                    string refresh_token = token.refresh_token;
+                    WR.SetValue("Atoken", refresh_token);
+
 
                     await loading.CloseAsync();
 
-                        var Minecraft = minecraftlogin.GetMincraftuuid(wrtoken);
+                    var Minecraft = minecraftlogin.GetMincraftuuid(wrtoken);
                     dlf.doSendMsg += new DownLoadFile.dlgSendMsg(SendMsgHander);
                     wruuid = Minecraft.uuid;
-                        wrname = Minecraft.name;
+                    wrname = Minecraft.name;
 
-                        LB.Content = wrname;
-                        loginmode = "wr";
-                        String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
+                    LB.Content = wrname;
+                    loginmode = "wr";
+                    String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
 
-                        wryes = "888";
-                        
-                        dw = Download( System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png","", tools.GetMinecraftSkin(wruuid));
+                    wryes = "888";
+
+                    dw = Download(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png", "", tools.GetMinecraftSkin(wruuid));
                     ONLINEW = Core5.timer(OnQw, 2333);
                     ONLINEW.Start();
                     IDTab.SelectedIndex = 2;
 
                     wryes = "888";
 
-                    }
-                    catch
-                    {
+                }
+                catch
+                {
 
-                    };
-                 
-                
-                
+                };
+
+
+
 
             }
             catch (Exception ex)
@@ -2708,7 +2900,6 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         private async void Button_Click_start(object sender, RoutedEventArgs e)
         {
             Random ra = new Random();
-
             SquareMinecraftLauncher.Minecraft.Game game = new SquareMinecraftLauncher.Minecraft.Game();//声明对象
             var loading = await this.ShowProgressAsync("启动游戏", "正在启动游戏,请稍后\n" + "你知道吗？" + NZDM[ra.Next(0, 6)]);
             switch (loginmode)
@@ -2721,14 +2912,14 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                             //var loading = await this.ShowProgressAsync("启动游戏", "正在启动游戏,请稍后\n"+"你知道吗？"+NZDM[ra.Next(0, 6)]);
                             loading.SetIndeterminate();
 
-                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), Mojangname, MojangUUID, MojangToken, JVM.Text, EY.Text);
+                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), Mojangname, MojangUUID, MojangToken, JVM.Text+ " -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true", EY.Text);
                             await loading.CloseAsync();
-                            
+
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             await loading.CloseAsync();
-                            
+
                             Ejava.Content = Java_list.Text;
                             ERAM.Content = "RAM：" + Bit.Text;
                             EFSMV.Content = Update;
@@ -2750,15 +2941,15 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                         {
                             //var loading = await this.ShowProgressAsync("启动游戏", "正在启动游戏,请稍后\n" + "你知道吗？" + NZDM[ra.Next(0, 6)]);
                             loading.SetIndeterminate();
-                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), wrname, wruuid, wrtoken, JVM.Text, EY.Text);
-                            
-                            
+                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), wrname, wruuid, wrtoken, JVM.Text + " -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true", EY.Text);
+
+
                             await loading.CloseAsync();
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             await loading.CloseAsync();
-                            
+
 
                             Ejava.Content = Java_list.Text;
                             ERAM.Content = "RAM：" + Bit.Text;
@@ -2781,14 +2972,14 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                         {
                             //var loading = await this.ShowProgressAsync("启动游戏", "正在启动游戏,请稍后\n" + "你知道吗？" + NZDM[ra.Next(0, 6)]);
                             loading.SetIndeterminate();
-                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), OfflineName.Text, JVM.Text, EY.Text);
-                            
+                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), OfflineName.Text, JVM.Text + " -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true", EY.Text);
+
                             await loading.CloseAsync();
                         }
                         catch (Exception ex)
                         {
                             await loading.CloseAsync();
-                            
+
                             Ejava.Content = Java_list.Text;
                             ERAM.Content = "RAM：" + Bit.Text;
                             EFSMV.Content = Update;
@@ -2812,13 +3003,13 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                             //var loading = await this.ShowProgressAsync("启动游戏", "正在启动游戏,请稍后\n" + "你知道吗？" + NZDM[ra.Next(0, 6)]);
                             loading.SetIndeterminate();
                             //MessageBox.Show(Y.GetValue("IP").ToString());
-                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), Yname, Yuuid, Ytoken, Y.GetValue("IP").ToString(), JVM.Text, EY.Text, AuthenticationServerMode.yggdrasil);
+                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), Yname, Yuuid, Ytoken, Y.GetValue("IP").ToString(), JVM.Text + " -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true", EY.Text, AuthenticationServerMode.yggdrasil);
                             await loading.CloseAsync();
                         }
                         catch (Exception ex)
                         {
                             await loading.CloseAsync();
-                            
+
                             Ejava.Content = Java_list.Text;
                             ERAM.Content = "RAM：" + Bit.Text;
                             EFSMV.Content = Update;
@@ -2828,7 +3019,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                             Tab1.SelectedIndex = 5;
                         }
                     }
-                    
+
 
 
                     catch (Exception ex)
@@ -2838,7 +3029,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                     break;
                 default:
                     await loading.CloseAsync();
-                    await this.ShowMessageAsync("启动错误", "你尚未登录或选择账户") ;
+                    await this.ShowMessageAsync("启动错误", "你尚未登录或选择账户");
                     break;
             }
 
@@ -2883,12 +3074,12 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 BitmapImage bi = new BitmapImage();
                 // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
                 IM.Source = BitmapToBitmapImage(i);
-                
+
                 ///WritePrivateProfileString("wr", "Atoken", refresh_token, File_);
 
             }
         }
-            private void OnQ(object ob, EventArgs a)
+        private void OnQ(object ob, EventArgs a)
         {
 
             if (DIYvar.xzItems[dw].xzwz == "完成")
@@ -2901,7 +3092,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 BitmapImage bi = new BitmapImage();
                 // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
                 IM.Source = BitmapToBitmapImage(i);
-                
+
             }
 
 
@@ -2944,11 +3135,44 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         public string Mojangname;
         public string MojangUUID;
         public string MojangToken;
+        /// <summary>
+        /// 用户控件动画
+        /// </summary>
+        /// <param name="element">控件名</param>
+        /// <param name="point">元素开始动画的位置</param>
+        /// <param name="from">元素开始的大小</param>
+        /// <param name="from">元素到达的大小</param>
+        /// <param name="m_Second">动画持续时间（毫秒）</param>
+        public static void ScaleEasingAnimationShow(FrameworkElement element, System.Windows.Point point, double from, double to, int m_Second)
+        {
+            lock (element)
+            {
+                ScaleTransform scale = new ScaleTransform();
+                element.RenderTransform = scale;
+                element.RenderTransformOrigin = point;//定义圆心位置        
+                EasingFunctionBase easeFunction = new PowerEase()
+                {
+                    EasingMode = EasingMode.EaseIn,
+                    Power = 5
+                };
+                DoubleAnimation scaleAnimation = new DoubleAnimation()
+                {
+                    From = from,                                 //起始值
+                    To = to,                                     //结束值
+                    EasingFunction = easeFunction,               //缓动函数
+                    Duration = new TimeSpan(0, 0, 0, 0, m_Second)  //动画播放时间
+                };
+
+                AnimationClock clock = scaleAnimation.CreateClock();
+                scale.ApplyAnimationClock(ScaleTransform.ScaleXProperty, clock);
+                scale.ApplyAnimationClock(ScaleTransform.ScaleYProperty, clock);
+            }
+        }
 
         private async void Button_Click_13(object sender, RoutedEventArgs e)
         {
-            
 
+            //ScaleEasingAnimationShow(ONLINET, System.Windows.Point.Parse("0.5,0.5"), 22, 22,1);
             /// AniStart(new AniData{
             /// OpAni(22, 2, st, 0)
             ///});
@@ -3091,12 +3315,12 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             {
                 loading.SetIndeterminate();
                 Xbox XboxLogin = new Xbox();
-                
-                    var token = microsoftLogin.GetToken(await microsoftLogin.Login(false));
-                    wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
-                    string refresh_token = token.refresh_token;
-                    WR.SetValue("Atoken", refresh_token);
-                
+
+                var token = microsoftLogin.GetToken(await microsoftLogin.Login(false));
+                wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
+                string refresh_token = token.refresh_token;
+                WR.SetValue("Atoken", refresh_token);
+
                 await loading.CloseAsync();
 
                 IDTab.SelectedIndex = 2;
@@ -3115,10 +3339,10 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 wryes = "888";
 
 
-                Download( System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png","",tools.GetMinecraftSkin(wruuid));
+                Download(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png", "", tools.GetMinecraftSkin(wruuid));
                 ONLINEW = Core5.timer(OnQw, 2333);
                 ONLINEW.Start();
-                
+
                 /*
                 System.Drawing.Point point = new System.Drawing.Point(8, 8);
                 System.Drawing.Size size = new System.Drawing.Size(8, 8);
@@ -3169,7 +3393,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         private async void Tile_Click_15(object sender, RoutedEventArgs e)
         {
-            try 
+            try
             {
                 Thread WRD1 = new Thread(MMJ);
                 WRD1.Start();
@@ -3178,7 +3402,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             {
 
             }
-            
+
 
 
 
@@ -3289,11 +3513,38 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         }
 
-        private void Tile_Click_17(object sender, RoutedEventArgs e)
+        private async void Tile_Click_17(object sender, RoutedEventArgs e)
         {
-            
-        }
+            if(inlite == 1 || infab == 1)
+            {
+                await this.ShowMessageAsync("不能进行Optifine安装", "Optifine与Fabric，LiteLoader不兼容", MessageDialogStyle.Affirmative);
+            }
+            else
+            {
+                try
+                {
+                    OptifineList.Items.Clear();
+                    MCVersionList[] mcvv = new MCVersionList[0];
+                    OptifineList.SelectedIndex = -1;
 
+                    string aw = mcVersionLists[MCV.SelectedIndex].version;
+                    var a = await tools.GetOptiFineList(aw);
+                    // sort forge versions
+
+
+                    foreach (var i in a)
+                    {
+                        OptifineList.Items.Add(i.filename);
+                    }
+                   
+                    DTB.SelectedIndex = 2;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
         private void Start_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -3311,7 +3562,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         private void Button_Click_15(object sender, RoutedEventArgs e)
         {
-            
+
             System.Windows.Forms.FolderBrowserDialog openFileDialog = new System.Windows.Forms.FolderBrowserDialog();  //选择文件夹
             String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
             System.Windows.Forms.FolderBrowserDialog dialog = new System.Windows.Forms.FolderBrowserDialog();//提示用户打开文件窗体
@@ -3336,14 +3587,14 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         private void pathlist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // vlist.Items.Clear();
-            
-            AllTheExistingVersion[] t = new AllTheExistingVersion[0];
-            
 
-            
+            AllTheExistingVersion[] t = new AllTheExistingVersion[0];
+
+
+
             try
             {
-                if(pathlist.SelectedIndex == 0)
+                if (pathlist.SelectedIndex == 0)
                 {
                     WritePrivateProfileString("Vlist", "Path", pathlist.SelectedIndex.ToString(), File_);
                     tools.SetMinecraftFilesPath(dminecraft_text.Text);
@@ -3353,7 +3604,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
 
                     //DIYvar.l = item1;
-                    
+
                     List<DoItem> user1 = new List<DoItem>();
                     for (int i = 0; i < t.Length; i++)
                     {
@@ -3363,14 +3614,14 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                     }
                     DIYvar.lw = user1;
                     vlist.ItemsSource = user1.ToArray();
-                    
-                    
+
+
                 }
                 else
                 {
                     WritePrivateProfileString("Vlist", "Path", pathlist.SelectedIndex.ToString(), File_);
                     string mcPath = (sender as ListBox).SelectedItem.ToString();
-                    if(mcPath == "")
+                    if (mcPath == "")
                     {
                         vlist.ItemsSource = "找不到任何版本";
                     }
@@ -3389,21 +3640,21 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                         DIYvar.lw = user1;
                         vlist.ItemsSource = user1.ToArray();
                     }
-                    
+
                 }
-               // string mcPath = (sender as ListBox).SelectedItem.ToString();
-                
+                // string mcPath = (sender as ListBox).SelectedItem.ToString();
+
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                
+
             }
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (vlist.SelectedIndex != -1)
+            if (pathlist.SelectedIndex == 0)
             {
                 MinecraftDownload minecraft = new MinecraftDownload();
                 AllTheExistingVersion[] t = new AllTheExistingVersion[0];
@@ -3415,6 +3666,21 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
 
                 NowV.Content = t[vlist.SelectedIndex].version;
+                Tab1.SelectedIndex = 0;
+            }
+            else
+            {
+                MinecraftDownload minecraft = new MinecraftDownload();
+                AllTheExistingVersion[] t = new AllTheExistingVersion[0];
+                string mcPath = (pathlist as ListBox).SelectedItem.ToString();
+                tools.SetMinecraftFilesPath(mcPath);
+                t = tools.GetAllTheExistingVersion();
+                String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
+                WritePrivateProfileString("Vlist", "V", vlist.SelectedIndex.ToString(), File_);
+
+
+                NowV.Content = t[vlist.SelectedIndex].version;
+                Tab1.SelectedIndex = 0;
             }
 
 
@@ -3539,7 +3805,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         {
             try
             {
-                
+
                 JS.Text = skin.NameItem[Ylist.SelectedIndex].Name;
                 WritePrivateProfileString("Y", "Ylist", Ylist.SelectedIndex.ToString(), FileS);
                 Yyes = "888";
@@ -3566,10 +3832,10 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         private void ImageMosedown(object sender, MouseButtonEventArgs e)
         {
-            
 
-            
-            
+
+
+
         }
 
         private void e(object sender, RoutedEventArgs e)
@@ -3588,7 +3854,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         private void Bit_TextChanged(object sender, TextChangedEventArgs e)
         {
-//rams.Value = double.Parse(Bit.Text);
+            //rams.Value = double.Parse(Bit.Text);
         }
         public static int iddd = 0;
         internal int Downloadw(string path, string ly, string url)
@@ -3598,8 +3864,8 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             iddd++;
             xzItem xzItem = new xzItem(System.IO.Path.GetFileName(path), 0, ly, "等待中", url, path);
             xzItems.Add(xzItem);
-            
-            
+
+
             return id - 1;
         }
 
@@ -3619,26 +3885,40 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         static System.Windows.Threading.DispatcherTimer JarTimer = new System.Windows.Threading.DispatcherTimer();
         public async Task<bool> libraries(string version)
         {
-            
-            
-              //  tools.DownloadSourceInitialization(DownloadSource.MCBBSSource);
-            
-            //libraries1 = mcVersionLists[MCV.SelectedIndex].version;
-            MCDownload[] File = tools.GetMissingFile(version);
-            if (File.Length != 0)
-            {
 
-                foreach (var i in File)
+            try
+            {
+                //  tools.DownloadSourceInitialization(DownloadSource.MCBBSSource);
+                dlf.doSendMsg += new DownLoadFile.dlgSendMsg(SendMsgHander);
+                //libraries1 = mcVersionLists[MCV.SelectedIndex].version;
+                MCDownload[] File = tools.GetMissingFile(version);
+                if (File.Length != 0)
                 {
-                    Download(i.path, "补全", i.Url);
+
+                    foreach (var i in File)
+                    {
+                        int aa = Download(i.path, "补全", i.Url);
+                        if(DIYvar.xzItems[aa].xzwz == "完成")
+                        {
+                            
+                            
+                        }
+                    }
+                    //libraries2 = sz.id;
+                    return false;
                 }
-                //libraries2 = sz.id;
-                return false;
+
+                
             }
-            
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             return true;
+
         }
         MCDownload[] downloads = new MCDownload[0];
+        DownloadSource QJDown;
         public async Task<bool> assetAsync(string version)
         {
             try
@@ -3654,7 +3934,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             {
 
 
-                tools.DownloadSourceInitialization(DownloadSource.MCBBSSource);
+                tools.DownloadSourceInitialization(QJDown);
 
 
                 //zy[t] = Download(downloads[t].path, "bq", downloads[t].Url);
@@ -3673,7 +3953,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             }
             return true;
         }
-        
+
         int[] zy = new int[3];
         static int d = 0;
         public static bool Asset = false;
@@ -3681,30 +3961,30 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         {
             for (int i = 0; i < zy.Length; i++)
             {
-                
-                    if (downloads.Length - d < 3)
+
+                if (downloads.Length - d < 3)
+                {
+                    for (int t = d - 1; t < downloads.Length; t++)
                     {
-                        for (int t = d - 1; t < downloads.Length; t++)
-                        {
-                            //DIYvar.Assetxz.Text = d + "/" + downloads.Length;
-                            //Download(downloads[t].path, "资源补全", downloads[t].Url);
-                            ///GacDownload gd = new GacDownload(10, downloads);
-                            ///gd.StartDownload();
-                        }
-                        return true;
+                        //DIYvar.Assetxz.Text = d + "/" + downloads.Length;
+                        //Download(downloads[t].path, "资源补全", downloads[t].Url);
+                        ///GacDownload gd = new GacDownload(10, downloads);
+                        ///gd.StartDownload();
                     }
-                    else
+                    return true;
+                }
+                else
+                {
+                    for (int t = 0; t < 3; t++, d++)
                     {
-                        for (int t = 0; t < 3; t++, d++)
-                        {
-                            //Assetxz.Text = d + "/" + downloads.Length;
-                            pdc = d + "/" + downloads.Length;
-                            //zy[i] = Download(downloads[d].path, "资源补全", downloads[d].Url);
-                            ///GacDownload gd = new GacDownload(10,downloads);
-                            ///gd.StartDownload();
-                        }
+                        //Assetxz.Text = d + "/" + downloads.Length;
+                        pdc = d + "/" + downloads.Length;
+                        //zy[i] = Download(downloads[d].path, "资源补全", downloads[d].Url);
+                        ///GacDownload gd = new GacDownload(10,downloads);
+                        ///gd.StartDownload();
                     }
-                
+                }
+
             }
             return false;
         }
@@ -3730,7 +4010,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                     if (DIYvar.xzItems[i].xzwz.IndexOf("无法") >= 0 || DIYvar.xzItems[i].xzwz.IndexOf("失败") >= 0)
                     {
                         //tools.DownloadSourceInitialization(DownloadSource.MinecraftSource);
-                        
+
                         //libraries1 = sz.id;
                         //MCDownload[] File = tools.GetMissingFile(DIYvar.Main1.GameVersion.Text);
                         lt = ap + "/" + Convert.ToString(libraries2 - libraries1);
@@ -3805,7 +4085,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         {
             try
             {
-                tools.DownloadSourceInitialization(DownloadSource.MCBBSSource);
+                tools.DownloadSourceInitialization(QJDown);
                 MCDownload download = MinecraftDownload.MCjarDownload(mcVersionLists[MCV.SelectedIndex].version);
                 JarID = Download(download.path, "", download.Url);
                 download = MinecraftDownload.MCjsonDownload(mcVersionLists[MCV.SelectedIndex].version);
@@ -3815,7 +4095,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 Jarw.Start();
                 JarTimerBool = true;
                 Tab1.SelectedIndex = 8;
-                
+
 
                 ///以上是Asset补全
 
@@ -3836,60 +4116,177 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         /// </summary>
         /// <param name="Log"></param>
        // static int logpro;
-        public void AssetDownload_DownloadProgressChanged(AssetDownload.DownloadIntermation Log)
+        public async void AssetDownload_DownloadProgressChanged(AssetDownload.DownloadIntermation Log)
         {
             
-                Console.WriteLine(Log.FinishFile + "/" + Log.AllFile + "  " + Log.Progress + "  " + Log.Speed);
+            Console.WriteLine(Log.FinishFile + "/" + Log.AllFile + "  " + Log.Progress + "  " + Log.Speed);
 
             this.Dispatcher.Invoke(new Action(delegate { DownPro.Value = Log.Progress; }));
-                if (Log.Progress == 100)
-                    {
+            if (Log.Progress == 100)
+            {
+                
+
+
                 this.Dispatcher.Invoke(new Action(delegate { Tab1.SelectedIndex = 0; }));
-                
-                
-                    }
-                
-            
-            
-            
+            }
+
+
+
+
         }
-        
+        MinecraftDownload mcd = new MinecraftDownload();
+        MCDownload ddd;
         private async void MCjarInstall(object ob, EventArgs a)
         {
             //MessageBox.Show(DIYvar.xzItems[JsonID].xzwz);
             string aa = DIYvar.xzItems[JarID].xzwz;
             string bb = DIYvar.xzItems[JsonID].xzwz;
-            
+
             if (aa == "完成" && bb == "完成")
             {
 
-                
+
                 JarTimerBool = false;
 
-                
+
                 Jarw.Stop();
                 try
                 {
+                    if (inforge == 1)
+                    {
+                        if (inopt == 1)
+                        {
+
+                            ///Lod.SetIndeterminate();
+                            //安装optifine和Forge
+                            ddd = mcd.ForgeDownload(mcVersionLists[MCV.SelectedIndex].version, ForgeVer);
+                            bbb = Download(ddd.path, "Forge", ddd.Url);
+                            UPDATEW = Core5.timer(OptifineandForgeI, 5555);
+                            UPDATEW.Start();
+                            
+                            
+                        }
+                        else
+                        {
+                            //安装Forge
+                            ///   Lod.SetIndeterminate();
+                            ddd = mcd.ForgeDownload(mcVersionLists[MCV.SelectedIndex].version, ForgeVer);
+                            bbb = Download(ddd.path, "Forge", ddd.Url);
+                            UPDATEW = Core5.timer(ForgeI,5555);
+                            UPDATEW.Start();
+                            
+                        }
+                    }
+                    else if (infab == 1)
+                    {
+                        //安装Fabric
+                        await fabricmc.FabricmcVersionInstall(mcVersionLists[MCV.SelectedIndex].version, FabVer);
+                        AssetDownload assetDownload = new AssetDownload();//asset下载类
+                        assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
+
+                        await libraries(mcVersionLists[MCV.SelectedIndex].version);
+
+                        await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
+                    }
+                    else if (inlite == 1)
+                    {
+                        //安装LiteLoader
+                    }
+                    else if (inopt == 1)
+                    {
+                        //安装Optifine
+                        
+                        OptiFineList[] opt = new OptiFineList[0];
+                        dlf.doSendMsg += new DownLoadFile.dlgSendMsg(SendMsgHander);
+                        ddd = mcd.DownloadOptifine(mcVersionLists[MCV.SelectedIndex].version, OptVer);
+                        bbb = Download(ddd.path,"Optifine", ddd.Url);
+                        UPDATEW = Core5.timer(OptifineI, 5555);
+                        UPDATEW.Start();
+                        
+                        
+                    }
+                    else
+                    {
+                        AssetDownload assetDownload = new AssetDownload();//asset下载类
+                        assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
+
+                        await libraries(mcVersionLists[MCV.SelectedIndex].version);
+
+                        await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
+                    }
                     //tools.DownloadSourceInitialization(DownloadSource.MCBBSSource);
 
-                    AssetDownload assetDownload = new AssetDownload();//asset下载类
-                    assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
-
-                    await libraries(mcVersionLists[MCV.SelectedIndex].version);
-                    await assetDownload.BuildAssetDownload(9, mcVersionLists[MCV.SelectedIndex].version);//构建下载
-                    Jarw.Stop();
-                    Jarw.Stop();
+                    
                 }
-                catch
+                catch(Exception ex)
                 {
-
+                    MessageBox.Show(ex.Message);
                 }
 
             }
-            
+
 
         }
+        int bbb;
+        public async void OptifineI(object ob, EventArgs a)
+        {
+            if (DIYvar.xzItems[bbb].xzwz == "完成")
+            {
+                UPDATEW.Stop();
+                UPDATEW.Stop();
+                OptiFineList[] opt = new OptiFineList[0];
+                await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, opt[0].patch);
+                AssetDownload assetDownload = new AssetDownload();//asset下载类
+                assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
 
+                await libraries(mcVersionLists[MCV.SelectedIndex].version);
+
+                await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
+                
+            }
+        }
+        public async void ForgeI(object ob, EventArgs a)
+        {
+            if (DIYvar.xzItems[bbb].xzwz == "完成")
+            {
+                UPDATEW.Stop();
+                await tools.ForgeInstallation(ddd.path, mcVersionLists[MCV.SelectedIndex].version, Java_list.Text);
+                //   await Lod.CloseAsync();
+                AssetDownload assetDownload = new AssetDownload();//asset下载类
+                assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
+
+                await libraries(mcVersionLists[MCV.SelectedIndex].version);
+
+                await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
+            }
+        }
+        public async void OptifineandForgeI(object ob, EventArgs a)
+        {
+            if (DIYvar.xzItems[bbb].xzwz == "完成")
+            {
+                UPDATEW.Stop();
+                await tools.ForgeInstallation(ddd.path, mcVersionLists[MCV.SelectedIndex].version, Java_list.Text);
+                ddd = mcd.DownloadOptifine(mcVersionLists[MCV.SelectedIndex].version, OptVer);
+                Directory.CreateDirectory(pathlist.SelectedItem + @"\mods");
+                bbb = Download(pathlist.SelectedItem + @"\mods\" + OptVer + "", "Optifine", ddd.Url);
+                /// await Lod.CloseAsync();
+                UPDATEW = Core5.timer(Cree, 5555);
+                UPDATEW.Start();
+            }
+        }
+        public async void Cree(object ob, EventArgs a)
+        {
+            if (DIYvar.xzItems[bbb].xzwz == "完成")
+            {
+                UPDATEW.Stop();
+                AssetDownload assetDownload = new AssetDownload();//asset下载类
+                assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
+
+                await libraries(mcVersionLists[MCV.SelectedIndex].version);
+
+                await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
+            }
+        }
         private async void Button_Click_21(object sender, RoutedEventArgs e)
         {
             //tools.DownloadSourceInitialization(DownloadSource.MCBBSSource);
@@ -3910,7 +4307,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             onlinename = await this.ShowInputAsync("请输入房间名", "房间名会在对方启动器内显示\n你也可以不填写");
             onlinezijiqq = await this.ShowInputAsync("请输入你的QQ", "QQ作为您的验证凭证,这是安全的\n你必须填写,请勿乱写,乱写有可能导致联机有问题");
             onlineduankou = await this.ShowInputAsync("请输入游戏端口", "打开Minecraft单人游戏,按esc到菜单,然后开放局域网\n你必须填写,请勿乱写,乱写有可能导致联机有问题");
-            OnlineTEXT.Text = "房间名:"+onlinename+"\n" + "你的QQ:" + onlinezijiqq + "\n" + "你的端口:" + onlineduankou + "\n";
+            OnlineTEXT.Text = "房间名:" + onlinename + "\n" + "你的QQ:" + onlinezijiqq + "\n" + "你的端口:" + onlineduankou + "\n";
             OpenOnline.Visibility = Visibility.Visible;
         }
 
@@ -3975,7 +4372,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             }
         }
         public short lj = 1;
-            private async void Button_Click_23(object sender, RoutedEventArgs e)
+        private async void Button_Click_23(object sender, RoutedEventArgs e)
         {
             if (lj == 1)
             {
@@ -3999,46 +4396,46 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             }
             else
             {
-                
+
                 byte[] b = System.Text.Encoding.Default.GetBytes(onlinezijiqq + "|" + onlinename);
-                
+
                 Clipboard.SetDataObject(Convert.ToBase64String(b));
                 await this.ShowMessageAsync("已复制链接", "分享给他人吧!");
             }
-            
-        
 
-            
+
+
+
         }
         public static bool StartProcess(string filename, string[] args)
-         {
-             try
-             {
-                 string s = "";
-                 foreach (string arg in args)
-                 {
-                     s = s + arg + " ";
-                 }
-                 s = s.Trim();
-                 var myprocess = new Process();
-                 var startInfo = new ProcessStartInfo(filename, s);
-                 myprocess.StartInfo = startInfo;
-                 //通过以下参数可以控制exe的启动方式，具体参照 myprocess.StartInfo.下面的参数，如以无界面方式启动exe等
-                 //myprocess.StartInfo.UseShellExecute = true;
+        {
+            try
+            {
+                string s = "";
+                foreach (string arg in args)
+                {
+                    s = s + arg + " ";
+                }
+                s = s.Trim();
+                var myprocess = new Process();
+                var startInfo = new ProcessStartInfo(filename, s);
+                myprocess.StartInfo = startInfo;
+                //通过以下参数可以控制exe的启动方式，具体参照 myprocess.StartInfo.下面的参数，如以无界面方式启动exe等
+                //myprocess.StartInfo.UseShellExecute = true;
                 myprocess.StartInfo.CreateNoWindow = true;
-                 myprocess.Start();
-                 return true;
-             }
-             catch (Exception ex)
-             {
-                     Console.WriteLine("启动应用程序时出错！原因：" + ex.Message);
-                 }
+                myprocess.Start();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("启动应用程序时出错！原因：" + ex.Message);
+            }
             return false;
-         }
+        }
 
         private void Button_Click_24(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private async void Button_Click_25(object sender, RoutedEventArgs e)
@@ -4081,12 +4478,12 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
         private async void Button_Click_26(object sender, RoutedEventArgs e)
         {
             Clipboard.SetDataObject("127.0.0.1:32423");
-            await this.ShowMessageAsync("已复制地址","快进入游戏联机吧!\n多人游戏，欢乐多又多");
+            await this.ShowMessageAsync("已复制地址", "快进入游戏联机吧!\n多人游戏，欢乐多又多");
         }
 
         private void CheckBox2(object sender, RoutedEventArgs e)
         {
-            
+
 
 
 
@@ -4112,7 +4509,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
                 xzdyy.Text = fileDialog.FileName;
                 /////PlaySound(xzdyy.Text, 0, 1); //第3个形参，把1换为9，连续播放
-                WritePrivateProfileString("Music","lj",xzdyy.Text,FileS);
+                WritePrivateProfileString("Music", "lj", xzdyy.Text, FileS);
             }
         }
         public int yyxhbf;
@@ -4125,7 +4522,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 {
                     //选择
                     yyxhbf = 9;
-                    WritePrivateProfileString("Music","XHBF","9",FileS);
+                    WritePrivateProfileString("Music", "XHBF", "9", FileS);
                 }
                 else
                 {
@@ -4182,6 +4579,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
                 try
                 {
                     ForgeList.Items.Clear();
+                    ForgeList.SelectedIndex = -1;
                     MCVersionList[] mcvv = new MCVersionList[0];
 
 
@@ -4193,7 +4591,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
                     foreach (var i in a)
                     {
-                        ForgeList.Items.Add("Forge - " + i.ForgeVersion);
+                        ForgeList.Items.Add("" + i.ForgeVersion);
                     }
                     var b = await tools.GetMaxForge(AZForgeV.Text);
                     MaxForge.Content = "建议的Forge版本:" + b.ForgeVersion + " (点击选择)";
@@ -4213,37 +4611,65 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         private async void Button_Click_30(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void ForgeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DTB.SelectedIndex = 0;
-            ForgeB.Content = "安装Forge\n" + ForgeList.SelectedItem ;
+            ForgeB.Content = "安装Forge\n" + ForgeList.SelectedItem;
+            ForgeVer = ForgeList.SelectedItem.ToString();
             inforge = 1;
         }
-
+        String ForgeVer;
+        String OptVer;
+        String FabVer;
+        String LiteVer;
         private async void MaxForge_Click(object sender, RoutedEventArgs e)
         {
             DTB.SelectedIndex = 0;
             var b = await tools.GetMaxForge(AZForgeV.Text);
             inforge = 1;
-            ForgeB.Content = "安装Forge\n" + "Forge - "+b.ForgeVersion;
-        }
+            ForgeVer = b.ForgeVersion;
+            ForgeB.Content = "安装Forge\n" + "Forge - " + b.ForgeVersion;
 
+        }
+        fabricmc fabricmc = new fabricmc();
         private async void Tile_Click_26(object sender, RoutedEventArgs e)
         {
-            if(inforge == 1 || inopt == 1 || inlite == 1)
+            if (inforge == 1 || inopt == 1 || inlite == 1)
             {
-                await this.ShowMessageAsync("不能进行Fabric安装","Fabric与Forge，Optifine，LiteLoader不兼容",MessageDialogStyle.Affirmative);
+                await this.ShowMessageAsync("不能进行Fabric安装", "Fabric与Forge，Optifine，LiteLoader不兼容", MessageDialogStyle.Affirmative);
             }
             else
             {
+                try
+                {
+                    FabricList.Items.Clear();
+                    FabricList.SelectedIndex = -1;
+                    MCVersionList[] mcvv = new MCVersionList[0];
 
+
+                    string bb = mcVersionLists[MCV.SelectedIndex].version;
+
+                    var a = await fabricmc.FabricmcList(bb);
+                    // sort forge versions
+
+
+                    foreach (var i in a)
+                    {
+                        FabricList.Items.Add(i);
+                    }
+                    DTB.SelectedIndex = 3;
+                }
+                catch
+                {
+
+                }
             }
         }
 
-        
+
 
         private void DB_Help(object sender, RoutedEventArgs e)
         {
@@ -4252,7 +4678,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         private void Button_Click_31(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void Size(object sender, SizeChangedEventArgs e)
@@ -4260,7 +4686,7 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             //asc.controlAutoSize(this);
             System.Windows.Rect r = new System.Windows.Rect(e.NewSize);
             RectangleGeometry gm = new RectangleGeometry(r, 7, 7);
-            ((UIElement)sender).Clip = gm; 
+            ((UIElement)sender).Clip = gm;
         }
 
         private void Tile_Click_LXSkin(object sender, RoutedEventArgs e)
@@ -4270,22 +4696,23 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
 
         private void Button_Click_XZJ(object sender, RoutedEventArgs e)
         {
+            ThemeManager.Current.ChangeTheme(this, "Dark.Olive");
             Tab1.SelectedIndex = 4;
             MoreTab.SelectedIndex = 0;
         }
 
         private async void Button_Click_32(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void SetBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(SetBox.SelectedIndex == 0)
+            if (SetBox.SelectedIndex == 0)
             {
                 SetTab.SelectedIndex = 0;
             }
-            else if(SetBox.SelectedIndex == 1)
+            else if (SetBox.SelectedIndex == 1)
             {
                 SetTab.SelectedIndex = 1;
             }
@@ -4303,7 +4730,184 @@ border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
             }
         }
 
-        
+        private void Button_Click_33(object sender, RoutedEventArgs e)
+        {
+            //Steel
+            WritePrivateProfileString("JSM","Color","Steel",FileS);
+            ThemeManager.Current.ChangeTheme(this, "Light.Steel");
+        }
+
+        private void Button_Click_34(object sender, RoutedEventArgs e)
+        {
+            //Mauve
+            WritePrivateProfileString("JSM", "Color", "Mauve", FileS);
+            ThemeManager.Current.ChangeTheme(this, "Light.Mauve");
+        }
+
+        private void Button_Click_35(object sender, RoutedEventArgs e)
+        {
+            //Olive
+            WritePrivateProfileString("JSM", "Color", "Olive", FileS);
+            ThemeManager.Current.ChangeTheme(this, "Light.Olive");
+        }
+        public static string jiema(string s)
+      {
+          System.Text.RegularExpressions.CaptureCollection cs =
+             System.Text.RegularExpressions.Regex.Match(s, @"([01]{8})+").Groups[1].Captures;
+         byte[] data = new byte[cs.Count];
+         for (int i = 0; i<cs.Count; i++)
+         {
+             data[i] = Convert.ToByte(cs[i].Value, 2);
+         }
+         return Encoding.Unicode.GetString(data, 0, data.Length);
+         }
+        public static string bianma(string s)
+        {
+            byte[] data = Encoding.Unicode.GetBytes(s);
+            StringBuilder result = new StringBuilder(data.Length * 8);
+
+            foreach (byte b in data)
+            {
+                result.Append(Convert.ToString(b, 2).PadLeft(8, '0'));
+            }
+            return result.ToString();
+        }
+        private void Button_Click_36(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                String JS = JS1.Text;
+                string code = null;
+                SelectQuery query = new SelectQuery("select * from Win32_ComputerSystemProduct");
+                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
+                {
+                    foreach (var item in searcher.Get())
+                    {
+                        using (item) code = item["UUID"].ToString();
+                    }
+                }
+                byte[] c = Convert.FromBase64String(JS);
+                string jsw = System.Text.Encoding.Default.GetString(c);
+                string zz = jiema(jsw);
+                if (zz == code + "SHILI")
+                {
+                    WritePrivateProfileString("JSM","JSM", EncryptDES(code,"87654321"), FileS);
+                    this.ShowMessageAsync("解锁成功", "解锁成功了!");
+                    TSZ.Visibility = Visibility.Visible;
+                    MWL.Visibility = Visibility.Visible;
+                    YFL.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    this.ShowMessageAsync("解锁失败","解锁码错误");
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void Button_Click_37(object sender, RoutedEventArgs e)
+        {
+            string code = null;
+            SelectQuery query = new SelectQuery("select * from Win32_ComputerSystemProduct");
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
+            {
+                foreach (var item in searcher.Get())
+                {
+                    using (item) code = item["UUID"].ToString();
+                }
+            }
+            Clipboard.SetDataObject(code);
+        }
+
+        private void Button_Click_38(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://afdian.net/@YUXUAN233");
+        }
+
+        private void OptifineList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DTB.SelectedIndex = 0;
+            OptifineB.Content = "安装Optifine\n" + OptifineList.SelectedItem;
+            OptVer = OptifineList.SelectedItem.ToString();
+            inopt = 1;
+        }
+
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            switch (DownS.SelectedIndex)
+            {
+                case 0:
+                    QJDown = DownloadSource.MCBBSSource;
+                    WritePrivateProfileString("DownLoad","Source","MCBBS",FileS);
+                    break;
+                case 1:
+                    QJDown = DownloadSource.bmclapiSource;
+                    WritePrivateProfileString("DownLoad", "Source", "BMCLAPI", FileS);
+                    break;
+                case 2:
+                    QJDown = DownloadSource.MinecraftSource;
+                    WritePrivateProfileString("DownLoad", "Source", "Minecraft", FileS);
+                    break;
+            }
+        }
+
+        private void FabricList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DTB.SelectedIndex = 0;
+            FabricB.Content = "安装Fabric\n" + FabricList.SelectedItem;
+            FabVer = FabricList.SelectedItem.ToString();
+            infab = 1;
+        }
+
+        private void LiteList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DTB.SelectedIndex = 0;
+            LiteB.Content = "安装LiteLoader\n" + LiteList.SelectedItem;
+            inlite = 1;
+        }
+        LiteloaderList LiteLoaderList = new LiteloaderList();
+        private async void Tile_Click_X(object sender, RoutedEventArgs e)
+        {
+            if (inopt == 1 || infab == 1 || inforge == 1)
+            {
+                await this.ShowMessageAsync("不能进行LiteLoader安装", "LiteLoader与Fabric，Forge，Optifine不兼容", MessageDialogStyle.Affirmative);
+            }
+            else
+            {
+                try
+                {
+                    LiteList.Items.Clear();
+                    MCVersionList[] mcvv = new MCVersionList[0];
+                    LiteList.SelectedIndex = -1;
+
+                    
+
+                    var a = await tools.GetLiteloaderList();
+                    
+                    // sort forge versions
+
+
+                    foreach (var i in a)
+                    {
+                        LiteList.Items.Add("" + i.version+"——"+i.mcversion);
+                    }
+
+                    DTB.SelectedIndex = 4;
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        private async void Button_Click_39(object sender, RoutedEventArgs e)
+        {
+            
+        }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {

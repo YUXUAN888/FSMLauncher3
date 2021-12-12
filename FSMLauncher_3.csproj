@@ -156,6 +156,9 @@
     <Compile Include="About List\SetsItem.xaml.cs">
       <DependentUpon>SetsItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="About Message\OSMessage.xaml.cs">
+      <DependentUpon>OSMessage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Core.cs" />
     <Compile Include="EaseMoveAnimation.cs" />
     <Compile Include="GacDownload.cs" />
@@ -181,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="About List\SetsItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="About Message\OSMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
