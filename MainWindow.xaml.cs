@@ -4502,19 +4502,13 @@ namespace FSMLauncher_3
         public short lj = 1;
         private async void Button_Click_23(object sender, RoutedEventArgs e)
         {
-            WebClient MyWebClient = new WebClient();
-            MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
-            StringBuilder sb = new StringBuilder();
-            String pageData = MyWebClient.DownloadString("http://1.116.201.220/"); //从指定网站下载数据
-            pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://1.116.201.220/"));
-            byte[] buff = Convert.FromBase64String(pageData);
-            string decStr = System.Text.Encoding.Default.GetString(buff);
+            
             if (lj == 1)
             {
                 WritePrivateProfileString("common", "server_addr", "sh.qwq.one", FileOnlineServer + @"\frpc.ini");
                 WritePrivateProfileString("common", "server_port", "7000", FileOnlineServer + @"\frpc.ini");
                 WritePrivateProfileString("common", "dns", "223.5.5.5", FileOnlineServer + @"\frpc.ini");
-                WritePrivateProfileString("common", "token", decStr, FileOnlineServer + @"\frpc.ini");
+               //WritePrivateProfileString("common", "token", decStr, FileOnlineServer + @"\frpc.ini");
                 WritePrivateProfileString(onlinezijiqq, "type", "stcp", FileOnlineServer + @"\frpc.ini");
                 WritePrivateProfileString(onlinezijiqq, "sk", "12345678", FileOnlineServer + @"\frpc.ini");
                 WritePrivateProfileString(onlinezijiqq, "local_port", onlineduankou, FileOnlineServer + @"\frpc.ini");
@@ -4578,13 +4572,7 @@ namespace FSMLauncher_3
         {
             try
             {
-                WebClient MyWebClient = new WebClient();
-                MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
-                StringBuilder sb = new StringBuilder();
-                String pageData = MyWebClient.DownloadString("http://1.116.201.220/"); //从指定网站下载数据
-                pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://1.116.201.220/"));
-                byte[] buff = Convert.FromBase64String(pageData);
-                string decStr = System.Text.Encoding.Default.GetString(buff);
+                
                 String yqm = await this.ShowInputAsync("请输入联机邀请码", "对方发来的邀请码");
                 String xcqq = await this.ShowInputAsync("请输入你的QQ", "请注意，");
                 byte[] c = Convert.FromBase64String(yqm);
@@ -4594,7 +4582,7 @@ namespace FSMLauncher_3
                 onlineduifangqq = after[0];
                 WritePrivateProfileString("common", "server_addr", "sh.qwq.one", FileOnlineKEHU + @"\frpc.ini");
                 WritePrivateProfileString("common", "server_port", "7000", FileOnlineKEHU + @"\frpc.ini");
-                WritePrivateProfileString("common", "token", decStr, FileOnlineKEHU + @"\frpc.ini");
+                //WritePrivateProfileString("common", "token", decStr, FileOnlineKEHU + @"\frpc.ini");
                 WritePrivateProfileString("common", "dns", "223.5.5.5", FileOnlineKEHU + @"\frpc.ini");
                 WritePrivateProfileString(xcqq, "server_name", onlineduifangqq, FileOnlineKEHU + @"\frpc.ini");
                 WritePrivateProfileString(xcqq, "type", "stcp", FileOnlineKEHU + @"\frpc.ini");
@@ -4918,52 +4906,13 @@ namespace FSMLauncher_3
         }
         private void Button_Click_36(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                String JS = JS1.Text;
-                string code = null;
-                SelectQuery query = new SelectQuery("select * from Win32_ComputerSystemProduct");
-                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
-                {
-                    foreach (var item in searcher.Get())
-                    {
-                        using (item) code = item["UUID"].ToString();
-                    }
-                }
-                byte[] c = Convert.FromBase64String(JS);
-                string jsw = System.Text.Encoding.Default.GetString(c);
-                string zz = jiema(jsw);
-                if (zz == code + "SHILI")
-                {
-                    WritePrivateProfileString("JSM","JSM", EncryptDES(code,"87654321"), FileS);
-                    this.ShowMessageAsync("解锁成功", "解锁成功了!");
-                    TSZ.Visibility = Visibility.Visible;
-                    MWL.Visibility = Visibility.Visible;
-                    YFL.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    this.ShowMessageAsync("解锁失败","解锁码错误");
-                }
-            }
-            catch
-            {
-
-            }
+            
+            
         }
 
         private void Button_Click_37(object sender, RoutedEventArgs e)
         {
-            string code = null;
-            SelectQuery query = new SelectQuery("select * from Win32_ComputerSystemProduct");
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
-            {
-                foreach (var item in searcher.Get())
-                {
-                    using (item) code = item["UUID"].ToString();
-                }
-            }
-            Clipboard.SetDataObject(code);
+            
         }
 
         private void Button_Click_38(object sender, RoutedEventArgs e)
