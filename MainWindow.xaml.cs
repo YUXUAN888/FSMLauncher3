@@ -4509,7 +4509,6 @@ namespace FSMLauncher_3
             pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://1.116.201.220/"));
             byte[] buff = Convert.FromBase64String(pageData);
             string decStr = System.Text.Encoding.Default.GetString(buff);
-            w
             if (lj == 1)
             {
                 WritePrivateProfileString("common", "server_addr", "sh.qwq.one", FileOnlineServer + @"\frpc.ini");
