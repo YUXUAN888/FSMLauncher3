@@ -4,12 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FSMLauncher_3.About_Message"
-             mc:Ignorable="d" Height="61.808" Width="335.904" Loaded="creat">
+             mc:Ignorable="d" Height="61.808" Width="335.904" SizeChanged="w">
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="#FF181818" Opacity="0.88"/>
+            <SolidColorBrush Color="#FF1F1D1D" Opacity="0.88"/>
         </Grid.Background>
-        <TextBlock HorizontalAlignment="Left" Height="32" Margin="115,11,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="216" Foreground="White"/>
+        <TextBlock x:Name="xxbt" HorizontalAlignment="Left" Height="23" Margin="7,4,0,0" TextWrapping="Wrap" Text="消息标题" VerticalAlignment="Top" Width="215" Foreground="White" FontSize="18" FontFamily="Microsoft YaHei UI Light"/>
+        <TextBlock x:Name="xxwb" HorizontalAlignment="Left" Height="30" Margin="8,29,0,0" TextWrapping="Wrap" Text="消息文本" VerticalAlignment="Top" Width="317" Foreground="White" FontFamily="Microsoft YaHei UI Light" FontWeight="Bold" FontSize="11"/>
 
     </Grid>
 </UserControl>

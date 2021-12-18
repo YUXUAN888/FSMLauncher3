@@ -62,6 +62,7 @@ using EaseMoveDemo;
 using FSMLauncher_3.About_List;
 using FSMLauncher_3.About_Message;
 using System.Security.Cryptography;
+using System.Windows.Interop;
 
 namespace FSMLauncher_3
 {
@@ -85,8 +86,9 @@ namespace FSMLauncher_3
         {
 
         }
-
+        static String ZongX = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //获取APPDATA
         public string UpdateD;
+        String ZongW = ZongX + @"\.fsm";
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
 
         private static extern long WritePrivateProfileString(string section, string key, string value, string filepath);
@@ -144,7 +146,6 @@ namespace FSMLauncher_3
         {
 
         }
-
 
         internal ObservableCollection<T> ItemAdd<T>(T[] items)
         {
@@ -208,7 +209,6 @@ namespace FSMLauncher_3
         private extern static int GetWindowTextLength(IntPtr hWnd);
         private int m_ProcessorCount = 0;
         RegistryKey hkim = Registry.LocalMachine;
-
         public long PhysicalMemory
         {
 
@@ -456,6 +456,18 @@ namespace FSMLauncher_3
             int i = GetPrivateProfileString(Section, Key, "", temp, 500, File_);
             return temp.ToString();
         }
+        /// <summary> 
+        /// 读出INI文件 
+        /// </summary> 
+        /// <param name="Section">项目名称(如 [TypeName] )</param> 
+        /// <param name="Key">键</param> 
+        public string IniReadValueW(string Section, string Key)
+        {
+            String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
+            StringBuilder temp = new StringBuilder(500);
+            int i = GetPrivateProfileString(Section, Key, "", temp, 500, ZongW + @"\ConsoleW.qwq");
+            return temp.ToString();
+        }
         public static int ssti;
         public static String Update;
         AutoSizeFormClass asc = new AutoSizeFormClass();
@@ -471,14 +483,13 @@ namespace FSMLauncher_3
             //Thread y = new Thread(yy);
             //y.Start();
             ServicePointManager.DefaultConnectionLimit = 512;
-            Update = "Beta5";///每次更新启动器设置，启动器当前版本号
+            Update = "Beta6";///每次更新启动器设置，启动器当前版本号
             Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM");
             String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM";
             StringBuilder temp = new StringBuilder();
             GetPrivateProfileString("ZTSY", "ZTSY", "", temp, 255, File_ + @"\FSM.slx");
 
             //DownloadSourceInitialization(DownloadSource.MCBBSSource);//改源方法
-
             this.ResizeMode = ResizeMode.CanMinimize;
             InitializeComponent();
                              FixJS.Visibility = Visibility.Hidden;
@@ -661,6 +672,7 @@ namespace FSMLauncher_3
                 RenderingBias = RenderingBias.Performance
             };
             border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
+
 
             
 
@@ -937,7 +949,7 @@ namespace FSMLauncher_3
          //Code
 
 
-         if (WR.GetValue("Atoken") == null)
+         if (IniReadValueW("wr","Atoken") == null||IniReadValueW("wr", "Atoken") == "")
          {
 
          }
@@ -948,16 +960,17 @@ namespace FSMLauncher_3
              {
                  MicrosoftLogin microsoftLogin = new MicrosoftLogin();
                  Xbox XboxLogin = new Xbox();
-                 await Task.Run(() =>
-                 {
-                     Minecraft_Token = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(microsoftLogin.RefreshingTokens(WR.GetValue("Atoken").ToString()))));
+                 
+                     Minecraft_Token = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(microsoftLogin.RefreshingTokens(IniReadValueW("wr", "Atoken")))));
                      MinecraftLogin minecraftlogin = new MinecraftLogin();
                      var Minecraft = minecraftlogin.GetMincraftuuid(Minecraft_Token);
                      IDTab.SelectedIndex = 2;
                      wruuid = Minecraft.uuid;
                      wrname = Minecraft.name;
                      wrtoken = Minecraft_Token;
-                 });
+
+                 
+                 
 
 
 
@@ -1004,7 +1017,7 @@ namespace FSMLauncher_3
 
 
             Application.Current.Dispatcher.Invoke(
-       delegate
+       async delegate
      {
          //Code
          try
@@ -1031,15 +1044,38 @@ namespace FSMLauncher_3
              String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
              StringBuilder temp = new StringBuilder(500);
              mojangyes = "888";
-             ///WritePrivateProfileString("Mojang", "Mail", Mojang1.Text, File_);
-             ///WritePrivateProfileString("Mojang", "PassWord", Mojang2.Password, File_);
-             Mojang.SetValue("Mail", Mojang1.Text);
-             Mojang.SetValue("PassWord", Mojang2.Password);
+             WritePrivateProfileString("Mojang", "Mail", Mojang1.Text, ZongW + @"\ConsoleW.qwq");
+             WritePrivateProfileString("Mojang", "PassWord", Mojang2.Password, ZongW + @"\ConsoleW.qwq");
+             ///Mojang.SetValue("Mail", Mojang1.Text);
+             ///Mojang.SetValue("PassWord", Mojang2.Password);
              IDTab.SelectedIndex = 2;
          }
          catch (SquareMinecraftLauncherException ex)
          {
-             this.ShowMessageAsync("登陆失败！", ex.Message);
+             try
+             {
+                 thick.Top = 4;
+                 thick.Left = 5;
+                 OSM.Margin = thick;
+                 OSM.Visibility = Visibility.Visible;
+                 OSM.xxbt.Text = "登录失败";
+                 OSM.xxwb.Text = "你登陆失败了\n"+ex.Message;
+                 //string a = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //获取APPDATA
+
+                 OSM.BeginAnimation(WidthProperty, OSMessage(0, 336, 0.8));
+
+                 //Thread.Sleep(888);
+                 await Task.Run(() =>
+                 {
+                     Thread.Sleep(1898);
+                 });
+
+                 OSM.BeginAnimation(WidthProperty, OSMessage(336, 0, 0.8));
+             }
+             catch
+             {
+
+             }
 
          }
 
@@ -1138,15 +1174,15 @@ namespace FSMLauncher_3
          //Code
          try
          {
-             if (Y.GetValue("IDD") == null)
+             if (IniReadValueW("wz", "IDD") == null||IniReadValueW("wz", "IDD") == "")
              {
                  ///////////////////////////////////////////////////
              }
              else
              {
-                 string yip = Y.GetValue("IP").ToString();
-                 string yidd = Y.GetValue("IDD").ToString();
-                 string yiddp = Y.GetValue("IPPPassWord").ToString();
+                 string yip = IniReadValueW("wz", "IP");
+                 string yidd = IniReadValueW("wz", "IDD");
+                 string yiddp = IniReadValueW("wz", "IDDPassWord");
                  skin = tools.GetAuthlib_Injector(yip, yidd, yiddp);
                  Ylist.ItemsSource = skin.NameItem;
                  //IDTab.SelectedIndex = 4;
@@ -2522,9 +2558,10 @@ namespace FSMLauncher_3
             {
 
             }
+            
             //this.Test_Resize += new EventHandler(Test_Resize);
             MetroDialogSettings settings = new MetroDialogSettings();
-            if (XK.GetValue("XK") == null)
+            if (IniReadValueW("Read","ReadW") == null || IniReadValueW("Read", "ReadW") == "")
             {
                 settings.NegativeButtonText = "同意";
                 settings.AffirmativeButtonText = "拒绝";
@@ -2539,8 +2576,8 @@ namespace FSMLauncher_3
                 else if (loading != MessageDialogResult.Affirmative)
                 {
                     //MessageBox.Show("同意");
-                    XK.SetValue("XK", "1");
-
+                    ///XK.SetValue("XK", "1");
+                    WritePrivateProfileString("Read","ReadW","w",ZongW+@"\ConsoleW.qwq");
                 }
             }
             else
@@ -2574,6 +2611,7 @@ namespace FSMLauncher_3
             try
             {
                 string aa = DecryptDES(IniReadValue("JSM", "JSM"), "87654321");
+               // MessageBox.Show(DecryptDES("ODliMzdkNWNmOTBhOTViNQ==", "8765432w"));
                 string code = null;
                 SelectQuery query = new SelectQuery("select * from Win32_ComputerSystemProduct");
                 using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
@@ -2597,7 +2635,12 @@ namespace FSMLauncher_3
 
             }
 
-
+            //如果没有文件夹就创建它
+            if (!Directory.Exists(ZongX + @"\.fsm"))
+            {
+                //System.IO.Directory.CreateDirectory(ZongX + ".fsm");
+                Directory.CreateDirectory(ZongX + @"\.fsm");
+            }
             XX = (float)this.Width;
 
             YY = (float)this.Height;
@@ -2682,7 +2725,7 @@ namespace FSMLauncher_3
             WRD1.Start();
             Thread y = new Thread(yy);
             y.Start();
-            if (Mojang.GetValue("Mail") == null)
+            if (IniReadValueW("Mojang","Mail") == null || IniReadValueW("Mojang", "Mail") == "")
             {
 
             }
@@ -2690,9 +2733,9 @@ namespace FSMLauncher_3
             {
                 try
                 {
-                    MojangMail = Mojang.GetValue("Mail").ToString();
+                    MojangMail = IniReadValueW("Mojang", "Mail");
 
-                    MojangPassWord = Mojang.GetValue("PassWord").ToString();
+                    MojangPassWord = IniReadValueW("Mojang", "PassWord");
                     var login = tools.MinecraftLogin(MojangMail, MojangPassWord);
 
                     Mojangname = login.name;
@@ -2701,7 +2744,7 @@ namespace FSMLauncher_3
                     LB.Content = Mojangname;
                     loginmode = "mojang";
                     mojangyes = "888";
-                    HttpDownloadFile(tools.GetMinecraftSkin(MojangUUID), System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
+                    Download( System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png","", tools.GetMinecraftSkin(MojangUUID));
                     System.Drawing.Point point = new System.Drawing.Point(8, 8);
                     System.Drawing.Size size = new System.Drawing.Size(8, 8);
                     Bitmap bitmap = new Bitmap(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
@@ -2722,7 +2765,10 @@ namespace FSMLauncher_3
 
 
             }
+            //Loaded -= load;
+            //InitWindowActualHeight();
         }
+        
         public string wrtoken;
         public string wruuid;
         public string wrname;
@@ -2799,8 +2845,8 @@ namespace FSMLauncher_3
                     var token = microsoftLogin.GetToken(await microsoftLogin.Login(true));
                     wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
                     string refresh_token = token.refresh_token;
-                    WR.SetValue("Atoken", refresh_token);
-
+                    ///WR.SetValue("Atoken", refresh_token);
+                    WritePrivateProfileString("wr","Atoken",refresh_token, ZongW + @"\ConsoleW.qwq");
 
                     await loading.CloseAsync();
 
@@ -3029,7 +3075,30 @@ namespace FSMLauncher_3
                     break;
                 default:
                     await loading.CloseAsync();
-                    await this.ShowMessageAsync("启动错误", "你尚未登录或选择账户");
+                    try
+                    {
+                        thick.Top = 4;
+                        thick.Left = 5;
+                        OSM.Margin = thick;
+                        OSM.Visibility = Visibility.Visible;
+                        OSM.xxbt.Text = "启动错误";
+                        OSM.xxwb.Text = "未登录或未选择账户";
+                        //string a = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //获取APPDATA
+
+                        OSM.BeginAnimation(WidthProperty, OSMessage(0, 336, 0.8));
+
+                        //Thread.Sleep(888);
+                        await Task.Run(() =>
+                        {
+                            Thread.Sleep(1898);
+                        });
+
+                        OSM.BeginAnimation(WidthProperty, OSMessage(336, 0, 0.8));
+                    }
+                    catch
+                    {
+
+                    }
                     break;
             }
 
@@ -3099,7 +3168,7 @@ namespace FSMLauncher_3
         }
         private void OnLineI(object ob, EventArgs a)
         {
-
+            
             string aa = DIYvar.xzItems[did1].xzwz;
             string bb = DIYvar.xzItems[did2].xzwz;
             string cc = DIYvar.xzItems[did3].xzwz;
@@ -3168,10 +3237,34 @@ namespace FSMLauncher_3
                 scale.ApplyAnimationClock(ScaleTransform.ScaleYProperty, clock);
             }
         }
-
+        Thickness thick = new Thickness();
+        //OSMessage OSMM = new OSMessage();
         private async void Button_Click_13(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                thick.Top = 4;
+                thick.Left = 5;
+                OSM.Margin = thick;
+                OSM.Visibility = Visibility.Visible;
+                OSM.xxbt.Text = "哦 不好!";
+                OSM.xxwb.Text = "FSM Cloud正在制作中\n亿年之后应该能好吧";
+                //string a = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //获取APPDATA
 
+                OSM.BeginAnimation(WidthProperty, OSMessage(0, 336, 0.8));
+
+                //Thread.Sleep(888);
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(1898);
+                });
+                
+                OSM.BeginAnimation(WidthProperty, OSMessage(336, 0, 0.8));
+            }
+            catch
+            {
+
+            }
             //ScaleEasingAnimationShow(ONLINET, System.Windows.Point.Parse("0.5,0.5"), 22, 22,1);
             /// AniStart(new AniData{
             /// OpAni(22, 2, st, 0)
@@ -3195,8 +3288,26 @@ namespace FSMLauncher_3
             //fyIcon.Icon = new Icon(@"D:\下载文件夹\PCL1-master\PCL1-master\Plain Craft Launcher\Images\icon.ico");/*找一个ico图标将其拷贝到 debug 目录下*/
             fyIcon.Visible = true;/*必须设置显隐，因为默认值是 false 不显示通知*/
             fyIcon.ShowBalloonTip(0);
-
-            this.ShowMessageAsync("FSM Cloud", "FSMCloud尚未制作完成，作者正在制作中...");
+            //WebClient MyWebClient = new WebClient();
+            //String pageData3 = Encoding.UTF8.GetString(MyWebClient.DownloadData("1.116.201.220")); //从指定网站下载数据
+            //MessageBox.Show(pageData3);
+            //MessageBox.Show(jiema("1101001110110110110011110101100101010100111100110100011011000011110101000011"));
+            /////await this.ShowMessageAsync("FSM Cloud", "FSMCloud尚未制作完成，作者正在制作中...");
+        }
+        public System.Windows.Media.Animation.DoubleAnimation OSMessage(int From, double To, double Time)
+        {
+            var widthAnimation = new DoubleAnimation()
+            {
+                From = From,
+                To = To,
+                Duration = TimeSpan.FromSeconds(Time),
+                EasingFunction = new CubicEase()
+                {
+                    //Dispatcher = 0.43,
+                    EasingMode = EasingMode.EaseInOut,
+                },
+            };
+            return widthAnimation;
         }
         /// <summary>
         /// 通过pid杀进程
@@ -3277,10 +3388,10 @@ namespace FSMLauncher_3
             {
                 case "mojang":
                     loginmode = "";
-                    ///WritePrivateProfileString("Mojang", "Mail", "", File_);
-                    ///WritePrivateProfileString("Mojang", "PassWord", "", File_);
-                    Mojang.DeleteValue("Mail");
-                    Mojang.DeleteValue("PassWord");
+                    WritePrivateProfileString("Mojang", "Mail", "", ZongW+@"\ConsoleW.qwq");
+                    WritePrivateProfileString("Mojang", "PassWord", "", ZongW+@"\ConsoleW.qwq");
+                    ///Mojang.DeleteValue("Mail");
+                    ///Mojang.DeleteValue("PassWord");
                     IDTab.SelectedIndex = 0;
                     mojangyes = "";
                     Mojangname = "";
@@ -3289,8 +3400,8 @@ namespace FSMLauncher_3
                     break;
                 case "wr":
                     loginmode = "";
-                    ///WritePrivateProfileString("wr", "Atoken", "", File_);
-                    WR.DeleteValue("Atoken");
+                   WritePrivateProfileString("wr", "Atoken", "", ZongW + @"\ConsoleW.qwq");
+                 ///WR.DeleteValue("Atoken");
                     IDTab.SelectedIndex = 3;
                     wryes = "";
                     wrname = "";
@@ -3319,8 +3430,8 @@ namespace FSMLauncher_3
                 var token = microsoftLogin.GetToken(await microsoftLogin.Login(false));
                 wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
                 string refresh_token = token.refresh_token;
-                WR.SetValue("Atoken", refresh_token);
-
+                //WR.SetValue("Atoken", refresh_token);
+                WritePrivateProfileString("wr", "Atoken", refresh_token, ZongW + @"\ConsoleW.qwq");
                 await loading.CloseAsync();
 
                 IDTab.SelectedIndex = 2;
@@ -3528,11 +3639,11 @@ namespace FSMLauncher_3
                     OptifineList.SelectedIndex = -1;
 
                     string aw = mcVersionLists[MCV.SelectedIndex].version;
-                    var a = await tools.GetOptiFineList(aw);
+                    opp = await tools.GetOptiFineList(aw);
                     // sort forge versions
+                    
 
-
-                    foreach (var i in a)
+                    foreach (var i in opp)
                     {
                         OptifineList.Items.Add(i.filename);
                     }
@@ -3545,6 +3656,7 @@ namespace FSMLauncher_3
                 }
             }
         }
+        OptiFineList[] opp = new OptiFineList[0];
         private void Start_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -3785,10 +3897,12 @@ namespace FSMLauncher_3
                 skin = tools.GetAuthlib_Injector(IP.Text, IDD.Text, IDDPassWord.Password);
                 Ylist.ItemsSource = skin.NameItem;
                 IDTab.SelectedIndex = 4;
-
-                Y.SetValue("IP", IP.Text);
-                Y.SetValue("IDD", IDD.Text);
-                Y.SetValue("IPPPassWord", IDDPassWord.Password);
+                WritePrivateProfileString("wz", "IP", IP.Text, ZongW + @"\ConsoleW.qwq");
+                WritePrivateProfileString("wz", "IDD", IDD.Text, ZongW + @"\ConsoleW.qwq");
+                WritePrivateProfileString("wz", "IDDPassWord", IDDPassWord.Password, ZongW + @"\ConsoleW.qwq");
+                ///Y.SetValue("IP", IP.Text);
+                ///Y.SetValue("IDD", IDD.Text);
+                ///Y.SetValue("IPPPassWord", IDDPassWord.Password);
                 Yyes = "888";
 
             }
@@ -3894,15 +4008,10 @@ namespace FSMLauncher_3
                 MCDownload[] File = tools.GetMissingFile(version);
                 if (File.Length != 0)
                 {
-
                     foreach (var i in File)
                     {
                         int aa = Download(i.path, "补全", i.Url);
-                        if(DIYvar.xzItems[aa].xzwz == "完成")
-                        {
-                            
-                            
-                        }
+                        
                     }
                     //libraries2 = sz.id;
                     return false;
@@ -4128,6 +4237,7 @@ namespace FSMLauncher_3
 
 
                 this.Dispatcher.Invoke(new Action(delegate { Tab1.SelectedIndex = 0; }));
+                
             }
 
 
@@ -4156,10 +4266,11 @@ namespace FSMLauncher_3
                     {
                         if (inopt == 1)
                         {
-
+                            Jarw.Stop();
                             ///Lod.SetIndeterminate();
                             //安装optifine和Forge
                             ddd = mcd.ForgeDownload(mcVersionLists[MCV.SelectedIndex].version, ForgeVer);
+                            
                             bbb = Download(ddd.path, "Forge", ddd.Url);
                             UPDATEW = Core5.timer(OptifineandForgeI, 5555);
                             UPDATEW.Start();
@@ -4168,9 +4279,11 @@ namespace FSMLauncher_3
                         }
                         else
                         {
+                            Jarw.Stop();
                             //安装Forge
                             ///   Lod.SetIndeterminate();
                             ddd = mcd.ForgeDownload(mcVersionLists[MCV.SelectedIndex].version, ForgeVer);
+                            await tools.ForgeInstallation(ddd.path, mcVersionLists[MCV.SelectedIndex].version, Java_list.Text);
                             bbb = Download(ddd.path, "Forge", ddd.Url);
                             UPDATEW = Core5.timer(ForgeI,5555);
                             UPDATEW.Start();
@@ -4179,6 +4292,7 @@ namespace FSMLauncher_3
                     }
                     else if (infab == 1)
                     {
+                        Jarw.Stop();
                         //安装Fabric
                         await fabricmc.FabricmcVersionInstall(mcVersionLists[MCV.SelectedIndex].version, FabVer);
                         AssetDownload assetDownload = new AssetDownload();//asset下载类
@@ -4190,23 +4304,37 @@ namespace FSMLauncher_3
                     }
                     else if (inlite == 1)
                     {
+                        Jarw.Stop();
                         //安装LiteLoader
                     }
                     else if (inopt == 1)
                     {
                         //安装Optifine
+                        Jarw.Stop();
+
+                        // dlf.doSendMsg += new DownLoadFile.dlgSendMsg(SendMsgHander);
+                        //ddd = mcd.DownloadOptifine(mcVersionLists[MCV.SelectedIndex].version, OptVer);
+                        //bbb = Download(ddd.path,"Optifine", ddd.Url);
+                        //UPDATEW = Core5.timer(OptifineI, 5555);
+                        //UPDATEW.Start();
+                        //OptiFineList[] opt = new OptiFineList[0];
+                        await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, optpatch);
                         
-                        OptiFineList[] opt = new OptiFineList[0];
-                        dlf.doSendMsg += new DownLoadFile.dlgSendMsg(SendMsgHander);
-                        ddd = mcd.DownloadOptifine(mcVersionLists[MCV.SelectedIndex].version, OptVer);
-                        bbb = Download(ddd.path,"Optifine", ddd.Url);
-                        UPDATEW = Core5.timer(OptifineI, 5555);
-                        UPDATEW.Start();
+                       //     AssetDownload assetDownload = new AssetDownload();//asset下载类
+                         //   assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
+
+//                            await libraries(mcVersionLists[MCV.SelectedIndex].version);
+
+                           // await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
                         
                         
+                        
+                        
+
                     }
                     else
                     {
+                        Jarw.Stop();
                         AssetDownload assetDownload = new AssetDownload();//asset下载类
                         assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
 
@@ -4374,11 +4502,20 @@ namespace FSMLauncher_3
         public short lj = 1;
         private async void Button_Click_23(object sender, RoutedEventArgs e)
         {
+            WebClient MyWebClient = new WebClient();
+            MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+            StringBuilder sb = new StringBuilder();
+            String pageData = MyWebClient.DownloadString("http://1.116.201.220/"); //从指定网站下载数据
+            pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://1.116.201.220/"));
+            byte[] buff = Convert.FromBase64String(pageData);
+            string decStr = System.Text.Encoding.Default.GetString(buff);
+            w
             if (lj == 1)
             {
                 WritePrivateProfileString("common", "server_addr", "sh.qwq.one", FileOnlineServer + @"\frpc.ini");
                 WritePrivateProfileString("common", "server_port", "7000", FileOnlineServer + @"\frpc.ini");
                 WritePrivateProfileString("common", "dns", "223.5.5.5", FileOnlineServer + @"\frpc.ini");
+                WritePrivateProfileString("common", "token", decStr, FileOnlineServer + @"\frpc.ini");
                 WritePrivateProfileString(onlinezijiqq, "type", "stcp", FileOnlineServer + @"\frpc.ini");
                 WritePrivateProfileString(onlinezijiqq, "sk", "12345678", FileOnlineServer + @"\frpc.ini");
                 WritePrivateProfileString(onlinezijiqq, "local_port", onlineduankou, FileOnlineServer + @"\frpc.ini");
@@ -4442,6 +4579,13 @@ namespace FSMLauncher_3
         {
             try
             {
+                WebClient MyWebClient = new WebClient();
+                MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                StringBuilder sb = new StringBuilder();
+                String pageData = MyWebClient.DownloadString("http://1.116.201.220/"); //从指定网站下载数据
+                pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://1.116.201.220/"));
+                byte[] buff = Convert.FromBase64String(pageData);
+                string decStr = System.Text.Encoding.Default.GetString(buff);
                 String yqm = await this.ShowInputAsync("请输入联机邀请码", "对方发来的邀请码");
                 String xcqq = await this.ShowInputAsync("请输入你的QQ", "请注意，");
                 byte[] c = Convert.FromBase64String(yqm);
@@ -4451,6 +4595,7 @@ namespace FSMLauncher_3
                 onlineduifangqq = after[0];
                 WritePrivateProfileString("common", "server_addr", "sh.qwq.one", FileOnlineKEHU + @"\frpc.ini");
                 WritePrivateProfileString("common", "server_port", "7000", FileOnlineKEHU + @"\frpc.ini");
+                WritePrivateProfileString("common", "token", decStr, FileOnlineKEHU + @"\frpc.ini");
                 WritePrivateProfileString("common", "dns", "223.5.5.5", FileOnlineKEHU + @"\frpc.ini");
                 WritePrivateProfileString(xcqq, "server_name", onlineduifangqq, FileOnlineKEHU + @"\frpc.ini");
                 WritePrivateProfileString(xcqq, "type", "stcp", FileOnlineKEHU + @"\frpc.ini");
@@ -4696,7 +4841,7 @@ namespace FSMLauncher_3
 
         private void Button_Click_XZJ(object sender, RoutedEventArgs e)
         {
-            ThemeManager.Current.ChangeTheme(this, "Dark.Olive");
+            //ThemeManager.Current.ChangeTheme(this, "Dark.Olive");
             Tab1.SelectedIndex = 4;
             MoreTab.SelectedIndex = 0;
         }
@@ -4826,12 +4971,14 @@ namespace FSMLauncher_3
         {
             System.Diagnostics.Process.Start("https://afdian.net/@YUXUAN233");
         }
-
+        String optpatch;
         private void OptifineList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DTB.SelectedIndex = 0;
+            //OptiFineList[] op = new OptiFineList[0];
             OptifineB.Content = "安装Optifine\n" + OptifineList.SelectedItem;
             OptVer = OptifineList.SelectedItem.ToString();
+            optpatch = opp[OptifineList.SelectedIndex].patch;
             inopt = 1;
         }
 
@@ -4907,6 +5054,11 @@ namespace FSMLauncher_3
         private async void Button_Click_39(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private async void Button_Click_40(object sender, RoutedEventArgs e)
+        {
+            await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, optpatch);
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)

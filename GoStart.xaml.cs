@@ -23,6 +23,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SquareMinecraftLauncher;
 using Microsoft.Win32;
+using Gac;
+using static FSMLauncher_3.Core.xzItem;
 
 namespace FSMLauncher_3
 {
@@ -194,20 +196,28 @@ namespace FSMLauncher_3
         }
         public string  loginmode;
         public string mojangyes;
-        private void Tile_Click_15(object sender, RoutedEventArgs e)
+        public static int id = 0;
+        internal int Download(string path, string ly, string url)
         {
-            try
-            {
-                var login = tools.MinecraftLogin(Mojang1.Text, Mojang2.Password);
-                Mojangname = login.name;
-                MojangUUID = login.uuid;
-                MojangToken = login.token;
-                Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin");
 
-                //Download(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png", "", tools.GetMinecraftSkin(MojangUUID));
-                HttpDownloadFile(tools.GetMinecraftSkin(MojangUUID), System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
-                System.Drawing.Point point = new System.Drawing.Point(8, 8);
-                System.Drawing.Size size = new System.Drawing.Size(8, 8);
+            dlf.AddDown(url, path.Replace(System.IO.Path.GetFileName(path), ""), System.IO.Path.GetFileName(path), id);//增加下载
+            dlf.StartDown(3);//开始下载
+            id++;
+            Core.xzItem xzItem = new Core.xzItem(System.IO.Path.GetFileName(path), 0, ly, "等待中", url, path);
+            DIYvar.xzItems.Add(xzItem);
+
+
+            return id - 1;
+        }
+        public Gac.DownLoadFile dlf = new DownLoadFile();
+        FSMLauncher_3.Core Core5 = new FSMLauncher_3.Core();
+        int dw;
+        static System.Windows.Threading.DispatcherTimer ONLINEW = new System.Windows.Threading.DispatcherTimer();
+        private void OnQ(object ob, EventArgs a)
+        {
+
+            if (DIYvar.xzItems[dw].xzwz == "完成")
+            {
                 Bitmap bitmap = new Bitmap(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
                 var i = crop(bitmap, new System.Drawing.Point(8, 8), new System.Drawing.Size(8, 8));
                 Zoom(i, 258, 258, out i, ZoomType.NearestNeighborInterpolation);
@@ -215,26 +225,170 @@ namespace FSMLauncher_3
                 System.Drawing.Image img = i;
                 BitmapImage bi = new BitmapImage();
                 // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
-                bi.BeginInit();
+                IM.Source = BitmapToBitmapImage(i);
 
-                bi.UriSource = new Uri(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\steven.png");
-                bi.EndInit();
-                IM.Source = bi;
+            }
+
+
+        }
+        public static BitmapImage BitmapToBitmapImage(Bitmap bitmap)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                bitmap.Save(stream, ImageFormat.Bmp);
+                stream.Position = 0;
+                BitmapImage result = new BitmapImage();
+                result.BeginInit();
+                result.CacheOption = BitmapCacheOption.OnLoad;
+                result.StreamSource = stream;
+                result.EndInit();
+                result.Freeze();
+                return result;
+            }
+        }
+        class AutoSizeFormClass
+        {
+            //(1).声明结构,只记录窗体和其控件的初始位置和大小。
+            public struct controlRect
+            {
+                public int Left;
+                public int Top;
+                public int Width;
+                public int Height;
+            }
+            //(2).声明 1个对象
+            //注意这里不能使用控件列表记录 List nCtrl;，因为控件的关联性，记录的始终是当前的大小。
+            //      public List oldCtrl= new List();//这里将西文的大于小于号都过滤掉了，只能改为中文的，使用中要改回西文
+            public List<controlRect> oldCtrl = new List<controlRect>();
+            int ctrlNo = 0;//1;
+                           //(3). 创建两个函数
+                           //(3.1)记录窗体和其控件的初始位置和大小,
+            public void controllInitializeSize(System.Windows.Forms.Control mForm)
+            {
+                controlRect cR;
+                cR.Left = mForm.Left; cR.Top = mForm.Top; cR.Width = mForm.Width; cR.Height = mForm.Height;
+                oldCtrl.Add(cR);//第一个为"窗体本身",只加入一次即可
+                AddControl(mForm);//窗体内其余控件还可能嵌套控件(比如panel),要单独抽出,因为要递归调用
+                                  //this.WindowState = (System.Windows.Forms.FormWindowState)(2);//记录完控件的初始位置和大小后，再最大化
+                                  //0 - Normalize , 1 - Minimize,2- Maximize
+            }
+            private void AddControl(System.Windows.Forms.Control ctl)
+            {
+                foreach (System.Windows.Forms.Control c in ctl.Controls)
+                {  //**放在这里，是先记录控件的子控件，后记录控件本身
+                   //if (c.Controls.Count > 0)
+                   //    AddControl(c);//窗体内其余控件还可能嵌套控件(比如panel),要单独抽出,因为要递归调用
+                    controlRect objCtrl;
+                    objCtrl.Left = c.Left; objCtrl.Top = c.Top; objCtrl.Width = c.Width; objCtrl.Height = c.Height;
+                    oldCtrl.Add(objCtrl);
+                    //**放在这里，是先记录控件本身，后记录控件的子控件
+                    if (c.Controls.Count > 0)
+                        AddControl(c);//窗体内其余控件还可能嵌套控件(比如panel),要单独抽出,因为要递归调用
+                }
+            }
+            //(3.2)控件自适应大小,
+            public void controlAutoSize(System.Windows.Forms.Control mForm)
+            {
+                if (ctrlNo == 0)
+                { //*如果在窗体的Form1_Load中，记录控件原始的大小和位置，正常没有问题，但要加入皮肤就会出现问题，因为有些控件如dataGridView的的子控件还没有完成，个数少
+                  //*要在窗体的Form1_SizeChanged中，第一次改变大小时，记录控件原始的大小和位置,这里所有控件的子控件都已经形成
+                    controlRect cR;
+                    //  cR.Left = mForm.Left; cR.Top = mForm.Top; cR.Width = mForm.Width; cR.Height = mForm.Height;
+                    cR.Left = 0; cR.Top = 0; cR.Width = mForm.PreferredSize.Width; cR.Height = mForm.PreferredSize.Height;
+
+                    oldCtrl.Add(cR);//第一个为"窗体本身",只加入一次即可
+                    AddControl(mForm);//窗体内其余控件可能嵌套其它控件(比如panel),故单独抽出以便递归调用
+                }
+                float wScale = (float)mForm.Width / (float)oldCtrl[0].Width;//新旧窗体之间的比例，与最早的旧窗体
+                float hScale = (float)mForm.Height / (float)oldCtrl[0].Height;//.Height;
+                ctrlNo = 1;//进入=1，第0个为窗体本身,窗体内的控件,从序号1开始
+                AutoScaleControl(mForm, wScale, hScale);//窗体内其余控件还可能嵌套控件(比如panel),要单独抽出,因为要递归调用
+            }
+            private void AutoScaleControl(System.Windows.Forms.Control ctl, float wScale, float hScale)
+            {
+                int ctrLeft0, ctrTop0, ctrWidth0, ctrHeight0;
+                //int ctrlNo = 1;//第1个是窗体自身的 Left,Top,Width,Height，所以窗体控件从ctrlNo=1开始
+                foreach (System.Windows.Forms.Control c in ctl.Controls)
+                { //**放在这里，是先缩放控件的子控件，后缩放控件本身
+                  //if (c.Controls.Count > 0)
+                  //   AutoScaleControl(c, wScale, hScale);//窗体内其余控件还可能嵌套控件(比如panel),要单独抽出,因为要递归调用
+                    ctrLeft0 = oldCtrl[ctrlNo].Left;
+                    ctrTop0 = oldCtrl[ctrlNo].Top;
+                    ctrWidth0 = oldCtrl[ctrlNo].Width;
+                    ctrHeight0 = oldCtrl[ctrlNo].Height;
+                    //c.Left = (int)((ctrLeft0 - wLeft0) * wScale) + wLeft1;//新旧控件之间的线性比例
+                    //c.Top = (int)((ctrTop0 - wTop0) * h) + wTop1;
+                    c.Left = (int)((ctrLeft0) * wScale);//新旧控件之间的线性比例。控件位置只相对于窗体，所以不能加 + wLeft1
+                    c.Top = (int)((ctrTop0) * hScale);//
+                    c.Width = (int)(ctrWidth0 * wScale);//只与最初的大小相关，所以不能与现在的宽度相乘 (int)(c.Width * w);
+                    c.Height = (int)(ctrHeight0 * hScale);//
+                    ctrlNo++;//累加序号
+                             //**放在这里，是先缩放控件本身，后缩放控件的子控件
+                    if (c.Controls.Count > 0)
+                        AutoScaleControl(c, wScale, hScale);//窗体内其余控件还可能嵌套控件(比如panel),要单独抽出,因为要递归调用
+
+                    if (ctl is System.Windows.Forms.DataGridView)
+                    {
+                        System.Windows.Forms.DataGridView dgv = ctl as System.Windows.Forms.DataGridView;
+                        System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
+
+                        int widths = 0;
+                        for (int i = 0; i < dgv.Columns.Count; i++)
+                        {
+                            dgv.AutoResizeColumn(i, System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells);  // 自动调整列宽  
+                            widths += dgv.Columns[i].Width;   // 计算调整列后单元列的宽度和                       
+                        }
+                        if (widths >= ctl.Size.Width)  // 如果调整列的宽度大于设定列宽  
+                            dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;  // 调整列的模式 自动  
+                        else
+                            dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;  // 如果小于 则填充  
+
+                        System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Default;
+                    }
+                }
+
+
+            }
+        }
+            private void Tile_Click_15(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+
+                var login = tools.MinecraftLogin(Mojang1.Text, Mojang2.Password);
+                Mojangname = login.name;
+                MojangUUID = login.uuid;
+                MojangToken = login.token;
+
+
+
+                Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin");
+
+                //Download(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png", "", tools.GetMinecraftSkin(MojangUUID));
+                dw = Download(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png", "", tools.GetMinecraftSkin(MojangUUID));
+                ONLINEW = Core5.timer(OnQ, 2333);
+                ONLINEW.Start();
+                System.Drawing.Point point = new System.Drawing.Point(8, 8);
+                System.Drawing.Size size = new System.Drawing.Size(8, 8);
                 LB.Content = Mojangname;
                 loginmode = "mojang";
                 String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
                 StringBuilder temp = new StringBuilder(500);
                 mojangyes = "888";
-                WritePrivateProfileString("Mojang", "Mail", Mojang1.Text, File_);
-                WritePrivateProfileString("Mojang", "PassWord", Mojang2.Password, File_);
+                ///WritePrivateProfileString("Mojang", "Mail", Mojang1.Text, File_);
+                ///WritePrivateProfileString("Mojang", "PassWord", Mojang2.Password, File_);
+                Mojang.SetValue("Mail", Mojang1.Text);
+                Mojang.SetValue("PassWord", Mojang2.Password);
                 IDTab.SelectedIndex = 2;
             }
-            catch(SquareMinecraftLauncher.SquareMinecraftLauncherException ex)
+            catch (SquareMinecraftLauncherException ex)
             {
-                this.ShowMessageAsync("登陆失败", ex.Message);
+                this.ShowMessageAsync("登陆失败！", ex.Message);
 
             }
-            
+
+
         }
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
 
@@ -273,17 +427,75 @@ namespace FSMLauncher_3
         {
             IDTab.SelectedIndex = 1;
         }
+        private void OnQw(object ob, EventArgs a)
+        {
 
-        private void Tile_Click_8(object sender, RoutedEventArgs e)
+            if (DIYvar.xzItems[dw].xzwz == "完成")
+            {
+                System.Drawing.Point point = new System.Drawing.Point(8, 8);
+                System.Drawing.Size size = new System.Drawing.Size(8, 8);
+                Bitmap bitmap = new Bitmap(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
+                var i = crop(bitmap, new System.Drawing.Point(8, 8), new System.Drawing.Size(8, 8));
+                Zoom(i, 258, 258, out i, ZoomType.NearestNeighborInterpolation);
+                i.Save(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\steven.png");
+                System.Drawing.Image img = i;
+                BitmapImage bi = new BitmapImage();
+                // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                IM.Source = BitmapToBitmapImage(i);
+
+                ///WritePrivateProfileString("wr", "Atoken", refresh_token, File_);
+
+            }
+        }
+        private async void Tile_Click_8(object sender, RoutedEventArgs e)
         {
             try
             {
-                Thread tha = new Thread(WR1);
-                tha.Start();
+                var loading = await this.ShowProgressAsync("正在微软登录", "请稍后...");
+                MicrosoftLogin microsoftLogin = new MicrosoftLogin();
+                MinecraftLogin minecraftlogin = new MinecraftLogin();
+                loading.SetIndeterminate();
+                //加载L.Content = "正在登录...";
+                try
+                {
+
+                    Xbox XboxLogin = new Xbox();
+
+                    var token = microsoftLogin.GetToken(await microsoftLogin.Login(true));
+                    wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
+                    string refresh_token = token.refresh_token;
+                    WR.SetValue("Atoken", refresh_token);
+
+
+                    await loading.CloseAsync();
+
+                    var Minecraft = minecraftlogin.GetMincraftuuid(wrtoken);
+                    //dlf.doSendMsg += new DownLoadFile.dlgSendMsg(SendMsgHander);
+                    wruuid = Minecraft.uuid;
+                    wrname = Minecraft.name;
+
+                    LB.Content = wrname;
+                    loginmode = "wr";
+                    String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
+
+                    wryes = "888";
+
+                    dw = Download(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png", "", tools.GetMinecraftSkin(wruuid));
+                    ONLINEW = Core5.timer(OnQw, 2333);
+                    ONLINEW.Start();
+                    IDTab.SelectedIndex = 2;
+
+                    wryes = "888";
+
+                }
+                catch
+                {
+
+                };
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.ToString());
+
             }
         }
         public string wrtoken;
@@ -365,17 +577,22 @@ namespace FSMLauncher_3
             //正常登录
             MicrosoftLogin microsoftLogin = new MicrosoftLogin();
             MinecraftLogin minecraftlogin = new MinecraftLogin();
-            
+            var loading = await this.ShowProgressAsync("正在微软登录", "请稍后...");
+            //加载L.Content = "正在登录...";
             try
             {
-
+                loading.SetIndeterminate();
                 Xbox XboxLogin = new Xbox();
+
                 var token = microsoftLogin.GetToken(await microsoftLogin.Login(false));
                 wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
-
                 string refresh_token = token.refresh_token;
+                WR.SetValue("Atoken", refresh_token);
 
+                await loading.CloseAsync();
 
+                IDTab.SelectedIndex = 2;
+                //dlf.doSendMsg += new DownLoadFile.dlgSendMsg(SendMsgHander);
                 var Minecraft = minecraftlogin.GetMincraftuuid(wrtoken);
 
                 wruuid = Minecraft.uuid;
@@ -384,10 +601,17 @@ namespace FSMLauncher_3
                 LB.Content = wrname;
                 loginmode = "wr";
                 String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
+                IDTab.SelectedIndex = 2;
 
                 wryes = "888";
+                wryes = "888";
 
-                HttpDownloadFile(tools.GetMinecraftSkin(wruuid), System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
+
+                Download(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png", "", tools.GetMinecraftSkin(wruuid));
+                ONLINEW = Core5.timer(OnQw, 2333);
+                ONLINEW.Start();
+
+                /*
                 System.Drawing.Point point = new System.Drawing.Point(8, 8);
                 System.Drawing.Size size = new System.Drawing.Size(8, 8);
                 Bitmap bitmap = new Bitmap(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
@@ -402,10 +626,9 @@ namespace FSMLauncher_3
                 bi.UriSource = new Uri(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\steven.png");
                 bi.EndInit();
                 IM.Source = bi;
-                WritePrivateProfileString("wr", "Atoken", refresh_token, File_);
+                ///WritePrivateProfileString("wr", "Atoken", refresh_token, File_);
+                */
 
-
-                IDTab.SelectedIndex = 2;
 
             }
             catch
@@ -682,6 +905,11 @@ namespace FSMLauncher_3
         }
 
         private void Button_ClickJava8(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Tile_Click_LXSkin(object sender, RoutedEventArgs e)
         {
 
         }

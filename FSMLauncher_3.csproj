@@ -371,7 +371,9 @@
     <Content Include="About List\CHUMENG.py" />
     <Content Include="FFS.py" />
     <Content Include="Hello!FSM.py" />
+    <Resource Include="Image\log-in-outline %282%29.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
