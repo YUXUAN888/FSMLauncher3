@@ -25,6 +25,7 @@ using SquareMinecraftLauncher;
 using Microsoft.Win32;
 using Gac;
 using static FSMLauncher_3.Core.xzItem;
+using ControlzEx.Theming;
 
 namespace FSMLauncher_3
 {
@@ -33,18 +34,21 @@ namespace FSMLauncher_3
     /// </summary>
     public partial class GoStart
     {
+        static String ZongX = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //获取APPDATA
+        public string UpdateD;
+        String ZongW = ZongX + @"\.fsm";
         SquareMinecraftLauncher.Minecraft.Tools tools = new SquareMinecraftLauncher.Minecraft.Tools();
         public GoStart()
         {
             InitializeComponent();
             this.ResizeMode = ResizeMode.CanMinimize;
-            software = hkim.OpenSubKey("SOFTWARE", true);
-            FSM = software.CreateSubKey("FSM");
-            Mojang = FSM.CreateSubKey("Mojang");
-            Y = FSM.CreateSubKey("Y");
-            LX = FSM.CreateSubKey("LX");
-            WR = FSM.CreateSubKey("WR");
-            TT.SelectedIndex = 1;
+            //software = hkim.OpenSubKey("SOFTWARE", true);
+            //FSM = software.CreateSubKey("FSM");
+            //Mojang = FSM.CreateSubKey("Mojang");
+            //Y = FSM.CreateSubKey("Y");
+            //LX = FSM.CreateSubKey("LX");
+            //WR = FSM.CreateSubKey("WR");
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -376,10 +380,10 @@ namespace FSMLauncher_3
                 String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
                 StringBuilder temp = new StringBuilder(500);
                 mojangyes = "888";
-                ///WritePrivateProfileString("Mojang", "Mail", Mojang1.Text, File_);
-                ///WritePrivateProfileString("Mojang", "PassWord", Mojang2.Password, File_);
-                Mojang.SetValue("Mail", Mojang1.Text);
-                Mojang.SetValue("PassWord", Mojang2.Password);
+                WritePrivateProfileString("Mojang", "Mail", Mojang1.Text, ZongW + @"\ConsoleW.qwq");
+                WritePrivateProfileString("Mojang", "PassWord", Mojang2.Password, ZongW + @"\ConsoleW.qwq");
+                ///Mojang.SetValue("Mail", Mojang1.Text);
+                ///Mojang.SetValue("PassWord", Mojang2.Password);
                 IDTab.SelectedIndex = 2;
             }
             catch (SquareMinecraftLauncherException ex)
@@ -464,8 +468,8 @@ namespace FSMLauncher_3
                     var token = microsoftLogin.GetToken(await microsoftLogin.Login(true));
                     wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
                     string refresh_token = token.refresh_token;
-                    WR.SetValue("Atoken", refresh_token);
-
+                    ///WR.SetValue("Atoken", refresh_token);
+                    WritePrivateProfileString("wr", "Atoken", refresh_token, ZongW + @"\ConsoleW.qwq");
 
                     await loading.CloseAsync();
 
@@ -587,8 +591,8 @@ namespace FSMLauncher_3
                 var token = microsoftLogin.GetToken(await microsoftLogin.Login(false));
                 wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
                 string refresh_token = token.refresh_token;
-                WR.SetValue("Atoken", refresh_token);
-
+                //WR.SetValue("Atoken", refresh_token);
+                WritePrivateProfileString("wr", "Atoken", refresh_token, ZongW + @"\ConsoleW.qwq");
                 await loading.CloseAsync();
 
                 IDTab.SelectedIndex = 2;
@@ -630,6 +634,7 @@ namespace FSMLauncher_3
                 */
 
 
+
             }
             catch
             {
@@ -645,82 +650,100 @@ namespace FSMLauncher_3
         private void Tile_Click(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "0", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Red");
         }
         public String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM";
 
         private void Tile_Click_1(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "2", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Blue");
         }
 
         private void Tile_Click_2(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "1", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Green");
         }
 
         private void Tile_Click_3(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "3", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Purple");
         }
 
         private void Tile_Click_4(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "4", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Orange");
         }
 
         private void Tile_Click_5(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "5", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Lime");
+
         }
 
         private void Tile_Click_6(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "6", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Emerald");
+
         }
 
         private void Tile_Click_7(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "7", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Teal");
         }
 
         private void Tile_Click_12(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "8", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Cyan");
         }
 
         private void Tile_Click_13(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "9", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Cobalt");
         }
 
         private void Tile_Click_14(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "10", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Indigo");
         }
 
         private void Tile_Click_16(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "11", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Violet");
         }
 
         private void Tile_Click_17(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "12", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Pink");
         }
 
         private void Tile_Click_18(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "13", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Magenta");
         }
 
         private void Tile_Click_19(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "14", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Crimson");
         }
 
         private void Tile_Click_20(object sender, RoutedEventArgs e)
         {
             WritePrivateProfileString("ZTSY", "ZTSY", "16", File_ + @"\FSM.slx");
+            ThemeManager.Current.ChangeTheme(this, "Light.Yellow");
         }
 
         private void Button_Clicw1wk1(object sender, RoutedEventArgs e)
@@ -731,7 +754,7 @@ namespace FSMLauncher_3
         private void Button_Cli1cw1wk1(object sender, RoutedEventArgs e)
         {
             String Filew_ = System.AppDomain.CurrentDomain.BaseDirectory + Process.GetCurrentProcess().ProcessName;
-            WritePrivateProfileString("Start", "Start", "1", File_ + @"\FSM.slx");
+            WritePrivateProfileString("Start", "Start", "1", ZongW + @"\ConsoleW.qwq");
             OpenFile(Filew_);
             Thread.Sleep(1000);
             Close();
@@ -790,7 +813,8 @@ namespace FSMLauncher_3
 
         private void OfflineName_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            loginmode = "offline";
+            WritePrivateProfileString("OffLine", "ID", OfflineName.Text, ZongW + @"\ConsoleW.qwq");
         }
 
         private void s(object sender, System.ComponentModel.CancelEventArgs e)
@@ -815,10 +839,13 @@ namespace FSMLauncher_3
                 skin = tools.GetAuthlib_Injector(IP.Text, IDD.Text, IDDPassWord.Password);
                 Ylist.ItemsSource = skin.NameItem;
                 IDTab.SelectedIndex = 4;
-
-                Y.SetValue("IP", IP.Text);
-                Y.SetValue("IDD", IDD.Text);
-                Y.SetValue("IPPPassWord", IDDPassWord.Password);
+                WritePrivateProfileString("wz", "IP", IP.Text, ZongW + @"\ConsoleW.qwq");
+                WritePrivateProfileString("wz", "IDD", IDD.Text, ZongW + @"\ConsoleW.qwq");
+                WritePrivateProfileString("wz", "IDDPassWord", IDDPassWord.Password, ZongW + @"\ConsoleW.qwq");
+                ///Y.SetValue("IP", IP.Text);
+                ///Y.SetValue("IDD", IDD.Text);
+                ///Y.SetValue("IPPPassWord", IDDPassWord.Password);
+                Yyes = "888";
 
             }
             catch (SquareMinecraftLauncherException ex)
@@ -912,6 +939,15 @@ namespace FSMLauncher_3
         private void Tile_Click_LXSkin(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private async void l(object sender, RoutedEventArgs e)
+        {
+            await Task.Run(() =>
+            {
+                Thread.Sleep(1188);
+            });
+            TT.SelectedIndex = 1;
         }
     }
 }

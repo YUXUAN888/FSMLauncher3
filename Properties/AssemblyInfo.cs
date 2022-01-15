@@ -8,9 +8,9 @@ using System.Windows;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("FSM3")]
-[assembly: AssemblyDescription("MinecraftLauncher！")]
+[assembly: AssemblyDescription("Minecraft Launcher！")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("宇轩yu_xuan")]
+[assembly: AssemblyCompany("宇轩Yu_Xuan")]
 [assembly: AssemblyProduct("FSMLauncher_3")]
 [assembly: AssemblyCopyright("Copyright © 宇轩YU_XUAN. 2021")]
 [assembly: AssemblyTrademark("")]

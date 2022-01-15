@@ -7,8 +7,8 @@
     xmlns:local="clr-namespace:FSMLauncher_3"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="FSM3_GoStart" Height="450" Width="800" Closing="s" Background="#FF3164BD" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FF3164BD">
+        Title="FSM3_GoStart" Height="450" Width="800" Closing="s" Background="#FF3164BD" WindowStartupLocation="CenterScreen" ShowMinButton="True" SizeToContent="WidthAndHeight" WindowStyle="None"  OpacityMask="White"  AllowsTransparency="True" Loaded="l">
+    <Grid Background="#FF3B6DC3">
         <TabControl x:Name="TT" HorizontalAlignment="Left" Height="418" Margin="0,1,0,0" VerticalAlignment="Top" Width="791" Style="{DynamicResource MahApps.Styles.TabControl.Animated}">
             <TabControl.Background>
                 <ImageBrush/>
@@ -18,7 +18,8 @@
                     <Grid.Background>
                         <ImageBrush/>
                     </Grid.Background>
-                    <mah:ProgressRing HorizontalAlignment="Left" Height="145" Margin="311,113,0,0" VerticalAlignment="Top" Width="156" Foreground="#CCFFFFFF"/>
+                    <mah:ProgressRing HorizontalAlignment="Left" Height="52" Margin="364,281,0,0" VerticalAlignment="Top" Width="51" Foreground="#CCFFFFFF"/>
+                    <Label Content="FSM3" HorizontalAlignment="Left" Height="61" Margin="347,119,0,0" VerticalAlignment="Top" Width="92" Foreground="#DDFFFFFF" FontSize="36" FontFamily="Consolas"/>
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem" Margin="0.2,-74,-0.4,73.6" >
@@ -30,7 +31,7 @@
                     <Grid.Background>
                         <ImageBrush/>
                     </Grid.Background>
-                    <Label Content="欢迎/Welcome" HorizontalAlignment="Left" Height="63" Margin="20,20,0,0" VerticalAlignment="Top" Width="273" Foreground="White" FontSize="36"/>
+                    <Label Content="欢迎" HorizontalAlignment="Left" Height="63" Margin="20,20,0,0" VerticalAlignment="Top" Width="273" Foreground="White" FontSize="36"/>
                     <Label Content="我们需要设置一些东西&#xD;&#xA;放心,这不会耽误您很长时间" HorizontalAlignment="Left" Height="125" Margin="20,92,0,0" VerticalAlignment="Top" Width="296" Foreground="White" FontSize="22" FontFamily="Microsoft YaHei UI Light"/>
                     <Button Content="下一步" HorizontalAlignment="Left" Height="76" Margin="515,331,0,0" VerticalAlignment="Top" Width="270" Style="{StaticResource MaterialDesignPaperLightButton}" FontSize="24" Foreground="White" FontWeight="Normal" Click="Button_Click" Grid.ColumnSpan="2">
                         <Button.Background>
@@ -45,8 +46,8 @@
                     <Grid.Background>
                         <ImageBrush/>
                     </Grid.Background>
-                    <Label Content="游戏环境/Java" HorizontalAlignment="Left" Height="63" Margin="20,20,0,0" VerticalAlignment="Top" Width="273" Foreground="White" FontSize="36"/>
-                    <Label Content="如果您装有Java,可以直接点击&#xA;下一步,如果没有或不确定,请下载一个&#xA;Java是运行游戏的基础(建议都下载)&#xA;(从1.18开始,必须使用Java17以上版本)" HorizontalAlignment="Left" Height="121" Margin="20,92,0,0" VerticalAlignment="Top" Width="373" Foreground="White" FontSize="22" FontFamily="Microsoft YaHei UI Light"/>
+                    <Label Content="游戏环境" HorizontalAlignment="Left" Height="63" Margin="20,20,0,0" VerticalAlignment="Top" Width="273" Foreground="White" FontSize="36"/>
+                    <Label Content="如果您装有Java,可直接点击下一步,&#xA;如果没有或不确定,请下载一个&#xA;Java是运行游戏的基础(建议都下载)&#xA;(从1.18开始,必须使用Java17以上版本)" HorizontalAlignment="Left" Height="121" Margin="20,92,0,0" VerticalAlignment="Top" Width="373" Foreground="White" FontSize="22" FontFamily="Microsoft YaHei UI Light"/>
                     <Image HorizontalAlignment="Left" Height="137" Margin="26,247,0,0" VerticalAlignment="Top" Width="143" Source="Image\java.png"/>
                     <Button Content="下一步" HorizontalAlignment="Left" Height="76" Margin="515,331,0,0" VerticalAlignment="Top" Width="270" Style="{StaticResource MaterialDesignPaperLightButton}" FontSize="24" Foreground="White" FontWeight="Normal" Click="Button_Click1">
                         <Button.Background>
@@ -70,7 +71,7 @@
                     <Grid.Background>
                         <ImageBrush/>
                     </Grid.Background>
-                    <Label Content="账户/account" HorizontalAlignment="Left" Height="63" Margin="20,20,0,0" VerticalAlignment="Top" Width="273" Foreground="White" FontSize="36"/>
+                    <Label Content="账户" HorizontalAlignment="Left" Height="63" Margin="20,20,0,0" VerticalAlignment="Top" Width="273" Foreground="White" FontSize="36"/>
                     <Label Content="如果您购买了正版账户,&#xA;您可以通过微软或Mojang登录&#xA;如果您没有购买,&#xD;&#xA;可选择离线模式或外置" HorizontalAlignment="Left" Height="118" Margin="20,92,0,0" VerticalAlignment="Top" Width="327" Foreground="White" FontSize="22" FontFamily="Microsoft YaHei UI Light"/>
                     <Image HorizontalAlignment="Left" Height="137" Margin="26,254,0,0" VerticalAlignment="Top" Width="143" Source="Image\wxb账户.png"/>
                     <Button Content="下一步" HorizontalAlignment="Left" Height="76" Margin="515,331,0,0" VerticalAlignment="Top" Width="270" Style="{StaticResource MaterialDesignPaperLightButton}" FontSize="24" Foreground="White" FontWeight="Normal" Click="Button_Clicwwk1">
@@ -148,11 +149,6 @@
                                 </TextBox>
                                 <Label Content="ID:" HorizontalAlignment="Left" Height="33" Margin="6,146,0,0" VerticalAlignment="Top" Width="32" FontSize="18" Foreground="#FF383434"/>
                                 <Image HorizontalAlignment="Left" Height="101" Margin="118,14,0,0" VerticalAlignment="Top" Width="101" Source="Image/u=3699317021,3596778976&amp;fm=26&amp;fmt=auto.png"/>
-                                <mah:Tile Content="" HorizontalAlignment="Left" Height="36" Margin="285,187,0,0" VerticalAlignment="Top" Width="36" Click="Tile_Click_LXSkin">
-                                    <mah:Tile.Background>
-                                        <ImageBrush ImageSource="Image/皮肤.png"/>
-                                    </mah:Tile.Background>
-                                </mah:Tile>
                             </Grid>
                         </TabItem>
                         <TabItem Header="LX1&#xA;" Margin="-482,-607,543.8,606">
@@ -171,11 +167,6 @@
                                 <mah:Tile Grid.ColumnSpan="2" Content="" HorizontalAlignment="Left" Height="36" Margin="12,189,0,0" VerticalAlignment="Top" Width="36" Click="Tile_Click_exit">
                                     <mah:Tile.Background>
                                         <ImageBrush ImageSource="Image/退出.png"/>
-                                    </mah:Tile.Background>
-                                </mah:Tile>
-                                <mah:Tile Grid.ColumnSpan="2" Content="" HorizontalAlignment="Left" Height="36" Margin="285,187,0,0" VerticalAlignment="Top" Width="36" Click="Tile_Click_13">
-                                    <mah:Tile.Background>
-                                        <ImageBrush ImageSource="Image/皮肤.png"/>
                                     </mah:Tile.Background>
                                 </mah:Tile>
                             </Grid>
@@ -244,9 +235,9 @@
                     <Grid.Background>
                         <ImageBrush/>
                     </Grid.Background>
-                    <Label Content="个性化/individualization" HorizontalAlignment="Left" Height="63" Margin="20,20,0,0" VerticalAlignment="Top" Width="417" Foreground="White" FontSize="36"/>
+                    <Label Content="个性化" HorizontalAlignment="Left" Height="63" Margin="16,20,0,0" VerticalAlignment="Top" Width="417" Foreground="White" FontSize="36"/>
                     <Label Content="来设置你喜欢的颜色吧！&#xD;&#xA;您稍后也可在设置更改" HorizontalAlignment="Left" Height="100" Margin="20,92,0,0" VerticalAlignment="Top" Width="327" Foreground="White" FontSize="22" FontFamily="Microsoft YaHei UI Light"/>
-                    <Image HorizontalAlignment="Left" Height="137" Margin="26,251,0,0" VerticalAlignment="Top" Width="143" Source="Image/个性化模板.png"/>
+                    <Image HorizontalAlignment="Left" Height="137" Margin="19,253,0,0" VerticalAlignment="Top" Width="143" Source="Image/个性化模板.png" Stretch="UniformToFill"/>
                     <Button Content="下一步" HorizontalAlignment="Left" Height="76" Margin="515,331,0,0" VerticalAlignment="Top" Width="270" Style="{StaticResource MaterialDesignPaperLightButton}" FontSize="24" Foreground="White" FontWeight="Normal" Click="Button_Clicw1wk1">
                         <Button.Background>
                             <SolidColorBrush Color="#FF35DE25" Opacity="0.98"/>
@@ -275,9 +266,9 @@
                     <Grid.Background>
                         <ImageBrush/>
                     </Grid.Background>
-                    <Label Content="开始使用/Start using" HorizontalAlignment="Left" Height="63" Margin="20,20,0,0" VerticalAlignment="Top" Width="417" Foreground="White" FontSize="36"/>
-                    <Label Content="设置完啦!轻点下方按钮即可开始&#xD;&#xA;你的游戏之旅~&#xD;&#xA;右边是一些常用的磁贴,你可以在&#xD;&#xA;后续进行设置" HorizontalAlignment="Left" Height="127" Margin="20,92,0,0" VerticalAlignment="Top" Width="327" Foreground="White" FontSize="22" FontFamily="Microsoft YaHei UI Light"/>
-                    <Image Margin="418,35,46,158" Source="Image\Image1.png" Stretch="Fill"/>
+                    <Label Content="开始使用" HorizontalAlignment="Left" Height="63" Margin="20,20,0,0" VerticalAlignment="Top" Width="417" Foreground="White" FontSize="36"/>
+                    <Label Content="设置完成,轻点下方按钮即可开始&#xA;你的游戏之旅~&#xA;右边是一些常用的磁贴,你可以在&#xA;后续进行设置" HorizontalAlignment="Left" Height="127" Margin="20,92,0,0" VerticalAlignment="Top" Width="327" Foreground="White" FontSize="22" FontFamily="Microsoft YaHei UI Light"/>
+                    <Image Margin="455,36,9,157" Source="Image\Image1.png"/>
                     <Image HorizontalAlignment="Left" Height="137" Margin="26,251,0,0" VerticalAlignment="Top" Width="143" Source="Image\完成.png"/>
                     <Button Content="开始使用" HorizontalAlignment="Left" Height="76" Margin="515,331,0,0" VerticalAlignment="Top" Width="270" Style="{StaticResource MaterialDesignPaperLightButton}" FontSize="24" Foreground="White" FontWeight="Normal" Click="Button_Cli1cw1wk1">
                         <Button.Background>

@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="FSMLauncher_3.About_List.CurseList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FSMLauncher_3.About_List"
+             mc:Ignorable="d" 
+             Height="70.82" Width="434">
+    <Grid>
+        <Image x:Name="CurseImage" HorizontalAlignment="Left" Height="61" Margin="5,5,0,0" VerticalAlignment="Top" Width="65"/>
+        <Label x:Name="CurseName" Content="Name" HorizontalAlignment="Left" Height="41" Margin="74,3,0,0" VerticalAlignment="Top" Width="352" Foreground="#DD797979" FontSize="24"/>
+        <Label x:Name="CurseLB" Content="类别" HorizontalAlignment="Left" Height="24" Margin="75,43,0,0" VerticalAlignment="Top" Width="118" Foreground="#DD797979" FontSize="14"/>
+
+    </Grid>
+</UserControl>

@@ -36,7 +36,7 @@ namespace FSMLauncher_3
         /// </summary>
         internal static List<McVersionList> minecraft2 = new List<McVersionList>();
         /// <summary>
-        /// 基岩版
+        /// 早期测试
         /// </summary>
         internal static List<McVersionList> minecraft3 = new List<McVersionList>();
         /// <summary>

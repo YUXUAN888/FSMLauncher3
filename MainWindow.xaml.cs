@@ -1,68 +1,46 @@
 ﻿using ControlzEx.Theming;
 using Gac;
-using MahApps;
-using MahApps.Metro;
-using MahApps.Metro.Accessibility;
-using MahApps.Metro.Actions;
-using MahApps.Metro.Automation;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.Converters;
-using MahApps.Metro.Markup;
-using MahApps.Metro.ValueBoxes;
 using MaterialDesignColors;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
-using ProjBobcat;
 using SquareMinecraftLauncher;
-using SquareMinecraftLauncher.Core;
 using SquareMinecraftLauncher.Core.fabricmc;
 using SquareMinecraftLauncher.Core.OAuth;
 using SquareMinecraftLauncher.Minecraft;
-using SquareMinecraftLauncher.Minecraft.MCServerPing;
-using SquareMinecraftLauncherWPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Management;
 using System.Net;
-using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using static FSMLauncher_3.Core;
 using static FSMLauncher_3.DIYvar;
-using SquareMinecraftLauncher;
 using System.Windows.Media.Animation;
-using static FSMLauncher_3.MyAni;
 using System.Windows.Media.Effects;
-using EaseMoveDemo;
 using FSMLauncher_3.About_List;
-using FSMLauncher_3.About_Message;
 using System.Security.Cryptography;
-using System.Windows.Interop;
+using SquareMinecraftLauncher.Core.Curseforge;
+using MojangAPI.Model;
+using MojangAPI;
+using System.Net.Http;
+//using SquareMinecraftLauncherSkin;
 
 namespace FSMLauncher_3
 {
@@ -88,7 +66,8 @@ namespace FSMLauncher_3
         }
         static String ZongX = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //获取APPDATA
         public string UpdateD;
-        String ZongW = ZongX + @"\.fsm";
+        static String ZongW = ZongX + @"\.fsm";
+        String ZongSkin = ZongX + @"\.fsm\Skin";
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
 
         private static extern long WritePrivateProfileString(string section, string key, string value, string filepath);
@@ -260,7 +239,7 @@ namespace FSMLauncher_3
 
         }
 
-
+        /*
         public RegistryKey software;
         public RegistryKey Mojang;
         public RegistryKey Y;
@@ -268,6 +247,7 @@ namespace FSMLauncher_3
         public RegistryKey WR;
         public RegistryKey XK;
         RegistryKey FSM;
+        */
         public static void setTag(System.Windows.Forms.Control cons)
         {
 
@@ -441,8 +421,8 @@ namespace FSMLauncher_3
 
             }
         }
-        public String FileOnlineServer = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Server";
-        public String FileOnlineKEHU = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Client";
+        public String FileOnlineServer = ZongW + @"\Server";
+        public String FileOnlineKEHU = ZongW + @"\Client";
         public String FileS = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
         /// <summary> 
         /// 读出INI文件 
@@ -468,6 +448,25 @@ namespace FSMLauncher_3
             int i = GetPrivateProfileString(Section, Key, "", temp, 500, ZongW + @"\ConsoleW.qwq");
             return temp.ToString();
         }
+        /// <summary> 
+        /// 读出INI文件 
+        /// </summary> 
+        /// <param name="Section">项目名称(如 [TypeName] )</param> 
+        /// <param name="Key">键</param> 
+        public string IniReadValueS(string Section, string Key)
+        {
+            String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
+            StringBuilder temp = new StringBuilder(500);
+            int i = GetPrivateProfileString(Section, Key, "", temp, 500, ZongW + @"\Skin\SkinZ.Skin");
+            return temp.ToString();
+        }
+        public string IniReadValueSS(string Section, string Key)
+        {
+            String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
+            StringBuilder temp = new StringBuilder(500);
+            int i = GetPrivateProfileString(Section, Key, "", temp, 500, ZongW + @"\Skin\SkinN.Skin");
+            return temp.ToString();
+        }
         public static int ssti;
         public static String Update;
         AutoSizeFormClass asc = new AutoSizeFormClass();
@@ -483,20 +482,22 @@ namespace FSMLauncher_3
             //Thread y = new Thread(yy);
             //y.Start();
             ServicePointManager.DefaultConnectionLimit = 512;
-            Update = "Beta6";///每次更新启动器设置，启动器当前版本号
+            Update = "Beta14";///每次更新启动器设置，启动器当前版本号
             Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM");
             String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM";
             StringBuilder temp = new StringBuilder();
             GetPrivateProfileString("ZTSY", "ZTSY", "", temp, 255, File_ + @"\FSM.slx");
-
             //DownloadSourceInitialization(DownloadSource.MCBBSSource);//改源方法
             this.ResizeMode = ResizeMode.CanMinimize;
             InitializeComponent();
-                             FixJS.Visibility = Visibility.Hidden;
-                           Fix__.Visibility = Visibility.Hidden;
-                         TSZ.Visibility = Visibility.Hidden;
-                       MWL.Visibility = Visibility.Hidden;
-                    YFL.Visibility = Visibility.Hidden;
+            FixJS.Visibility = Visibility.Hidden;
+            Fix__.Visibility = Visibility.Hidden;
+            /*---------------------------------------------------*/
+            TSZ.Visibility = Visibility.Hidden;
+            MWL.Visibility = Visibility.Hidden;
+            YFL.Visibility = Visibility.Hidden;
+            rams.AddHandler(Slider.MouseUpEvent, new MouseButtonEventHandler(MouseRAM), true);
+            /*
             software = hkim.OpenSubKey("SOFTWARE", true);
             FSM = software.CreateSubKey("FSM");
             Mojang = FSM.CreateSubKey("Mojang");
@@ -504,6 +505,7 @@ namespace FSMLauncher_3
             LX = FSM.CreateSubKey("LX");
             WR = FSM.CreateSubKey("WR");
             XK = FSM.CreateSubKey("XK");
+            */
             rams.Maximum = MemoryAvailable / 1024 / 1024;
             rams.Value = int.Parse(Bit.Text);
             dminecraft_text.Text = System.AppDomain.CurrentDomain.BaseDirectory + @".minecraft";
@@ -517,78 +519,10 @@ namespace FSMLauncher_3
             }
             try
             {
-                for (int i = 2; i <= int.Parse(IniReadValue("VPath1", "1")); i++)
+                if (IniReadValue("ONLINE", "Server") != "" && IniReadValue("ONLINE", "Server") == "GZ")
                 {
-                    pathlist.Items.Add(IniReadValue("VPath", i.ToString()));
+                    GZJDXZ.IsChecked = true;
                 }
-            }
-            catch
-            {
-
-            }
-            try
-            {
-                if (IniReadValue("Vlist", "Path") == null)
-                {
-
-                }
-                else
-                {
-                    pathlist.SelectedItem = int.Parse(IniReadValue("Vlist", "Path"));
-                    pathlist.SelectedIndex = int.Parse(IniReadValue("Vlist", "Path"));
-                    pathlist.SelectedItems.Add(pathlist.Items[int.Parse(IniReadValue("Vlist", "Path"))]);
-                    pathlist.Focus();
-                    pathlist.SelectedIndex = int.Parse(IniReadValue("Vlist", "Path"));
-                    pathlist.SelectedItems.Add(pathlist.Items[int.Parse(IniReadValue("Vlist", "Path"))]);
-                }
-
-                try
-                {
-
-                    AllTheExistingVersion[] t = new AllTheExistingVersion[0];
-                    if (pathlist.SelectedIndex == 0)
-                    {
-                        tools.SetMinecraftFilesPath(dminecraft_text.Text);
-                        t = tools.GetAllTheExistingVersion();
-
-                        List<DoItem> item1 = new List<DoItem>();
-                        for (int i = 0; i < t.Length; i++)
-                        {
-
-                            //vlist.Items.Add(t[i]);
-                            DoItem item = new DoItem();
-                            item.DverV.Content = t[i].version;
-                            item1.Add(item);
-                        }
-                        DIYvar.lw = item1;
-                        vlist.ItemsSource = item1.ToArray();
-                    }
-                    else
-                    {
-                        string mcPath = (pathlist as ListBox).SelectedItem.ToString();
-                        tools.SetMinecraftFilesPath(mcPath);
-                        t = tools.GetAllTheExistingVersion();
-
-                        List<DoItem> item1 = new List<DoItem>();
-                        for (int i = 0; i < t.Length; i++)
-                        {
-
-                            //vlist.Items.Add(t[i]);
-                            DoItem item = new DoItem();
-                            item.DverV.Content = t[i].version;
-                            item1.Add(item);
-                        }
-                        DIYvar.lw = item1;
-                        vlist.ItemsSource = item1.ToArray();
-                    }
-
-                }
-                catch
-                {
-
-                }
-
-
             }
             catch
             {
@@ -660,34 +594,84 @@ namespace FSMLauncher_3
 
             }
             SetBox.ItemsSource = itemw.ToArray();
+            List<SetsItem> itemww = new List<SetsItem>();
+            for (int i = 0; i <= 3; ++i)
+            {
+                if (i == 1)
+                {
+                    SetsItem item = new SetsItem();
+                    item.SetName.Content = "创建房间";
+                    item.SetName.Foreground = new SolidColorBrush(Colors.Gray);
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"\Image\创建.PNG", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    item.SetImage.Source = bi;
+                    itemww.Add(item);
+                }
+                else if (i == 2)
+                {
+                    SetsItem item = new SetsItem();
+                    item.SetName.Content = "加入房间";
+                    item.SetName.Foreground = new SolidColorBrush(Colors.Gray);
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"\Image\加入.PNG", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    item.SetImage.Source = bi;
+                    itemww.Add(item);
+                }
+                else if (i == 3)
+                {
+                    SetsItem item = new SetsItem();
+                    item.SetName.Content = "高性能";
+                    item.SetName.Foreground = new SolidColorBrush(Colors.Gray);
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(@"\Image\高性能.PNG", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    item.SetImage.Source = bi;
+                    itemww.Add(item);
+                }
+            }
+            SetBox1.ItemsSource = itemww.ToArray();
             //this.ShowMessageAsync("欢迎测试(Debug0.4.1)(Beta1铺垫版本)!", "很高兴您能参加FSM3的早期测试(Debug)！\n此版本可以实现：联机的多线程完整初始化，下载列表获取，Mojang完整登录，微软完整登录(免密,正常),关于,个性化,版本列表的算法以及获取,开始向导,内存获取,外置登录,公告获取,启动游戏,启动错误跟踪器,下载补全游戏(不稳定),联机!!,背景音乐,一点点小动画\nDebug版本是功能完全没有开发好的版本，请多多向交流群举报Bug");
-            Border border = new Border();
-            VisualBrush brush = new VisualBrush();
+            //Console.WriteLine("---------------------------------------------------");
 
-            brush.Stretch = Stretch.Uniform;
-            border.Background = brush;
-            border.Effect = new BlurEffect()
+            //DOWNLOADTHREAD = int.Parse(IniReadValue("Download", "Thread"));
+
+
+
+//Console.WriteLine("---------------------------------------------------");
+
+            //if (IniReadValueW("Start", "Start") == "1")
+            //{
+
+            //}
+            //else
+            //{
+            //    Main1.ShowDialog();
+            //}
+
+            if(IniReadValue("Image","lj") != "")
             {
-                Radius = 80,
-                RenderingBias = RenderingBias.Performance
-            };
-            border.Margin = new Thickness(-this.Margin.Left, -this.Margin.Top, 0, 0);
-
-
-            
-
-
-            if (IniReadValue("Start", "Start") == "1")
-            {
-
+                if(IniReadValue("Image","SF") == "1")
+                {
+                    BJLJ.Text = IniReadValue("Image", "lj");
+                    BJAN.IsChecked = true;
+                    ImageBrush b = new ImageBrush();
+                    b.ImageSource = new BitmapImage(new Uri(BJLJ.Text));
+                    b.Stretch = Stretch.Fill;
+                    this.Background = b; 
+                }
+                else
+                {
+                    BJLJ.Text = IniReadValue("Image", "lj");
+                }
             }
-            else
-            {
-                DIYvar.Main1.ShowDialog();
-
-            }
-
-
 
             /*
             if (Mojang.GetValue("Mail") == null)
@@ -730,6 +714,18 @@ namespace FSMLauncher_3
 
             }
             */
+            try
+            {
+                for (int i = 0; i < int.Parse(IniReadValue("Java", "JavaS")); ++i)
+                {
+                    Java_list.Items.Add(IniReadValue("Java", i.ToString()));
+                }
+                JavaS = int.Parse(IniReadValue("Java", "JavaS"));
+            }
+            catch
+            {
+
+            }
             List<JavaVersion> aa = tools.GetJavaPath();
             for (int i = 0; i < aa.Count; i++)
             {
@@ -741,19 +737,64 @@ namespace FSMLauncher_3
             NZDM[3] = "把鼠标停留在一些按钮上，你可以看到它的提示";
             NZDM[4] = "作者在启动器藏有3+个彩蛋！";
             NZDM[5] = "在版本列表右键版本就可以转到这个版本的设置！";
-            NZDM[6] = "FSM最早在2020年2月发布";
+            NZDM[6] = "FSM最早在2020年2月发布，当时叫XMCL，后来名称撞车改了";
 
             //获取UUID  MessageBox.Show(KMCCC.Pro.Modules.MojangAPI.MojangAPI.NameToUUID("CHINA_YUXUAN").ToString());
-            
-            
+            try
+            {
+                int TB1 = int.Parse(IniReadValueS("Skin", "List"));
+                for (int i = 1; i < TB1 + 1; ++i)
+                {
+                    List<SkinList> item1 = new List<SkinList>();
+                    SkinList item = new SkinList();
+                    after = IniReadValueS("Skin", i.ToString()).Split(new char[] { '|' });
+                    item.SkinNamew.Text = after[0] + "的皮肤";
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                    BitmapImage bi = new BitmapImage();
+                    //BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(ZongSkin + @"\" + after[0] + @"\SkinT.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    item.OffLineSkinImage.Source = bi;
+                    item1.Add(item);
+                    OffLineSkinList.Items.Add(item);
+                    //OffLineSkinList.Items.Add(IniReadValueS("Skin", i.ToString()));
+                }
+            }
+            catch
+            {
 
+            }
+            try
+            {
+                int TB1 = int.Parse(IniReadValueSS("Skin", "List"));
+                for (int i = 1; i < TB1 + 1; ++i)
+                {
+                    List<SkinList> item1 = new List<SkinList>();
+                    SkinList item = new SkinList();
+                    after = IniReadValueSS("Skin", i.ToString()).Split(new char[] { '|' });
+                    item.SkinNamew.Text = after[0];
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                    BitmapImage bi = new BitmapImage();
+                    //BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(ZongSkin + @"\SkinN\" + after[0] + @"\SkinT.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    item.OffLineSkinImage.Source = bi;
+                    item1.Add(item);
+                    OnLineSkinList.Items.Add(item);
+                    //OffLineSkinList.Items.Add(IniReadValueS("Skin", i.ToString()));
+                }
+            }
+            catch
+            {
+
+            }
 
             Label1.Content = "您好！" + Environment.UserName;
-
             UpdateButton.Visibility = System.Windows.Visibility.Visible;
             if (System.IO.File.Exists(File_ + @"\FSM.slx"))
             {
-
                 //存在文件
             }
             else
@@ -761,8 +802,19 @@ namespace FSMLauncher_3
                 //不存在文件
                 using (File.Create(File_ + @"\FSM.slx")) ;
             }
-
-
+            if (IniReadValue("RAM", "RAMW") != "")
+            {
+                Bit.Text = IniReadValue("RAM", "RAMW");
+            }
+            if (IniReadValue("JVM", "JVMW") != "")
+            {
+                JVM.Text = IniReadValue("JVM", "JVMW");
+            }
+            if (IniReadValue("EY", "EYW") != "")
+            {
+                EY.Text = IniReadValue("EY", "EYW");
+            }
+            Directory.CreateDirectory(ZongSkin);
 
 
             //StringBuilder temp = new StringBuilder();
@@ -899,30 +951,11 @@ namespace FSMLauncher_3
                 a1a.PrimaryColor = PrimaryColor.Yellow;
                 Java_list_Copy.SelectedIndex = 16;
             }
-            try
-            {
-                if (IniReadValue("Vlist", "V") == "")
-                {
-                    NowV.Content = "当前没有版本";
-                }
-                else
-                {
-
-                    vlist.SelectedIndex = int.Parse(IniReadValue("Vlist", "V"));
-                    AllTheExistingVersion[] t = new AllTheExistingVersion[0];
-                    string mcPath = (pathlist as ListBox).SelectedItem.ToString();
-                    tools.SetMinecraftFilesPath(mcPath);
-                    t = tools.GetAllTheExistingVersion();
-                    NowV.Content = t[vlist.SelectedIndex].version;
-
-                }
-            }
-            catch
-            {
-
-            }
+            
+                
+            
             //Bit.Text = tools.GetMemorySize(Java_list.Text).TotalMemory.ToString();
-
+            
 
 
         }
@@ -937,7 +970,33 @@ namespace FSMLauncher_3
 
         }
         public string wratoken;
+        public static string PostW(string str)
+        {
 
+            string result = "";
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://localhost:8563/nfo/dd");
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+
+            byte[] data = Encoding.UTF8.GetBytes(str);//把字符串转换为字节
+
+            req.ContentLength = data.Length; //请求长度
+
+            using (Stream reqStream = req.GetRequestStream()) //获取
+            {
+                reqStream.Write(data, 0, data.Length);//向当前流中写入字节
+                reqStream.Close(); //关闭当前流
+            }
+
+            HttpWebResponse resp = (HttpWebResponse)req.GetResponse(); //响应结果
+            Stream stream = resp.GetResponseStream();
+            //获取响应内容
+            using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+            {
+                result = reader.ReadToEnd();
+            }
+            return result;
+        }
         private void WRD()
         {
 
@@ -948,8 +1007,8 @@ namespace FSMLauncher_3
      {
          //Code
 
-
-         if (IniReadValueW("wr","Atoken") == null||IniReadValueW("wr", "Atoken") == "")
+         
+         if (IniReadValueW("wr", "Atoken") == null || IniReadValueW("wr", "Atoken") == "")
          {
 
          }
@@ -960,17 +1019,17 @@ namespace FSMLauncher_3
              {
                  MicrosoftLogin microsoftLogin = new MicrosoftLogin();
                  Xbox XboxLogin = new Xbox();
-                 
-                     Minecraft_Token = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(microsoftLogin.RefreshingTokens(IniReadValueW("wr", "Atoken")))));
-                     MinecraftLogin minecraftlogin = new MinecraftLogin();
-                     var Minecraft = minecraftlogin.GetMincraftuuid(Minecraft_Token);
-                     IDTab.SelectedIndex = 2;
-                     wruuid = Minecraft.uuid;
-                     wrname = Minecraft.name;
-                     wrtoken = Minecraft_Token;
 
-                 
-                 
+                 Minecraft_Token = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(microsoftLogin.RefreshingTokens(IniReadValueW("wr", "Atoken")))));
+                 MinecraftLogin minecraftlogin = new MinecraftLogin();
+                 var Minecraft = minecraftlogin.GetMincraftuuid(Minecraft_Token);
+
+                 wruuid = Minecraft.uuid;
+                 wrname = Minecraft.name;
+                 wrtoken = Minecraft_Token;
+
+
+
 
 
 
@@ -1059,7 +1118,7 @@ namespace FSMLauncher_3
                  OSM.Margin = thick;
                  OSM.Visibility = Visibility.Visible;
                  OSM.xxbt.Text = "登录失败";
-                 OSM.xxwb.Text = "你登陆失败了\n"+ex.Message;
+                 OSM.xxwb.Text = "你登陆失败了\n" + ex.Message;
                  //string a = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData); //获取APPDATA
 
                  OSM.BeginAnimation(WidthProperty, OSMessage(0, 336, 0.8));
@@ -1174,7 +1233,7 @@ namespace FSMLauncher_3
          //Code
          try
          {
-             if (IniReadValueW("wz", "IDD") == null||IniReadValueW("wz", "IDD") == "")
+             if (IniReadValueW("wz", "IDD") == null || IniReadValueW("wz", "IDD") == "")
              {
                  ///////////////////////////////////////////////////
              }
@@ -1264,7 +1323,7 @@ namespace FSMLauncher_3
          //Code
          加载L.Content = "正在为您准备新的启动器!";
          Tab1.SelectedIndex = 6;
-         String File_ = System.AppDomain.CurrentDomain.BaseDirectory + "[Update]FSM.exe";
+         String File_ = System.AppDomain.CurrentDomain.BaseDirectory + "[" + after[4] + "]FSM.exe";
          Tab1.SelectedIndex = 6;
          dlf.doSendMsg += new DownLoadFile.dlgSendMsg(SendMsgHander);
          wa = Download(File_, "", UpdateD);
@@ -1297,9 +1356,9 @@ namespace FSMLauncher_3
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             pathlist.SelectedIndex = pathlist.SelectedIndex;
-            
+
             Tab1.SelectedIndex = 7;
-            
+
             var palette = new PaletteHelper();
 
 
@@ -1494,75 +1553,81 @@ namespace FSMLauncher_3
 
         private async void Tile_Click_2(object sender, RoutedEventArgs e)
         {
-            Tab1.SelectedIndex = 1;
-            yxlx.SelectedIndex = 0;
-            //await this.ShowMessageAsync("下载提示", "现在最好别用FSM的下载\n因为还不稳定,FSM会卡死");
-            //  Thread.Sleep(111);
-            ForgeB.BeginAnimation(WidthProperty, CatC(0, 149, 0.8));
-            //Thread.Sleep(555);
-            FabricB.BeginAnimation(WidthProperty, CatC(0, 149, 1));
-            //Thread.Sleep(555);
-            OptifineB.BeginAnimation(WidthProperty, CatC(0, 149, 1.2));
-            //Thread.Sleep(555);
-            LiteB.BeginAnimation(WidthProperty, CatC(0, 149, 1.4));
-            StartDownLoad.BeginAnimation(WidthProperty, CatC(0, 183.2, 1.5));
-            Tools tools = new Tools();
-            MCVersionList[] mc = new MCVersionList[0];
             try
             {
-                mc = await tools.GetMCVersionList();
+                Tab1.SelectedIndex = 1;
+                yxlx.SelectedIndex = 0;
+                //await this.ShowMessageAsync("下载提示", "现在最好别用FSM的下载\n因为还不稳定,FSM会卡死");
+                //  Thread.Sleep(111);
+                ForgeB.BeginAnimation(WidthProperty, CatC(0, 149, 0.8));
+                //Thread.Sleep(555);
+                FabricB.BeginAnimation(WidthProperty, CatC(0, 149, 1));
+                //Thread.Sleep(555);
+                OptifineB.BeginAnimation(WidthProperty, CatC(0, 149, 1.2));
+                //Thread.Sleep(555);
+                LiteB.BeginAnimation(WidthProperty, CatC(0, 149, 1.4));
+                StartDownLoad.BeginAnimation(WidthProperty, CatC(0, 183.2, 1.5));
+                Tools tools = new Tools();
+                MCVersionList[] mc = new MCVersionList[0];
+                try
+                {
+                    mc = await tools.GetMCVersionList();
+                }
+                catch (Exception ex)
+                {
+
+                    await this.ShowMessageAsync("未获取到游戏下载列表，请重试", "请检查网络，或重试一遍\n" + ex.Message);
+
+                    return;
+                }
+
+                foreach (var i in mc)
+                {
+                    switch (i.type)
+                    {
+                        case "正式版":
+                            McVersionList a = new McVersionList(i.id, i.type);
+                            minecraft1.Add(a);
+                            break;
+                        case "快照版":
+                            McVersionList b = new McVersionList(i.id, i.type);
+                            minecraft2.Add(b);
+                            break;
+                        case "基岩版":
+                            McVersionList c = new McVersionList(i.id, "早期测试");
+                            minecraft3.Add(c);
+                            break;
+                        case "远古版":
+                            McVersionList d = new McVersionList(i.id, i.type);
+                            minecraft4.Add(d);
+                            break;
+                    }
+                    var DT = DateTime.Parse(i.releaseTime);
+                    if (DT.ToString("MM-dd") == "04-01")
+                    {
+                        McVersionList s = new McVersionList(i.id, "愚人节版本");
+                        minecraft5.Add(s);
+                    }
+
+                }
+                mcVersionLists = minecraft1.ToArray();
+                List<Item> item1 = new List<Item>();
+
+
+                for (int i = 0; i < mcVersionLists.Length; i++)
+                {
+                    Item item = new Item();
+                    item.Dver.Text = mcVersionLists[i].version;
+                    item1.Add(item);
+                }
+                //DIYvar.l = item1;
+                MCV.ItemsSource = item1.ToArray();
+
             }
             catch (Exception ex)
             {
-
-                await this.ShowMessageAsync("未获取到游戏下载列表，请重试", "请检查网络，或重试一遍\n" + ex.Message);
-
-                return;
+                MessageBox.Show("灾难性故障\n" + ex.Message);
             }
-
-            foreach (var i in mc)
-            {
-                switch (i.type)
-                {
-                    case "正式版":
-                        McVersionList a = new McVersionList(i.id, i.type);
-                        DIYvar.minecraft1.Add(a);
-                        break;
-                    case "快照版":
-                        McVersionList b = new McVersionList(i.id, i.type);
-                        DIYvar.minecraft2.Add(b);
-                        break;
-                    case "基岩版":
-                        McVersionList c = new McVersionList(i.id, "早期测试");
-                        DIYvar.minecraft3.Add(c);
-                        break;
-                    case "远古版":
-                        McVersionList d = new McVersionList(i.id, i.type);
-                        DIYvar.minecraft4.Add(d);
-                        break;
-                }
-                var DT = DateTime.Parse(i.releaseTime);
-                if (DT.ToString("MM-dd") == "04-01")
-                {
-                    McVersionList s = new McVersionList(i.id, "愚人节版本");
-                    DIYvar.minecraft5.Add(s);
-                }
-
-            }
-            mcVersionLists = DIYvar.minecraft1.ToArray();
-            List<Item> item1 = new List<Item>();
-
-
-            for (int i = 0; i < mcVersionLists.Length; i++)
-            {
-                Item item = new Item();
-                item.Dver.Text = mcVersionLists[i].version;
-                item1.Add(item);
-            }
-            DIYvar.l = item1;
-            MCV.ItemsSource = item1.ToArray();
-
-
         }
 
 
@@ -1794,7 +1859,7 @@ namespace FSMLauncher_3
 
             string aa = DIYvar.xzItems[wa].xzwz;
             //HttpDownloadFile(UpdateD, File_, 6, Tab1);
-            String File_ = System.AppDomain.CurrentDomain.BaseDirectory + "[Update]FSM.exe";
+            String File_ = System.AppDomain.CurrentDomain.BaseDirectory + "[" + after[4] + "]FSM.exe";
 
 
             if (aa == "完成")
@@ -1881,24 +1946,22 @@ namespace FSMLauncher_3
 
 
         //public List iClassList { get; set; }
-
+        int JavaS = 0;
 
         private void Button_Click_10(object sender, RoutedEventArgs e)
         {
-
-
             OpenFileDialog fileDialog = new OpenFileDialog();//提示用户打开文件窗体
             fileDialog.Title = "选择Java路径";//文件对话框标题
             fileDialog.Filter = "Java路径|*javaw.exe";//文件格式筛选字符串
             if (fileDialog.ShowDialog() == true)//判断对话框返回值，点击打开
             {
                 //fileDialog.FileName.ToString()
-
-                Java_list.IsEditable = false;
-
                 //listBoxSS.DataContext = this;
                 Java_list.Items.Add(fileDialog.FileName.ToString());
                 //MessageBox.Show(fileDialog.FileName.ToString());
+                ++JavaS;
+                WritePrivateProfileString("Java", "JavaS", JavaS.ToString(), FileS);
+                WritePrivateProfileString("Java", JavaS.ToString(), fileDialog.FileName.ToString(), FileS);
 
 
             }
@@ -2334,7 +2397,7 @@ namespace FSMLauncher_3
                 if (tag == DownStatus.Error)
                 {
                     xzItems[msg.Id].xzwz = msg.ErrMessage;
-                    this.ShowMessageAsync("下载错误",msg.ErrMessage+"\n请尝试更换下载源");
+                    this.ShowMessageAsync("下载错误", msg.ErrMessage + "\n请尝试更换下载源");
                     Tab1.SelectedIndex = 0;
 
                     return;
@@ -2433,7 +2496,7 @@ namespace FSMLauncher_3
 
         private void Tile_Click_4(object sender, RoutedEventArgs e)
         {
-
+            SetBox1.SelectedIndex = 0;
 
             OpenOnline.Visibility = Visibility.Hidden;
             dfjr.Visibility = Visibility.Visible;
@@ -2447,8 +2510,8 @@ namespace FSMLauncher_3
 
             }
 
-            String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Server\frpc.exe";
-            String File__ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Client\frpc.exe";
+            String File_ = ZongW + @"\Server\frpc.exe";
+            String File__ = ZongW + @"\Client\frpc.exe";
             if (File.Exists(File_) == true && File.Exists(File__) == true)
             {
                 Tab1.SelectedIndex = 3;
@@ -2468,10 +2531,10 @@ namespace FSMLauncher_3
                 加载L.Content = "正在为第一次联机做准备...";
                 Tab1.SelectedIndex = 6;
 
-                String File___ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Server\StartForFSM.exe";
-                String File____ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Client\StartForFSM.exe";
-                Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Server");
-                Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Client");
+                String File___ = ZongW + @"\Server\StartForFSM.exe";
+                String File____ = ZongW + @"\Client\StartForFSM.exe";
+                Directory.CreateDirectory(ZongW + @"\Server");
+                Directory.CreateDirectory(ZongW + @"\Client");
 
 
 
@@ -2479,10 +2542,10 @@ namespace FSMLauncher_3
                 did2 = Download(File__, "OnLine", "http://www.baibaoblog.cn:81/frpc/Client/frpc.exe");
                 did3 = Download(File___, "OnLine", "http://www.baibaoblog.cn:81/frpc/Client/StartForFSM.exe");
                 did4 = Download(File____, "OnLine", "http://www.baibaoblog.cn:81/frpc/Client/StartForFSM.exe");
-                ONLINEW = Core5.timer(OnLineI, 5555);
+                ONLINEW = Core5.timer(OnLineI, 2333);
                 ONLINEW.Start();
-                Gac.DownLoadFile downLoadFile = new Gac.DownLoadFile();
-                JarTimerBool = true;
+                //Gac.DownLoadFile downLoadFile = new Gac.DownLoadFile();
+                //JarTimerBool = true;
 
 
             }
@@ -2534,34 +2597,11 @@ namespace FSMLauncher_3
         }
         private async void load(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                WebClient MyWebClient = new WebClient();
 
-                String pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://yuxuanbbs.cn/FSM/FSMGX.txt")); //从指定网站下载数据
-                String pageHtml = pageData;
 
-                byte[] c = Convert.FromBase64String(pageHtml);
-                String ww = System.Text.Encoding.Default.GetString(c);
-                string ggxx = IniReadValue("GG", "DQGG");
-                if (ggxx == ww)
-                {
-
-                }
-                else
-                {
-                    this.ShowModalMessageExternal("新公告", "公告内容:" + ww);
-                    WritePrivateProfileString("GG", "DQGG", ww, FileS);
-                }
-            }
-            catch
-            {
-
-            }
-            
             //this.Test_Resize += new EventHandler(Test_Resize);
             MetroDialogSettings settings = new MetroDialogSettings();
-            if (IniReadValueW("Read","ReadW") == null || IniReadValueW("Read", "ReadW") == "")
+            if (IniReadValueW("Read", "ReadW") == null || IniReadValueW("Read", "ReadW") == "")
             {
                 settings.NegativeButtonText = "同意";
                 settings.AffirmativeButtonText = "拒绝";
@@ -2577,14 +2617,154 @@ namespace FSMLauncher_3
                 {
                     //MessageBox.Show("同意");
                     ///XK.SetValue("XK", "1");
-                    WritePrivateProfileString("Read","ReadW","w",ZongW+@"\ConsoleW.qwq");
+                    WritePrivateProfileString("Read", "ReadW", "w", ZongW + @"\ConsoleW.qwq");
                 }
             }
             else
             {
 
             }
+            if (IniReadValueW("OffLine", "ID") == null || IniReadValueW("OffLine", "ID") == "")
+            {
 
+            }
+            else
+            {
+                OfflineName.Text = IniReadValueW("OffLine", "ID");
+            }
+            if (IniReadValueW("OffLine", "Skin") == "" || IniReadValueW("OffLine", "Skin") == null)
+            {
+
+            }
+            else
+            {
+                try
+                {
+                    after = IniReadValueW("OffLine", "Skin").Split(new char[] { '|' });
+                    SkinUUIDMC = after[1];
+                    BitmapImage bi = new BitmapImage();
+                    //BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                    bi.BeginInit();
+                    bi.UriSource = new Uri(ZongSkin + @"\" + after[0] + @"\SkinT.png", UriKind.RelativeOrAbsolute);
+                    bi.EndInit();
+                    OFFLINEI.Source = bi;
+                }
+                catch
+                {
+
+                }
+            }
+
+            try
+            {
+                for (int i = 2; i <= int.Parse(IniReadValue("VPath1", "1")); i++)
+                {
+                    PathItem user = new PathItem();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                    user.Path.Content = IniReadValue("VPath", i.ToString());
+                    pathlist.Items.Add(user);
+                }
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                //if (IniReadValue("Vlist", "Path") == null || IniReadValue("Vlist","Path") == "")
+                //{
+
+                //}
+                //else
+                //{
+                //    //  pathlist.SelectedItem = int.Parse(IniReadValue("Vlist", "Path"));
+                //    pathlist.SelectedIndex = int.Parse(IniReadValue("Vlist", "Path"));
+                //    //   pathlist.SelectedItems.Add(pathlist.Items[int.Parse(IniReadValue("Vlist", "Path"))]);
+                //    //   pathlist.Focus();
+                //    pathlist.SelectedIndex = int.Parse(IniReadValue("Vlist", "Path"));
+                //    ////pathlist.SelectedItems.Add(pathlist.Items[int.Parse(IniReadValue("Vlist", "Path"))]);
+                //}
+
+                //try
+                //{
+
+                //    AllTheExistingVersion[] t;
+                //    if (pathlist.SelectedIndex == 0)
+                //    {
+                //        tools.SetMinecraftFilesPath(dminecraft_text.Text);
+                //        t = tools.GetAllTheExistingVersion();
+
+                //        List<DoItem> item1 = new List<DoItem>();
+                //        for (int i = 0; i < t.Length; i++)
+                //        {
+
+                //            //vlist.Items.Add(t[i]);
+                //            DoItem item = new DoItem();
+                //            item.DverV.Content = t[i].version;
+                //            item1.Add(item);
+                //        }
+                //        //DIYvar.lw = item1;
+                //        vlist.ItemsSource = item1.ToArray();
+                //    }
+                //    else
+                //    {
+                //        if (pathlist.SelectedItem == null)
+                //        {
+
+                //        }
+                //        else
+                //        {
+                //            String mcPath = pathlist.SelectedItem.ToString();
+                //            tools.SetMinecraftFilesPath(mcPath);
+                //            t = tools.GetAllTheExistingVersion();
+
+                //            List<DoItem> item1 = new List<DoItem>();
+                //            for (int i = 0; i < t.Length; i++)
+                //            {
+
+                //                //vlist.Items.Add(t[i]);
+                //                DoItem item = new DoItem();
+                //                item.DverV.Content = t[i].version;
+                //                item1.Add(item);
+                //            }
+                //            //DIYvar.lw = item1;
+                //            vlist.ItemsSource = item1.ToArray();
+                //        }
+                        
+                //    }
+
+                //}
+                //catch
+                //{
+
+                //}
+
+
+
+            }
+            catch
+            {
+
+            }
+            STCP.IsChecked = false;
+            XTCP.IsChecked = false;
+            if (IniReadValue("ONLINE", "TCPP2P") == "" || IniReadValue("ONLINE", "TCPP2P") == null)
+            {
+                STCP.IsChecked = true;
+                WritePrivateProfileString("ONLINE", "TCPP2P", "stcp", FileS);
+            }
+            else
+            {
+                if(IniReadValue("ONLINE", "TCPP2P") == "stcp")
+                {
+                    STCP.IsChecked = true;
+                }
+                else if (IniReadValue("ONLINE", "TCPP2P") == "xtcp")
+                {
+                    XTCP.IsChecked = true;
+                }
+            }
             switch (IniReadValue("DownLoad", "Source"))
             {
                 case "":
@@ -2608,38 +2788,18 @@ namespace FSMLauncher_3
                     DownS.SelectedIndex = 2;
                     break;
             }
-            try
-            {
-                string aa = DecryptDES(IniReadValue("JSM", "JSM"), "87654321");
-               // MessageBox.Show(DecryptDES("ODliMzdkNWNmOTBhOTViNQ==", "8765432w"));
-                string code = null;
-                SelectQuery query = new SelectQuery("select * from Win32_ComputerSystemProduct");
-                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(query))
-                {
-                    foreach (var item in searcher.Get())
-                    {
-                        using (item) code = item["UUID"].ToString();
-                    }
-
-                }
-                if (aa == code)
-                {
-                    ThemeManager.Current.ChangeTheme(this, "Light." + IniReadValue("JSM", "Color"));
-                    TSZ.Visibility = Visibility.Visible;
-                    MWL.Visibility = Visibility.Visible;
-                    YFL.Visibility = Visibility.Visible;
-                }
-            }
-            catch
-            {
-
-            }
+            
 
             //如果没有文件夹就创建它
             if (!Directory.Exists(ZongX + @"\.fsm"))
             {
                 //System.IO.Directory.CreateDirectory(ZongX + ".fsm");
                 Directory.CreateDirectory(ZongX + @"\.fsm");
+            }
+            if (!Directory.Exists(ZongX + @"\.fsm\Skin\SkinN"))
+            {
+                //System.IO.Directory.CreateDirectory(ZongX + ".fsm");
+                Directory.CreateDirectory(ZongX + @"\.fsm\Skin\SkinN");
             }
             XX = (float)this.Width;
 
@@ -2677,7 +2837,7 @@ namespace FSMLauncher_3
 
                 }
             }
-            
+
             try
             {
                 WebClient MyWebClient = new WebClient();
@@ -2725,7 +2885,7 @@ namespace FSMLauncher_3
             WRD1.Start();
             Thread y = new Thread(yy);
             y.Start();
-            if (IniReadValueW("Mojang","Mail") == null || IniReadValueW("Mojang", "Mail") == "")
+            if (IniReadValueW("Mojang", "Mail") == null || IniReadValueW("Mojang", "Mail") == "")
             {
 
             }
@@ -2744,7 +2904,7 @@ namespace FSMLauncher_3
                     LB.Content = Mojangname;
                     loginmode = "mojang";
                     mojangyes = "888";
-                    Download( System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png","", tools.GetMinecraftSkin(MojangUUID));
+                    Download(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png", "", tools.GetMinecraftSkin(MojangUUID));
                     System.Drawing.Point point = new System.Drawing.Point(8, 8);
                     System.Drawing.Size size = new System.Drawing.Size(8, 8);
                     Bitmap bitmap = new Bitmap(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\Skin\Skin.png");
@@ -2756,7 +2916,7 @@ namespace FSMLauncher_3
 
                     IM.Source = BitmapToBitmapImage(i);
 
-                    IDTab.SelectedIndex = 2;
+
                 }
                 catch
                 {
@@ -2765,10 +2925,76 @@ namespace FSMLauncher_3
 
 
             }
+            if (IniReadValue("Login", "LoginM") != "")
+            {
+                IDTab.SelectedIndex = int.Parse(IniReadValue("Login", "LoginM"));
+            }
             //Loaded -= load;
             //InitWindowActualHeight();
+            try
+            {
+
+                String ww = HttpUitls.Get("http://api.2018k.cn/getExample?id=acdbe11aceff42a599113997cbb74103&data=notice");
+                string ggxx = IniReadValue("GG", "DQGG");
+                if (ggxx == ww)
+                {
+
+                }
+                else
+                {
+                    await this.ShowMessageAsync("新公告", "公告内容:" + ww);
+                    WritePrivateProfileString("GG", "DQGG", ww, FileS);
+                }
+            }
+            catch
+            {
+
+            }
+            DownLoadThread.AddHandler(Slider.MouseUpEvent, new MouseButtonEventHandler(Mouse), true);
+            try
+            {
+                DownLoadThread.Value = int.Parse(IniReadValue("DownLoad", "Thread"));
+            }
+            catch
+            {
+
+            }
+            try
+            {
+                if (IniReadValue("Vlist", "V") == "" || IniReadValue("Vlist", "V") == null)
+                {
+                    NowV.Content = "当前没有版本";
+                }
+                else if (IniReadValue("Vlist", "Path") != "" || IniReadValue("Vlist", "Path") != null)
+                {
+                    AllTheExistingVersion[] t = new AllTheExistingVersion[0];
+                    pathlist.SelectedIndex = int.Parse(IniReadValue("Vlist", "Path"));
+                    tools.SetMinecraftFilesPath(IniReadValue("VPath", IniReadValue("Vlist", "Path")));
+
+                    t = tools.GetAllTheExistingVersion();
+
+
+                    vlist.SelectedIndex = int.Parse(IniReadValue("Vlist", "V"));
+
+                    NowV.Content = t[vlist.SelectedIndex].version;
+                }
+                else
+                {
+                    pathlist.SelectedIndex = 0;
+                }
+                if (DateTime.Now.Month.ToString() == "1" && DateTime.Now.DayOfYear.ToString() == "1")
+                {
+                    ThemeManager.Current.ChangeTheme(this, "Light.Red");
+                    await this.ShowMessageAsync("元旦快乐!!!", "新的一年开始啦!祝你,FSM和Minecraft越来越好！\n红包惊喜!!!将此页面截图至FSM交流总群,满20人作者会发一个大红包！");
+                }
+
+            }
+            catch
+            {
+
+            }
         }
-        
+
         public string wrtoken;
         public string wruuid;
         public string wrname;
@@ -2846,7 +3072,7 @@ namespace FSMLauncher_3
                     wrtoken = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(token.access_token)));
                     string refresh_token = token.refresh_token;
                     ///WR.SetValue("Atoken", refresh_token);
-                    WritePrivateProfileString("wr","Atoken",refresh_token, ZongW + @"\ConsoleW.qwq");
+                    WritePrivateProfileString("wr", "Atoken", refresh_token, ZongW + @"\ConsoleW.qwq");
 
                     await loading.CloseAsync();
 
@@ -2871,7 +3097,7 @@ namespace FSMLauncher_3
                 }
                 catch
                 {
-
+                    await loading.CloseAsync();
                 };
 
 
@@ -2894,6 +3120,7 @@ namespace FSMLauncher_3
         private void Tile_Click_9(object sender, RoutedEventArgs e)
         {
             IDTab.SelectedIndex = 1;
+            WritePrivateProfileString("Login", "LoginM", "1", FileS);
             loginmode = "offline";
         }
 
@@ -2904,6 +3131,7 @@ namespace FSMLauncher_3
                 IDTab.SelectedIndex = 2;
                 LB.Content = wrname;
                 loginmode = "wr";
+                WritePrivateProfileString("Login", "LoginM", "2", FileS);
             }
             else
             {
@@ -2921,6 +3149,7 @@ namespace FSMLauncher_3
                 IDTab.SelectedIndex = 2;
                 LB.Content = Mojangname;
                 loginmode = "mojang";
+                WritePrivateProfileString("Login", "LoginM", "0", FileS);
             }
             else
             {
@@ -2942,12 +3171,24 @@ namespace FSMLauncher_3
 
         }
         public static string[] NZDM = new string[8];
-
+        CurseForge CurseForge = new CurseForge();
+        ModCurseForge ModCurseForge = new ModCurseForge();
+        ModpackCurseForge ModPackCurseForge = new ModpackCurseForge();
+        ResourcePackCurseForge resourcepackcurseforge = new ResourcePackCurseForge();
+        WorldCurseForge MapCurseForge = new WorldCurseForge();
+        internal static string logs = null;
+        private void log(Game.Log log)
+        {
+            logs += log.Message + "\n";
+            Console.WriteLine(log.Message);
+        }
         private async void Button_Click_start(object sender, RoutedEventArgs e)
         {
             Random ra = new Random();
             SquareMinecraftLauncher.Minecraft.Game game = new SquareMinecraftLauncher.Minecraft.Game();//声明对象
-            var loading = await this.ShowProgressAsync("启动游戏", "正在启动游戏,请稍后\n" + "你知道吗？" + NZDM[ra.Next(0, 6)]);
+            game.LogEvent += new Game.LogDel(log);
+            game.ErrorEvent += new Game.ErrorDel(error);
+            var loading = await this.ShowProgressAsync("启动游戏", "正在启动游戏,请稍后\n" + "你知道吗？" + NZDM[ra.Next(0, 7)]);
             switch (loginmode)
             {
                 case "mojang":
@@ -2958,7 +3199,7 @@ namespace FSMLauncher_3
                             //var loading = await this.ShowProgressAsync("启动游戏", "正在启动游戏,请稍后\n"+"你知道吗？"+NZDM[ra.Next(0, 6)]);
                             loading.SetIndeterminate();
 
-                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), Mojangname, MojangUUID, MojangToken, JVM.Text+ " -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true", EY.Text);
+                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), Mojangname, MojangUUID, MojangToken, JVM.Text + " -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true", EY.Text);
                             await loading.CloseAsync();
 
                         }
@@ -3018,8 +3259,15 @@ namespace FSMLauncher_3
                         {
                             //var loading = await this.ShowProgressAsync("启动游戏", "正在启动游戏,请稍后\n" + "你知道吗？" + NZDM[ra.Next(0, 6)]);
                             loading.SetIndeterminate();
-                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), OfflineName.Text, JVM.Text + " -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true", EY.Text);
-
+                            if (SkinUUIDMC == "" || SkinUUIDMC == null)
+                            {
+                                await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), OfflineName.Text, "SkinUUID", "YUXUANSHILI", JVM.Text + " -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true", EY.Text);
+                            }
+                            else
+                            {
+                                await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), OfflineName.Text, SkinUUIDMC, "YUXUANSHILI", JVM.Text + " -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true", EY.Text);
+                            }
+                            //game.ErrorEvent += new Game.ErrorDel(error);//错误事件
                             await loading.CloseAsync();
                         }
                         catch (Exception ex)
@@ -3049,7 +3297,7 @@ namespace FSMLauncher_3
                             //var loading = await this.ShowProgressAsync("启动游戏", "正在启动游戏,请稍后\n" + "你知道吗？" + NZDM[ra.Next(0, 6)]);
                             loading.SetIndeterminate();
                             //MessageBox.Show(Y.GetValue("IP").ToString());
-                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), Yname, Yuuid, Ytoken, Y.GetValue("IP").ToString(), JVM.Text + " -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true", EY.Text, AuthenticationServerMode.yggdrasil);
+                            await game.StartGame(NowV.Content.ToString(), Java_list.Text, int.Parse(Bit.Text), Yname, Yuuid, Ytoken, IniReadValueW("wz", "IP"), JVM.Text + " -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true", EY.Text, AuthenticationServerMode.yggdrasil);
                             await loading.CloseAsync();
                         }
                         catch (Exception ex)
@@ -3101,9 +3349,19 @@ namespace FSMLauncher_3
                     }
                     break;
             }
+            //game.ErrorEvent += new Game.ErrorDel(error);//错误事件
 
         }
-
+        public void error(Game.Error error)
+        {
+            Dispatcher.Invoke((Action)async delegate ()
+            {
+                if (error.SeriousError != null)
+                {
+                    this.ShowModalMessageExternal("灾难性启动事故",error.SeriousError);
+                }
+            });
+        }
         private void Tile_Click_12(object sender, RoutedEventArgs e)
         {
 
@@ -3111,7 +3369,8 @@ namespace FSMLauncher_3
 
         private void Tile_Click_13(object sender, RoutedEventArgs e)
         {
-
+            Tab1.SelectedIndex = 9;
+            SkinTab.SelectedIndex = 1;
         }
 
         private void Tile_Click_14(object sender, RoutedEventArgs e)
@@ -3166,38 +3425,42 @@ namespace FSMLauncher_3
 
 
         }
-        private void OnLineI(object ob, EventArgs a)
+        private async void OnLineI(object ob, EventArgs a)
         {
-            
+
             string aa = DIYvar.xzItems[did1].xzwz;
             string bb = DIYvar.xzItems[did2].xzwz;
             string cc = DIYvar.xzItems[did3].xzwz;
             string dd = DIYvar.xzItems[did4].xzwz;
             if (aa == "完成" && bb == "完成" && cc == "完成" && dd == "完成")
             {
-                Tab1.SelectedIndex = 3;
-                Tab1.SelectedIndex = 3;
-                Tab1.SelectedIndex = 3;
-                Tab1.SelectedIndex = 3;
-                Tab1.SelectedIndex = 3;
-                Tab1.SelectedIndex = 3;
-                aa = "0";
-                bb = "0";
-                cc = "0";
-                dd = "0";
-                Tab1.SelectedIndex = 3;
                 ONLINEW.Stop();
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(2333);
+                });
                 Tab1.SelectedIndex = 3;
-                ONLINEW.Stop();
-                ONLINEW.Stop();
-                ONLINEW.Stop();
-                ONLINEW.Stop();
                 Tab1.SelectedIndex = 3;
-                ONLINEW.Stop();
+                Tab1.SelectedIndex = 3;
+                Tab1.SelectedIndex = 3;
+                Tab1.SelectedIndex = 3;
+                Tab1.SelectedIndex = 3;
+                Tab1.SelectedIndex = 3;
+                //ONLINEW.Stop();
+                //ONLINEW.Stop();
+                //ONLINEW.Stop();
+                //ONLINEW.Stop();
+                Tab1.SelectedIndex = 3;
+                //ONLINEW.Stop();
+                Tab1.SelectedIndex = 3;
+                Tab1.SelectedIndex = 3;
+                Tab1.SelectedIndex = 3;
+                Tab1.SelectedIndex = 3;
+                Tab1.SelectedIndex = 3;
                 Tab1.SelectedIndex = 3;
             }
 
-            JarTimerBool = false;
+            //JarTimerBool = false;
 
 
         }
@@ -3238,6 +3501,8 @@ namespace FSMLauncher_3
             }
         }
         Thickness thick = new Thickness();
+        CurseForgeInterface ModCure = new ModCurseForge();//声明对象
+        CurseForgeItem CurseForgeItem = new CurseForgeItem();
         //OSMessage OSMM = new OSMessage();
         private async void Button_Click_13(object sender, RoutedEventArgs e)
         {
@@ -3258,7 +3523,7 @@ namespace FSMLauncher_3
                 {
                     Thread.Sleep(1898);
                 });
-                
+
                 OSM.BeginAnimation(WidthProperty, OSMessage(336, 0, 0.8));
             }
             catch
@@ -3388,8 +3653,8 @@ namespace FSMLauncher_3
             {
                 case "mojang":
                     loginmode = "";
-                    WritePrivateProfileString("Mojang", "Mail", "", ZongW+@"\ConsoleW.qwq");
-                    WritePrivateProfileString("Mojang", "PassWord", "", ZongW+@"\ConsoleW.qwq");
+                    WritePrivateProfileString("Mojang", "Mail", "", ZongW + @"\ConsoleW.qwq");
+                    WritePrivateProfileString("Mojang", "PassWord", "", ZongW + @"\ConsoleW.qwq");
                     ///Mojang.DeleteValue("Mail");
                     ///Mojang.DeleteValue("PassWord");
                     IDTab.SelectedIndex = 0;
@@ -3400,8 +3665,8 @@ namespace FSMLauncher_3
                     break;
                 case "wr":
                     loginmode = "";
-                   WritePrivateProfileString("wr", "Atoken", "", ZongW + @"\ConsoleW.qwq");
-                 ///WR.DeleteValue("Atoken");
+                    WritePrivateProfileString("wr", "Atoken", "", ZongW + @"\ConsoleW.qwq");
+                    ///WR.DeleteValue("Atoken");
                     IDTab.SelectedIndex = 3;
                     wryes = "";
                     wrname = "";
@@ -3476,7 +3741,7 @@ namespace FSMLauncher_3
             }
             catch
             {
-
+                await loading.CloseAsync();
             }
 
         }
@@ -3495,6 +3760,7 @@ namespace FSMLauncher_3
         {
             offlinename = OfflineName.Text;
             loginmode = "offline";
+            WritePrivateProfileString("OffLine", "ID", OfflineName.Text, ZongW + @"\ConsoleW.qwq");
         }
 
         private void Tile_Click_16(object sender, RoutedEventArgs e)
@@ -3626,7 +3892,7 @@ namespace FSMLauncher_3
 
         private async void Tile_Click_17(object sender, RoutedEventArgs e)
         {
-            if(inlite == 1 || infab == 1)
+            if (inlite == 1 || infab == 1)
             {
                 await this.ShowMessageAsync("不能进行Optifine安装", "Optifine与Fabric，LiteLoader不兼容", MessageDialogStyle.Affirmative);
             }
@@ -3641,16 +3907,16 @@ namespace FSMLauncher_3
                     string aw = mcVersionLists[MCV.SelectedIndex].version;
                     opp = await tools.GetOptiFineList(aw);
                     // sort forge versions
-                    
+
 
                     foreach (var i in opp)
                     {
                         OptifineList.Items.Add(i.filename);
                     }
-                   
+
                     DTB.SelectedIndex = 2;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -3681,8 +3947,15 @@ namespace FSMLauncher_3
             dialog.Description = "请选择.minecraft文件夹";
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                pathlist.Items.Add(dialog.SelectedPath);
-            }
+                //pathlist.Items.Add(dialog.SelectedPath);
+                List<PathItem> user1 = new List<PathItem>();
+
+                PathItem user = new PathItem();
+                // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                user.Path.Content = dialog.SelectedPath;
+                pathlist.Items.Add(user);
+                //pathlist.ItemsSource = user1.ToArray();
+            }  
             try
             {
 
@@ -3701,9 +3974,9 @@ namespace FSMLauncher_3
             // vlist.Items.Clear();
 
             AllTheExistingVersion[] t = new AllTheExistingVersion[0];
-
-
-
+            //tools.SetMinecraftFilesPath(dminecraft_text.Text);
+            //AllTheExistingVersion[] t = tools.GetAllTheExistingVersion();
+            
             try
             {
                 if (pathlist.SelectedIndex == 0)
@@ -3714,17 +3987,50 @@ namespace FSMLauncher_3
                     //List<DoItem> item1 = new List<DoItem>();
 
 
-
+                    string forge = null, Lite = null, Op = null, fab = null;
                     //DIYvar.l = item1;
 
                     List<DoItem> user1 = new List<DoItem>();
                     for (int i = 0; i < t.Length; i++)
                     {
                         DoItem user = new DoItem();
-                        user.DverV.Content = t[i].version;
+                        if (tools.ForgeExist(t[i].version, ref forge))
+                        {
+                            BitmapImage bi = new BitmapImage();
+                            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                            bi.BeginInit();
+                            bi.UriSource = new Uri(@"\Image\20140521134310.png", UriKind.RelativeOrAbsolute);
+                            bi.EndInit();
+                            user.DverV.Content = t[i].version;
+                            user.Dimage.Source = bi;
+                        }
+                        else if (tools.OptifineExist(t[i].version, ref Op))
+                        {
+                            BitmapImage bi = new BitmapImage();
+                            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                            bi.BeginInit();
+                            bi.UriSource = new Uri(@"\Image\OptifineLogo.png", UriKind.RelativeOrAbsolute);
+                            bi.EndInit();
+                            user.DverV.Content = t[i].version;
+                            user.Dimage.Source = bi;
+                        }
+                        else if (tools.FabricExist(t[i].version, ref fab))
+                        {
+                            BitmapImage bi = new BitmapImage();
+                            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                            bi.BeginInit();
+                            bi.UriSource = new Uri(@"\Image\Fabric.png", UriKind.RelativeOrAbsolute);
+                            bi.EndInit();
+                            user.DverV.Content = t[i].version;
+                            user.Dimage.Source = bi;
+                        }
+                        else
+                        {
+                            user.DverV.Content = t[i].version;
+                        }
                         user1.Add(user);
                     }
-                    DIYvar.lw = user1;
+                    // DIYvar.lw = user1;
                     vlist.ItemsSource = user1.ToArray();
 
 
@@ -3732,7 +4038,7 @@ namespace FSMLauncher_3
                 else
                 {
                     WritePrivateProfileString("Vlist", "Path", pathlist.SelectedIndex.ToString(), File_);
-                    string mcPath = (sender as ListBox).SelectedItem.ToString();
+                    string mcPath = (pathlist.SelectedItem as PathItem).Path.Content.ToString();
                     if (mcPath == "")
                     {
                         vlist.ItemsSource = "找不到任何版本";
@@ -3742,59 +4048,97 @@ namespace FSMLauncher_3
                         tools.SetMinecraftFilesPath(mcPath);
                         t = tools.GetAllTheExistingVersion();
                         List<DoItem> user1 = new List<DoItem>();
+                        string forge = null, Lite = null, Op = null , fab = null;
                         for (int i = 0; i < t.Length; i++)
                         {
 
                             DoItem user = new DoItem();
-                            user.DverV.Content = t[i].version;
+                            if (tools.ForgeExist(t[i].version, ref forge))
+                            {
+                                BitmapImage bi = new BitmapImage();
+                                // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                                bi.BeginInit();
+                                bi.UriSource = new Uri(@"\Image\20140521134310.png", UriKind.RelativeOrAbsolute);
+                                bi.EndInit();
+                                user.DverV.Content = t[i].version;
+                                user.Dimage.Source = bi;
+                            }else if(tools.OptifineExist(t[i].version, ref Op))
+                            {
+                                BitmapImage bi = new BitmapImage();
+                                // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                                bi.BeginInit();
+                                bi.UriSource = new Uri(@"\Image\OptifineLogo.png", UriKind.RelativeOrAbsolute);
+                                bi.EndInit();
+                                user.DverV.Content = t[i].version;
+                                user.Dimage.Source = bi;
+                            }
+                            else if (tools.FabricExist(t[i].version, ref fab))
+                            {
+                                BitmapImage bi = new BitmapImage();
+                                // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                                bi.BeginInit();
+                                bi.UriSource = new Uri(@"\Image\Fabric.png", UriKind.RelativeOrAbsolute);
+                                bi.EndInit();
+                                user.DverV.Content = t[i].version;
+                                user.Dimage.Source = bi;
+                            }
+                            else
+                            {
+                                user.DverV.Content = t[i].version;
+                            }
                             user1.Add(user);
                         }
-                        DIYvar.lw = user1;
+                        // DIYvar.lw = user1;
                         vlist.ItemsSource = user1.ToArray();
                     }
 
                 }
                 // string mcPath = (sender as ListBox).SelectedItem.ToString();
-
-
             }
             catch (Exception ex)
             {
-
+                vlist.ItemsSource = "";
             }
+            
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (pathlist.SelectedIndex == 0)
+            try
             {
-                MinecraftDownload minecraft = new MinecraftDownload();
-                AllTheExistingVersion[] t = new AllTheExistingVersion[0];
-                string mcPath = (pathlist.SelectedItem as TextBlock).Text;
-                tools.SetMinecraftFilesPath(mcPath);
-                t = tools.GetAllTheExistingVersion();
-                String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
-                WritePrivateProfileString("Vlist", "V", vlist.SelectedIndex.ToString(), File_);
+                if (pathlist.SelectedIndex == 0)
+                {
+                    MinecraftDownload minecraft = new MinecraftDownload();
+                    AllTheExistingVersion[] t = new AllTheExistingVersion[0];
+                    string mcPath = (pathlist.SelectedItem as PathItem).Path.Content.ToString();
+                    tools.SetMinecraftFilesPath(mcPath);
+                    t = tools.GetAllTheExistingVersion();
+                    String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
+                    WritePrivateProfileString("Vlist", "V", vlist.SelectedIndex.ToString(), File_);
 
 
-                NowV.Content = t[vlist.SelectedIndex].version;
-                Tab1.SelectedIndex = 0;
+                    NowV.Content = t[vlist.SelectedIndex].version;
+                    Tab1.SelectedIndex = 0;
+                }
+                else
+                {
+                    MinecraftDownload minecraft = new MinecraftDownload();
+                    AllTheExistingVersion[] t = new AllTheExistingVersion[0];
+                    string mcPath = (pathlist.SelectedItem as PathItem).Path.Content.ToString();
+                    tools.SetMinecraftFilesPath(mcPath);
+                    t = tools.GetAllTheExistingVersion();
+                    String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
+                    WritePrivateProfileString("Vlist", "V", vlist.SelectedIndex.ToString(), File_);
+
+
+                    NowV.Content = t[vlist.SelectedIndex].version;
+                    Tab1.SelectedIndex = 0;
+                }
             }
-            else
+            catch
             {
-                MinecraftDownload minecraft = new MinecraftDownload();
-                AllTheExistingVersion[] t = new AllTheExistingVersion[0];
-                string mcPath = (pathlist as ListBox).SelectedItem.ToString();
-                tools.SetMinecraftFilesPath(mcPath);
-                t = tools.GetAllTheExistingVersion();
-                String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM\FSM.slx";
-                WritePrivateProfileString("Vlist", "V", vlist.SelectedIndex.ToString(), File_);
 
-
-                NowV.Content = t[vlist.SelectedIndex].version;
-                Tab1.SelectedIndex = 0;
             }
-
 
 
 
@@ -3833,7 +4177,7 @@ namespace FSMLauncher_3
 
         private void JVM_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            WritePrivateProfileString("JVM", "JVMW", EY.Text, FileS);
         }
 
         private void Button_Click_16(object sender, RoutedEventArgs e)
@@ -3870,6 +4214,7 @@ namespace FSMLauncher_3
                 IDTab.SelectedIndex = 4;
                 JS.Text = Yname;
                 loginmode = "y";
+                WritePrivateProfileString("Login", "LoginM", "4", FileS);
             }
             else
             {
@@ -3906,7 +4251,7 @@ namespace FSMLauncher_3
                 Yyes = "888";
 
             }
-            catch (SquareMinecraftLauncherException ex)
+            catch (Exception ex)
             {
                 await this.ShowMessageAsync("登录失败", ex.Message);
             }
@@ -3963,12 +4308,13 @@ namespace FSMLauncher_3
 
         private void rams_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Bit.Text = rams.Value.ToString();
+            
         }
 
         private void Bit_TextChanged(object sender, TextChangedEventArgs e)
         {
             //rams.Value = double.Parse(Bit.Text);
+            WritePrivateProfileString("RAM", "RAMW", Bit.Text, FileS);
         }
         public static int iddd = 0;
         internal int Downloadw(string path, string ly, string url)
@@ -4011,15 +4357,15 @@ namespace FSMLauncher_3
                     foreach (var i in File)
                     {
                         int aa = Download(i.path, "补全", i.Url);
-                        
+                        //MessageBox.Show("w");
                     }
                     //libraries2 = sz.id;
                     return false;
                 }
 
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -4194,6 +4540,7 @@ namespace FSMLauncher_3
         {
             try
             {
+                Tab1.SelectedIndex = 8;
                 tools.DownloadSourceInitialization(QJDown);
                 MCDownload download = MinecraftDownload.MCjarDownload(mcVersionLists[MCV.SelectedIndex].version);
                 JarID = Download(download.path, "", download.Url);
@@ -4203,7 +4550,7 @@ namespace FSMLauncher_3
                 Jarw = Core5.timer(MCjarInstall, 5555);
                 Jarw.Start();
                 JarTimerBool = true;
-                Tab1.SelectedIndex = 8;
+
 
 
                 ///以上是Asset补全
@@ -4227,17 +4574,17 @@ namespace FSMLauncher_3
        // static int logpro;
         public async void AssetDownload_DownloadProgressChanged(AssetDownload.DownloadIntermation Log)
         {
-            
+            // MessageBox.Show("2");
             Console.WriteLine(Log.FinishFile + "/" + Log.AllFile + "  " + Log.Progress + "  " + Log.Speed);
 
             this.Dispatcher.Invoke(new Action(delegate { DownPro.Value = Log.Progress; }));
             if (Log.Progress == 100)
             {
-                
+
 
 
                 this.Dispatcher.Invoke(new Action(delegate { Tab1.SelectedIndex = 0; }));
-                
+
             }
 
 
@@ -4270,12 +4617,12 @@ namespace FSMLauncher_3
                             ///Lod.SetIndeterminate();
                             //安装optifine和Forge
                             ddd = mcd.ForgeDownload(mcVersionLists[MCV.SelectedIndex].version, ForgeVer);
-                            
+
                             bbb = Download(ddd.path, "Forge", ddd.Url);
                             UPDATEW = Core5.timer(OptifineandForgeI, 5555);
                             UPDATEW.Start();
-                            
-                            
+
+
                         }
                         else
                         {
@@ -4285,9 +4632,9 @@ namespace FSMLauncher_3
                             ddd = mcd.ForgeDownload(mcVersionLists[MCV.SelectedIndex].version, ForgeVer);
                             await tools.ForgeInstallation(ddd.path, mcVersionLists[MCV.SelectedIndex].version, Java_list.Text);
                             bbb = Download(ddd.path, "Forge", ddd.Url);
-                            UPDATEW = Core5.timer(ForgeI,5555);
+                            UPDATEW = Core5.timer(ForgeI, 5555);
                             UPDATEW.Start();
-                            
+
                         }
                     }
                     else if (infab == 1)
@@ -4300,7 +4647,7 @@ namespace FSMLauncher_3
 
                         await libraries(mcVersionLists[MCV.SelectedIndex].version);
 
-                        await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
+                        await assetDownload.BuildAssetDownload(DOWNLOADTHREAD, mcVersionLists[MCV.SelectedIndex].version);//构建下载
                     }
                     else if (inlite == 1)
                     {
@@ -4318,35 +4665,36 @@ namespace FSMLauncher_3
                         //UPDATEW = Core5.timer(OptifineI, 5555);
                         //UPDATEW.Start();
                         //OptiFineList[] opt = new OptiFineList[0];
-                        await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, optpatch);
                         
-                       //     AssetDownload assetDownload = new AssetDownload();//asset下载类
-                         //   assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
+                        ddd = mcd.DownloadOptifine(mcVersionLists[MCV.SelectedIndex].version,OptifineList.SelectedItem.ToString());
+                        bbb = Download(System.AppDomain.CurrentDomain.BaseDirectory + @"SquareMinecraftLauncher\OptiFine\"+ OptifineList.SelectedItem.ToString(), "Optifine", ddd.Url);
+                        UPDATEW = Core5.timer(OptifineI, 5555);
+                        UPDATEW.Start();
 
-//                            await libraries(mcVersionLists[MCV.SelectedIndex].version);
 
-                           // await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
-                        
-                        
-                        
-                        
+
+
+
+
+
 
                     }
                     else
                     {
                         Jarw.Stop();
+                        //MessageBox.Show("1");
                         AssetDownload assetDownload = new AssetDownload();//asset下载类
                         assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
 
                         await libraries(mcVersionLists[MCV.SelectedIndex].version);
 
-                        await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
+                        await assetDownload.BuildAssetDownload(128, mcVersionLists[MCV.SelectedIndex].version);//构建下载
                     }
                     //tools.DownloadSourceInitialization(DownloadSource.MCBBSSource);
 
-                    
+
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -4356,21 +4704,84 @@ namespace FSMLauncher_3
 
         }
         int bbb;
+        public class HttpUitls
+        {
+            public static string Get(string Url)
+            {
+                //System.GC.Collect();
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+                request.Proxy = null;
+                request.KeepAlive = false;
+                request.Method = "GET";
+                request.ContentType = "application/json; charset=UTF-8";
+                request.AutomaticDecompression = DecompressionMethods.GZip;
+
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                Stream myResponseStream = response.GetResponseStream();
+                StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.UTF8);
+                string retString = myStreamReader.ReadToEnd();
+
+                myStreamReader.Close();
+                myResponseStream.Close();
+
+                if (response != null)
+                {
+                    response.Close();
+                }
+                if (request != null)
+                {
+                    request.Abort();
+                }
+
+                return retString;
+            }
+
+            public static string Post(string Url, string Data, string Referer)
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+                request.Method = "POST";
+                request.Referer = Referer;
+                byte[] bytes = Encoding.UTF8.GetBytes(Data);
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = bytes.Length;
+                Stream myResponseStream = request.GetRequestStream();
+                myResponseStream.Write(bytes, 0, bytes.Length);
+
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                StreamReader myStreamReader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                string retString = myStreamReader.ReadToEnd();
+
+                myStreamReader.Close();
+                myResponseStream.Close();
+
+                if (response != null)
+                {
+                    response.Close();
+                }
+                if (request != null)
+                {
+                    request.Abort();
+                }
+                return retString;
+            }
+
+        }
         public async void OptifineI(object ob, EventArgs a)
         {
             if (DIYvar.xzItems[bbb].xzwz == "完成")
             {
                 UPDATEW.Stop();
                 UPDATEW.Stop();
-                OptiFineList[] opt = new OptiFineList[0];
-                await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, opt[0].patch);
-                AssetDownload assetDownload = new AssetDownload();//asset下载类
-                assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
+                if (await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, optpatch))
+                {
+                    AssetDownload assetDownload = new AssetDownload();//asset下载类
+                    assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
 
-                await libraries(mcVersionLists[MCV.SelectedIndex].version);
+                    await libraries(mcVersionLists[MCV.SelectedIndex].version);
 
-                await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
-                
+                    await assetDownload.BuildAssetDownload(DOWNLOADTHREAD, mcVersionLists[MCV.SelectedIndex].version);//构建下载
+                }
+
             }
         }
         public async void ForgeI(object ob, EventArgs a)
@@ -4385,7 +4796,7 @@ namespace FSMLauncher_3
 
                 await libraries(mcVersionLists[MCV.SelectedIndex].version);
 
-                await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
+                await assetDownload.BuildAssetDownload(DOWNLOADTHREAD, mcVersionLists[MCV.SelectedIndex].version);//构建下载
             }
         }
         public async void OptifineandForgeI(object ob, EventArgs a)
@@ -4412,7 +4823,7 @@ namespace FSMLauncher_3
 
                 await libraries(mcVersionLists[MCV.SelectedIndex].version);
 
-                await assetDownload.BuildAssetDownload(5, mcVersionLists[MCV.SelectedIndex].version);//构建下载
+                await assetDownload.BuildAssetDownload(DOWNLOADTHREAD, mcVersionLists[MCV.SelectedIndex].version);//构建下载
             }
         }
         private async void Button_Click_21(object sender, RoutedEventArgs e)
@@ -4500,42 +4911,87 @@ namespace FSMLauncher_3
             }
         }
         public short lj = 1;
+        String MFLJ;
         private async void Button_Click_23(object sender, RoutedEventArgs e)
         {
-            
-            if (lj == 1)
+            if (IniReadValue("ONLINE", "Server") == "GZ")
             {
-                WritePrivateProfileString("common", "server_addr", "sh.qwq.one", FileOnlineServer + @"\frpc.ini");
-                WritePrivateProfileString("common", "server_port", "7000", FileOnlineServer + @"\frpc.ini");
-                WritePrivateProfileString("common", "dns", "223.5.5.5", FileOnlineServer + @"\frpc.ini");
-               //WritePrivateProfileString("common", "token", decStr, FileOnlineServer + @"\frpc.ini");
-                WritePrivateProfileString(onlinezijiqq, "type", "stcp", FileOnlineServer + @"\frpc.ini");
-                WritePrivateProfileString(onlinezijiqq, "sk", "12345678", FileOnlineServer + @"\frpc.ini");
-                WritePrivateProfileString(onlinezijiqq, "local_port", onlineduankou, FileOnlineServer + @"\frpc.ini");
-                WritePrivateProfileString(onlinezijiqq, "remote_port", "32423", FileOnlineServer + @"\frpc.ini");
-                ProcessStartInfo info = new ProcessStartInfo();
-                info.FileName = FileOnlineServer + @"\StartForFSM.exe";
-                info.Arguments = "";
-                info.WindowStyle = ProcessWindowStyle.Hidden;
-                Process pro = Process.Start(info);
-                //pro.WaitForExit();
-                Stat.Visibility = Visibility.Hidden;
-                await this.ShowMessageAsync("房间创建完毕", "复制链接给他人加入吧!");
-                OpenOnline.Content = "复制链接";
-                lj = 2;
+                WebClient MyWebClient = new WebClient();
+                MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                StringBuilder sb = new StringBuilder();
+                String pageData = MyWebClient.DownloadString("http://119.29.66.223/"); //从指定网站下载数据
+                pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://119.29.66.223/"));
+                byte[] buff = Convert.FromBase64String(pageData);
+                string decStr = System.Text.Encoding.Default.GetString(buff);
+                if (lj == 1)
+                {
+                    WritePrivateProfileString("common", "server_addr", "gz1.qwq.one", FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString("common", "server_port", "7000", FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString("common", "dns", "223.5.5.5", FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString("common", "token", decStr, FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString(onlinezijiqq, "type", IniReadValue("ONLINE","TCPP2P"), FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString(onlinezijiqq, "sk", "12345678", FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString(onlinezijiqq, "local_port", onlineduankou, FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString(onlinezijiqq, "remote_port", "32423", FileOnlineServer + @"\frpc.ini");
+                    ProcessStartInfo info = new ProcessStartInfo();
+                    info.FileName = FileOnlineServer + @"\StartForFSM.exe";
+                    info.Arguments = "";
+                    info.WindowStyle = ProcessWindowStyle.Hidden;
+                    Process pro = Process.Start(info);
+                    //pro.WaitForExit();
+                    Stat.Visibility = Visibility.Hidden;
+                    await this.ShowMessageAsync("房间创建完毕(广州服务)", "复制链接给他人加入吧!");
+                    OpenOnline.Content = "复制链接";
+                    lj = 2;
+                }
+                else
+                {
+
+                    byte[] b = System.Text.Encoding.Default.GetBytes(onlinezijiqq + "|" + onlinename);
+                    MFLJ = Convert.ToBase64String(b);
+                    Clipboard.SetDataObject(Convert.ToBase64String(b));
+                    await this.ShowMessageAsync("已复制链接", "分享给他人吧!");
+                }
             }
             else
             {
+                WebClient MyWebClient = new WebClient();
+                MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                StringBuilder sb = new StringBuilder();
+                String pageData = MyWebClient.DownloadString("http://1.116.201.220/"); //从指定网站下载数据
+                pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://1.116.201.220/"));
+                byte[] buff = Convert.FromBase64String(pageData);
+                string decStr = System.Text.Encoding.Default.GetString(buff);
+                if (lj == 1)
+                {
+                    WritePrivateProfileString("common", "server_addr", "sh.qwq.one", FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString("common", "server_port", "7000", FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString("common", "dns", "223.5.5.5", FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString("common", "token", decStr, FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString(onlinezijiqq, "type", IniReadValue("ONLINE", "TCPP2P"), FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString(onlinezijiqq, "sk", "12345678", FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString(onlinezijiqq, "local_port", onlineduankou, FileOnlineServer + @"\frpc.ini");
+                    WritePrivateProfileString(onlinezijiqq, "remote_port", "32423", FileOnlineServer + @"\frpc.ini");
+                    ProcessStartInfo info = new ProcessStartInfo();
+                    info.FileName = FileOnlineServer + @"\StartForFSM.exe";
+                    info.Arguments = "";
+                    info.WindowStyle = ProcessWindowStyle.Hidden;
+                    Process pro = Process.Start(info);
+                    //pro.WaitForExit();
+                    Stat.Visibility = Visibility.Hidden;
+                    await this.ShowMessageAsync("房间创建完毕", "复制链接给他人加入吧!");
+                    OpenOnline.Content = "复制链接";
+                    lj = 2;
+                }
+                else
+                {
 
-                byte[] b = System.Text.Encoding.Default.GetBytes(onlinezijiqq + "|" + onlinename);
-
-                Clipboard.SetDataObject(Convert.ToBase64String(b));
-                await this.ShowMessageAsync("已复制链接", "分享给他人吧!");
+                    byte[] b = System.Text.Encoding.Default.GetBytes(onlinezijiqq + "|" + onlinename);
+                    MFLJ = Convert.ToBase64String(b);
+                    Clipboard.SetDataObject(Convert.ToBase64String(b));
+                    await this.ShowMessageAsync("已复制链接", "分享给他人吧!");
+                }
             }
-
-
-
-
         }
         public static bool StartProcess(string filename, string[] args)
         {
@@ -4570,40 +5026,107 @@ namespace FSMLauncher_3
 
         private async void Button_Click_25(object sender, RoutedEventArgs e)
         {
-            try
+            if (IniReadValue("ONLINE", "Server") == "GZ")
             {
-                
-                String yqm = await this.ShowInputAsync("请输入联机邀请码", "对方发来的邀请码");
-                String xcqq = await this.ShowInputAsync("请输入你的QQ", "请注意，");
-                byte[] c = Convert.FromBase64String(yqm);
-                String ww = System.Text.Encoding.Default.GetString(c);
-                after = ww.Split(new char[] { '|' });
-                fjm.Content = "您已加入房间:" + after[1];
-                onlineduifangqq = after[0];
-                WritePrivateProfileString("common", "server_addr", "sh.qwq.one", FileOnlineKEHU + @"\frpc.ini");
-                WritePrivateProfileString("common", "server_port", "7000", FileOnlineKEHU + @"\frpc.ini");
-                //WritePrivateProfileString("common", "token", decStr, FileOnlineKEHU + @"\frpc.ini");
-                WritePrivateProfileString("common", "dns", "223.5.5.5", FileOnlineKEHU + @"\frpc.ini");
-                WritePrivateProfileString(xcqq, "server_name", onlineduifangqq, FileOnlineKEHU + @"\frpc.ini");
-                WritePrivateProfileString(xcqq, "type", "stcp", FileOnlineKEHU + @"\frpc.ini");
-                WritePrivateProfileString(xcqq, "bind_addr", "127.0.0.1", FileOnlineKEHU + @"\frpc.ini");
-                WritePrivateProfileString(xcqq, "bind_port", "32423", FileOnlineKEHU + @"\frpc.ini");
-                WritePrivateProfileString(xcqq, "role", "visitor", FileOnlineKEHU + @"\frpc.ini");
-                WritePrivateProfileString(xcqq, "sk", "12345678", FileOnlineKEHU + @"\frpc.ini");
-                ProcessStartInfo info = new ProcessStartInfo();
-                info.FileName = FileOnlineKEHU + @"\StartForFSM.exe";
-                info.Arguments = "";
-                info.WindowStyle = ProcessWindowStyle.Hidden;
-                Process pro = Process.Start(info);
-                //pro.WaitForExit();
-                OpenOnline.Visibility = Visibility.Hidden;
-                dfjr.Visibility = Visibility.Hidden;
-                drfz.Visibility = Visibility.Visible;
-                await this.ShowMessageAsync("连接成功", "进入游戏吧!");
+                try
+                {
+                    WebClient MyWebClient = new WebClient();
+                    MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                    StringBuilder sb = new StringBuilder();
+                    String pageData = MyWebClient.DownloadString("http://119.29.66.223/"); //从指定网站下载数据
+                    pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://119.29.66.223/"));
+                    byte[] buff = Convert.FromBase64String(pageData);
+                    string decStr = System.Text.Encoding.Default.GetString(buff);
+                    String yqm = await this.ShowInputAsync("请输入联机邀请码", "对方发来的邀请码");
+                    if(yqm == MFLJ)
+                    {
+                        this.ShowModalMessageExternal("真好玩", "获得成就:我连我自己\n奥利给!!!!!!");
+                    }
+                    else
+                    {
+                        String xcqq = await this.ShowInputAsync("请输入你的QQ", "请注意，");
+                        byte[] c = Convert.FromBase64String(yqm);
+                        String ww = System.Text.Encoding.Default.GetString(c);
+                        after = ww.Split(new char[] { '|' });
+                        fjm.Content = "您已加入房间:" + after[1];
+                        onlineduifangqq = after[0];
+                        WritePrivateProfileString("common", "server_addr", "gz1.qwq.one", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString("common", "server_port", "7000", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString("common", "token", decStr, FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString("common", "dns", "223.5.5.5", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "server_name", onlineduifangqq, FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "type", IniReadValue("ONLINE", "TCPP2P"), FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "bind_addr", "127.0.0.1", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "bind_port", "32423", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "role", "visitor", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "sk", "12345678", FileOnlineKEHU + @"\frpc.ini");
+                        ProcessStartInfo info = new ProcessStartInfo();
+                        info.FileName = FileOnlineKEHU + @"\StartForFSM.exe";
+                        info.Arguments = "";
+                        info.WindowStyle = ProcessWindowStyle.Hidden;
+                        Process pro = Process.Start(info);
+                        //pro.WaitForExit();
+                        OpenOnline.Visibility = Visibility.Hidden;
+                        dfjr.Visibility = Visibility.Hidden;
+                        //drfz.Visibility = Visibility.Visible;
+                        await this.ShowMessageAsync("连接成功", "进入游戏吧!(若你或对方为校园网，有概率连接不成功，若连接不成功，请尝试用手机热点)");
+                    }
+                }
+                catch
+                {
+                    await this.ShowMessageAsync("连接失败", "您的邀请码错误");
+                }
             }
-            catch
+            else
             {
-                await this.ShowMessageAsync("连接失败", "您的邀请码错误");
+                try
+                {
+                    WebClient MyWebClient = new WebClient();
+                    MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                    StringBuilder sb = new StringBuilder();
+                    String pageData = MyWebClient.DownloadString("http://1.116.201.220/"); //从指定网站下载数据
+                    pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://1.116.201.220/"));
+                    byte[] buff = Convert.FromBase64String(pageData);
+                    string decStr = System.Text.Encoding.Default.GetString(buff);
+                    String yqm = await this.ShowInputAsync("请输入联机邀请码", "对方发来的邀请码");
+                    if(yqm == MFLJ)
+                    {
+                        this.ShowModalMessageExternal("真好玩","获得成就:我连我自己\n奥利给!!!!!!");
+                    }
+                    else
+                    {
+                        String xcqq = await this.ShowInputAsync("请输入你的QQ", "请注意，");
+                        byte[] c = Convert.FromBase64String(yqm);
+                        String ww = System.Text.Encoding.Default.GetString(c);
+                        after = ww.Split(new char[] { '|' });
+                        fjm.Content = "您已加入房间:" + after[1];
+                        onlineduifangqq = after[0];
+                        WritePrivateProfileString("common", "server_addr", "sh.qwq.one", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString("common", "server_port", "7000", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString("common", "token", decStr, FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString("common", "dns", "223.5.5.5", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "server_name", onlineduifangqq, FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "type", IniReadValue("ONLINE", "TCPP2P"), FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "bind_addr", "127.0.0.1", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "bind_port", "32423", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "role", "visitor", FileOnlineKEHU + @"\frpc.ini");
+                        WritePrivateProfileString(xcqq, "sk", "12345678", FileOnlineKEHU + @"\frpc.ini");
+                        ProcessStartInfo info = new ProcessStartInfo();
+                        info.FileName = FileOnlineKEHU + @"\StartForFSM.exe";
+                        info.Arguments = "";
+                        info.WindowStyle = ProcessWindowStyle.Hidden;
+                        Process pro = Process.Start(info);
+                        //pro.WaitForExit();
+                        OpenOnline.Visibility = Visibility.Hidden;
+                        dfjr.Visibility = Visibility.Hidden;
+                        //drfz.Visibility = Visibility.Visible;
+                        await this.ShowMessageAsync("连接成功", "进入游戏吧!");
+                    }
+                }
+                catch
+                {
+                    await this.ShowMessageAsync("连接失败", "您的邀请码错误");
+                }
             }
         }
 
@@ -4729,9 +5252,9 @@ namespace FSMLauncher_3
                     MaxForge.Content = "建议的Forge版本:" + b.ForgeVersion + " (点击选择)";
                     DTB.SelectedIndex = 1;
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
@@ -4794,9 +5317,9 @@ namespace FSMLauncher_3
                     }
                     DTB.SelectedIndex = 3;
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
@@ -4823,7 +5346,13 @@ namespace FSMLauncher_3
 
         private void Tile_Click_LXSkin(object sender, RoutedEventArgs e)
         {
-
+            //WPFSkin skin = new WPFSkin();
+            //skin.HorizontalAlignment = HorizontalAlignment.Left;
+            //skin.VerticalAlignment = VerticalAlignment.Center;
+            //skin.Margin = SkinGrid.Margin;
+            //SkinGrid.Children.Add(skin);
+            Tab1.SelectedIndex = 9;
+            SkinTab.SelectedIndex = 0;
         }
 
         private void Button_Click_XZJ(object sender, RoutedEventArgs e)
@@ -4865,7 +5394,7 @@ namespace FSMLauncher_3
         private void Button_Click_33(object sender, RoutedEventArgs e)
         {
             //Steel
-            WritePrivateProfileString("JSM","Color","Steel",FileS);
+            WritePrivateProfileString("JSM", "Color", "Steel", FileS);
             ThemeManager.Current.ChangeTheme(this, "Light.Steel");
         }
 
@@ -4883,16 +5412,16 @@ namespace FSMLauncher_3
             ThemeManager.Current.ChangeTheme(this, "Light.Olive");
         }
         public static string jiema(string s)
-      {
-          System.Text.RegularExpressions.CaptureCollection cs =
-             System.Text.RegularExpressions.Regex.Match(s, @"([01]{8})+").Groups[1].Captures;
-         byte[] data = new byte[cs.Count];
-         for (int i = 0; i<cs.Count; i++)
-         {
-             data[i] = Convert.ToByte(cs[i].Value, 2);
-         }
-         return Encoding.Unicode.GetString(data, 0, data.Length);
-         }
+        {
+            System.Text.RegularExpressions.CaptureCollection cs =
+               System.Text.RegularExpressions.Regex.Match(s, @"([01]{8})+").Groups[1].Captures;
+            byte[] data = new byte[cs.Count];
+            for (int i = 0; i < cs.Count; i++)
+            {
+                data[i] = Convert.ToByte(cs[i].Value, 2);
+            }
+            return Encoding.Unicode.GetString(data, 0, data.Length);
+        }
         public static string bianma(string s)
         {
             byte[] data = Encoding.Unicode.GetBytes(s);
@@ -4906,7 +5435,6 @@ namespace FSMLauncher_3
         }
         private void Button_Click_36(object sender, RoutedEventArgs e)
         {
-            
             
         }
 
@@ -4936,7 +5464,7 @@ namespace FSMLauncher_3
             {
                 case 0:
                     QJDown = DownloadSource.MCBBSSource;
-                    WritePrivateProfileString("DownLoad","Source","MCBBS",FileS);
+                    WritePrivateProfileString("DownLoad", "Source", "MCBBS", FileS);
                     break;
                 case 1:
                     QJDown = DownloadSource.bmclapiSource;
@@ -4978,16 +5506,16 @@ namespace FSMLauncher_3
                     MCVersionList[] mcvv = new MCVersionList[0];
                     LiteList.SelectedIndex = -1;
 
-                    
+
 
                     var a = await tools.GetLiteloaderList();
-                    
+
                     // sort forge versions
 
 
                     foreach (var i in a)
                     {
-                        LiteList.Items.Add("" + i.version+"——"+i.mcversion);
+                        LiteList.Items.Add("" + i.version + "——" + i.mcversion);
                     }
 
                     DTB.SelectedIndex = 4;
@@ -4999,14 +5527,729 @@ namespace FSMLauncher_3
             }
         }
 
-        private async void Button_Click_39(object sender, RoutedEventArgs e)
+        private void Button_Click_39(object sender, RoutedEventArgs e)
         {
-            
+            System.Diagnostics.Process.Start("https://afdian.net/@BaiBaoStudio");
         }
 
         private async void Button_Click_40(object sender, RoutedEventArgs e)
         {
             await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, optpatch);
+        }
+
+        private void Button_Click_41(object sender, RoutedEventArgs e)
+        {
+
+        }
+        KMCCC.Pro.Modules.MojangAPI.Statistics statistics = new KMCCC.Pro.Modules.MojangAPI.Statistics(0, 0, 0);
+        public void Skinw(object ob, EventArgs a)
+        {
+            if (DIYvar.xzItems[onlw].xzwz == "完成")
+            {
+                Jarw.Stop();
+                List<SkinList> item1 = new List<SkinList>();
+                SkinList item = new SkinList();
+                item.SkinNamew.Text = inputSkinName + "的皮肤";
+                System.Drawing.Point point = new System.Drawing.Point(8, 8);
+                System.Drawing.Size size = new System.Drawing.Size(8, 8);
+                Bitmap bitmap = new Bitmap(ZongSkin + @"\" + inputSkinName + @"\SkinY.png");
+                var i = crop(bitmap, new System.Drawing.Point(8, 8), new System.Drawing.Size(8, 8));
+                Zoom(i, 258, 258, out i, ZoomType.NearestNeighborInterpolation);
+                i.Save(ZongSkin + @"\" + inputSkinName + @"\SkinT.png");
+                System.Drawing.Image img = i;
+                BitmapImage bi = new BitmapImage();
+                // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                item.OffLineSkinImage.Source = BitmapToBitmapImage(i);
+                item1.Add(item);
+                OffLineSkinList.Items.Add(item);
+                WritePrivateProfileString("Skin", "List", OffLineSkinList.Items.Count.ToString(), ZongSkin + @"\SkinZ.Skin");
+                WritePrivateProfileString("Skin", OffLineSkinList.Items.Count.ToString(), inputSkinName + "|" + SkinUUID, ZongSkin + @"\SkinZ.Skin");
+            }
+        }
+        int onlw;
+        string inputSkinName;
+        string SkinUUID;
+        private async void Button_Click_42(object sender, RoutedEventArgs e)
+        {
+            inputSkinName = await this.ShowInputAsync("请输入正版玩家名", "输入后,您可以使用ta的皮肤");
+            try
+            {
+                //statistics = KMCCC.Pro.Modules.MojangAPI.MojangAPI.GetStatistics();
+                //MessageBox.Show(statistics.getTotal().ToString());
+                SkinUUID = KMCCC.Pro.Modules.MojangAPI.MojangAPI.NameToUUID(inputSkinName).ToString();
+                Directory.CreateDirectory(ZongSkin + @"\" + inputSkinName);
+                if (System.IO.File.Exists(ZongSkin + @"\SkinZ.Skin"))
+                {
+                    //存在文件
+                }
+                else
+                {
+                    //不存在文件
+                    using (File.Create(ZongSkin + @"\SkinZ.Skin")) ;
+                }
+                onlw = Download(ZongSkin + @"\" + inputSkinName + @"\SkinY.png", "", tools.GetMinecraftSkin(SkinUUID));
+                dlf.doSendMsg += new DownLoadFile.dlgSendMsg(SendMsgHander);
+                Jarw = Core5.timer(Skinw, 1000);
+                Jarw.Start();
+            }
+            catch (Exception ex)
+            {
+                await this.ShowMessageAsync("添加失败!", "没有该用户,错误信息:\n" + ex.Message);
+            }
+
+        }
+        public String SkinUUIDMC;
+        private void OffLineSkinList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int a = OffLineSkinList.SelectedIndex + 1;
+            after = IniReadValueS("Skin", a.ToString()).Split(new char[] { '|' });
+            SkinUUIDMC = after[1];
+            BitmapImage bi = new BitmapImage();
+            //BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+            bi.BeginInit();
+            bi.UriSource = new Uri(ZongSkin + @"\" + after[0] + @"\SkinT.png", UriKind.RelativeOrAbsolute);
+            bi.EndInit();
+            OFFLINEI.Source = bi;
+            WritePrivateProfileString("OffLine", "Skin", after[0] + "|" + after[1], ZongW + @"\ConsoleW.qwq");
+            //Skin3D.SkinFilePath = ZongSkin + @"\" + after[0] + @"\SkinY.png";
+            //Skin3D.SetSkin();
+        }
+        GameVersionLatestFilesItem[] gamevcurse = new GameVersionLatestFilesItem[0];
+        CategoriesItem cattecurse = new CategoriesItem();
+        AttachmentsItem attcurse = new AttachmentsItem();
+        CurseForgeInterface CurseForgeImap = new WorldCurseForge();
+        private async void Button_Click_43(object sender, RoutedEventArgs e)
+        {
+            var show = await this.ShowProgressAsync("正在获取列表", "请稍后...");
+            List<CurseList> item1 = new List<CurseList>();
+            try
+            {
+                switch (CurseBoBox.SelectedIndex)
+                {
+                    case 0:
+                        show.SetIndeterminate();
+                        var item = await ModCurseForge.popular();
+                        foreach (var i in item)
+                        {
+                            cattecurse = i.categories[0];
+                            attcurse = i.attachments[0];
+                            //gamevcurse = i.gameVersionLatestFiles[0];
+                            //CurseForgeListw.Items.Add(i.name);
+                            CurseList itemw = new CurseList();
+                            itemw.CurseName.Content = i.name;
+                            //item.Dimage.Source = new BitmapImage(new Uri("pack://application:,,,/Image/0E8348D8.PNG"));
+                            BitmapImage bi = new BitmapImage();
+                            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                            bi.BeginInit();
+                            bi.UriSource = new Uri(attcurse.thumbnailUrl, UriKind.RelativeOrAbsolute);
+                            itemw.CurseLB.Content = cattecurse.name;
+                            bi.EndInit();
+                            itemw.CurseImage.Source = bi;
+                            item1.Add(itemw);
+                        }
+                        CurseForgeListw.ItemsSource = item1;
+                        await show.CloseAsync();
+                        break;
+                    case 1:
+                        show.SetIndeterminate();
+                        var item2 = await ModPackCurseForge.popular();
+                        foreach (var i in item2)
+                        {
+                            cattecurse = i.categories[0];
+                            attcurse = i.attachments[0];
+                            //CurseForgeListw.Items.Add(i.name);
+                            CurseList itemw = new CurseList();
+                            itemw.CurseName.Content = i.name;
+                            //item.Dimage.Source = new BitmapImage(new Uri("pack://application:,,,/Image/0E8348D8.PNG"));
+                            BitmapImage bi = new BitmapImage();
+                            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                            bi.BeginInit();
+                            bi.UriSource = new Uri(attcurse.thumbnailUrl, UriKind.RelativeOrAbsolute);
+                            itemw.CurseLB.Content = cattecurse.name;
+                            bi.EndInit();
+                            itemw.CurseImage.Source = bi;
+                            item1.Add(itemw);
+                        }
+                        CurseForgeListw.ItemsSource = item1;
+                        await show.CloseAsync();
+                        break;
+                    case 2:
+                        show.SetIndeterminate();
+                        var item3 = await resourcepackcurseforge.popular();
+                        foreach (var i in item3)
+                        {
+                            cattecurse = i.categories[0];
+                            attcurse = i.attachments[0];
+                            //CurseForgeListw.Items.Add(i.name);
+                            CurseList itemw = new CurseList();
+                            itemw.CurseName.Content = i.name;
+                            //item.Dimage.Source = new BitmapImage(new Uri("pack://application:,,,/Image/0E8348D8.PNG"));
+                            BitmapImage bi = new BitmapImage();
+                            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                            bi.BeginInit();
+                            bi.UriSource = new Uri(attcurse.thumbnailUrl, UriKind.RelativeOrAbsolute);
+                            itemw.CurseLB.Content = cattecurse.name;
+                            bi.EndInit();
+                            itemw.CurseImage.Source = bi;
+                            item1.Add(itemw);
+                        }
+                        CurseForgeListw.ItemsSource = item1;
+                        await show.CloseAsync();
+                        break;
+                    case 3:
+                        show.SetIndeterminate();
+                        var item4 = await MapCurseForge.popular();
+                        foreach (var i in item4)
+                        {
+                            //cattecurse = i.categories[item4];
+                            attcurse = i.attachments[0];
+
+                            //MCDownload CurseDown = CurseForgeImap.download(item4[0].gameVersionLatestFiles[0]);//下载
+                            //CurseForgeListw.Items.Add(i.name);
+                            CurseList itemw = new CurseList();
+                            itemw.CurseName.Content = i.name;
+                            //item.Dimage.Source = new BitmapImage(new Uri("pack://application:,,,/Image/0E8348D8.PNG"));
+                            BitmapImage bi = new BitmapImage();
+                            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                            bi.BeginInit();
+                            bi.UriSource = new Uri(attcurse.thumbnailUrl, UriKind.RelativeOrAbsolute);
+                            itemw.CurseLB.Content = cattecurse.name;
+                            bi.EndInit();
+                            itemw.CurseImage.Source = bi;
+                            //Console.WriteLine(CurseDown.Url);
+                            item1.Add(itemw);
+                        }
+                        for (int i = 0; i < item4.Count; ++i)
+                        {
+                            //gamevcurse[i] = item4[i].gameVersionLatestFiles
+                        }
+
+                        CurseForgeListw.ItemsSource = item1;
+                        await show.CloseAsync();
+                        break;
+                    case -1:
+                        await show.CloseAsync();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                await show.CloseAsync();
+            }
+        }
+
+        private void Button_Click_CurseDown(object sender, RoutedEventArgs e)
+        {
+            CurseForgeListw.SelectedItem.ToString();
+        }
+
+        private void CurseForgeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //DTB.SelectedIndex = 6;
+            //for
+            //CurseVMC.ItemsSource = gamevcurse[CurseForgeListw.SelectedIndex].gameVersion;
+        }
+
+        private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        private void TabItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //WPFSkin skin = new WPFSkin();
+            //skin.HorizontalAlignment = HorizontalAlignment.Left;
+            //skin.VerticalAlignment = VerticalAlignment.Center;
+            //SkinGrid.Children.Add(skin);
+        }
+
+        private void EY_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            WritePrivateProfileString("EY", "EYW", EY.Text, FileS);
+        }
+
+        private void Ch(object sender, RoutedEventArgs e)
+        {
+            if (IniReadValue("ONLINE", "Server") == "GZ")
+            {
+                WritePrivateProfileString("ONLINE", "Server", "SH", FileS);
+            }
+            else
+            {
+                WritePrivateProfileString("ONLINE", "Server", "GZ", FileS);
+            }
+        }
+
+        private async void SetBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SetBox1.SelectedIndex == 0)
+            {
+                OnLineTab.SelectedIndex = 0;
+            }
+            else if (SetBox1.SelectedIndex == 1)
+            {
+                OnLineTab.SelectedIndex = 1;
+            }
+            else if (SetBox1.SelectedIndex == 2)
+            {
+                MetroDialogSettings set = new MetroDialogSettings();
+                set.AffirmativeButtonText = "我要加入房间";
+                set.FirstAuxiliaryButtonText = "我要创建房间";
+                set.NegativeButtonText = "我要购买高性能节点";
+                var a = await this.ShowMessageAsync("请选择模式", "普通联机是免费的,高性能联机是收费的\n高性能联机用于高峰期缓解免费联机\n高性能联机连接稍比免费联机性能高", MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, set);
+                if (a == MessageDialogResult.Affirmative)
+                {
+                    //我要加入
+                    OnLineTab.SelectedIndex = 2;
+                }
+                else if (a == MessageDialogResult.FirstAuxiliary)
+                {
+                    //我要创建
+                    OnLineTab.SelectedIndex = 3;
+                }
+                else
+                {
+                    //我要购买
+                    System.Diagnostics.Process.Start("https://afdian.net/@YUXUAN233");
+                    //https://afdian.net/@YUXUAN233
+                }
+            }
+        }
+
+        private void Button_Click_44(object sender, RoutedEventArgs e)
+        {
+            DTB.SelectedIndex = 0;
+        }
+
+        private void Button_Click_45(object sender, RoutedEventArgs e)
+        {
+            DTB.SelectedIndex = 5;
+        }
+        HttpClient httpClient = new HttpClient();
+        Mojang mojangw = new Mojang();
+        private async void Button_Click_4XXXX(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();//提示用户打开文件窗体
+            fileDialog.Title = "选择皮肤文件";//文件对话框标题
+            fileDialog.Filter = "皮肤文件|*.png";//文件格式筛选字符串
+            if (fileDialog.ShowDialog() == true)//判断对话框返回值，点击打开
+            {
+                //fileDialog.FileName.ToString()
+                /*
+                MetroDialogSettings set = new MetroDialogSettings();
+                set.AffirmativeButtonText = "普通";
+                set.NegativeButtonText = "纤细";
+                if(await this.ShowMessageAsync("请选择皮肤类型", "这将会更改您Minecraft皮肤的类型\n纤细会缩短皮肤手臂,模型为Alex；普通是史蒂夫的形态,模型为Steve", MessageDialogStyle.AffirmativeAndNegative, set) == MessageDialogResult.Affirmative)
+                {
+                    MojangAPIResponse response = await mojangw.UploadSkin("accessToken", SkinType.Steve, "skin_png_file_path");
+                }
+                else
+                {
+                    MojangAPIResponse response = await mojangw.UploadSkin("accessToken", SkinType.Alex, "skin_png_file_path");
+                }
+                */
+                string skinname = await this.ShowInputAsync("请输入皮肤名", "这将显示在列表里");
+                Directory.CreateDirectory(ZongX + @"\.fsm\Skin\SkinN\" + skinname);
+                string path = fileDialog.FileName;
+                string path2 = ZongX + @"\.fsm\Skin\SkinN\" + skinname + @"\SkinY.png";
+                FileInfo fi1 = new FileInfo(path);
+                FileInfo fi2 = new FileInfo(path2);
+                fi1.CopyTo(path2);
+                List<SkinList> item1 = new List<SkinList>();
+                SkinList item = new SkinList();
+                item.SkinNamew.Text = skinname;
+                System.Drawing.Point point = new System.Drawing.Point(8, 8);
+                System.Drawing.Size size = new System.Drawing.Size(8, 8);
+                Bitmap bitmap = new Bitmap(ZongX + @"\.fsm\Skin\SkinN\" + skinname + @"\SkinY.png");
+                var i = crop(bitmap, new System.Drawing.Point(8, 8), new System.Drawing.Size(8, 8));
+                Zoom(i, 258, 258, out i, ZoomType.NearestNeighborInterpolation);
+                i.Save(ZongX + @"\.fsm\Skin\SkinN\" + skinname + @"\SkinT.png");
+                System.Drawing.Image img = i;
+                BitmapImage bi = new BitmapImage();
+                // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                item.OffLineSkinImage.Source = BitmapToBitmapImage(i);
+                item1.Add(item);
+                OnLineSkinList.Items.Add(item);
+                WritePrivateProfileString("Skin", "List", OnLineSkinList.Items.Count.ToString(), ZongSkin + @"\SkinN.Skin");
+                WritePrivateProfileString("Skin", OnLineSkinList.Items.Count.ToString(), skinname + "|" + fileDialog.FileName, ZongSkin + @"\SkinN.Skin");
+            }
+        }
+        /// <summary>
+        /// 复制目录
+        /// </summary>
+        /// <param name="SourcePath">源路径</param>
+        /// <param name="TargetPath">目标路径</param>
+        /// <param name="Overwrite">是否覆盖</param>
+        public static void CopyDirectory(string SourcePath, string TargetPath, bool Overwrite)
+        {
+            // 如果源目录不存在，则退出
+            if (!Directory.Exists(SourcePath))
+            {
+                return;
+            }
+
+            try
+            {
+
+                // 如果目标路径不存在，则创建此文件夹
+                if (!Directory.Exists(TargetPath))
+                {
+                    Directory.CreateDirectory(TargetPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                string ErrInfo = ex.Message;
+                return;
+            }
+            if (Directory.Exists(TargetPath))
+            {
+
+                // 遍历源路径的文件夹，获取文件名（带路径的）
+                foreach (string FileName in Directory.GetFiles(SourcePath))
+                {
+                    try
+                    {
+
+                        //复制文件
+                        File.Copy(FileName, Path.Combine(TargetPath, Path.GetFileName(FileName)), Overwrite);
+                    }
+                    catch (Exception ex)
+                    {
+                        string ErrInfo = ex.Message;
+                    }
+                }
+
+                // 子文件夹的遍历
+
+                foreach (string SubPath in Directory.GetDirectories(SourcePath))
+                {
+
+                    //复制文件
+                    CopyDirectory(SubPath, Path.Combine(TargetPath, Path.GetFileName(SubPath)), Overwrite);
+                }
+            }
+
+        }
+
+        private async void OnLineSkinList_Skin(object sender, SelectionChangedEventArgs e)
+        {
+            int a = OnLineSkinList.SelectedIndex + 1;
+            string[] Wfter = IniReadValueSS("Skin", a.ToString()).Split(new char[] { '|' });
+            String Path = Wfter[1];
+            MetroDialogSettings set = new MetroDialogSettings();
+            set.AffirmativeButtonText = "普通";
+            set.NegativeButtonText = "纤细";
+            MicrosoftLogin microsoftLogin = new MicrosoftLogin();
+            Xbox XboxLogin = new Xbox();
+            string refresh_token = IniReadValueW("wr", "Atoken");
+            string Minecraft_Token = new MinecraftLogin().GetToken(XboxLogin.XSTSLogin(XboxLogin.GetToken(microsoftLogin.RefreshingTokens(refresh_token))));
+            if (await this.ShowMessageAsync("请选择皮肤类型", "这将会更改您Minecraft皮肤的类型\n纤细会缩短皮肤手臂,模型为Alex；普通是史蒂夫的形态,模型为Steve", MessageDialogStyle.AffirmativeAndNegative, set) == MessageDialogResult.Affirmative)
+            {
+                MojangAPIResponse response = await mojangw.UploadSkin(Minecraft_Token, SkinType.Steve, Path);
+                if (response.IsSuccess)
+                {
+                    await this.ShowMessageAsync("更换成功!", "您可以使用新皮肤啦!");
+                    System.Drawing.Point point = new System.Drawing.Point(8, 8);
+                    System.Drawing.Size size = new System.Drawing.Size(8, 8);
+                    Bitmap bitmap = new Bitmap(Path);
+                    var i = crop(bitmap, new System.Drawing.Point(8, 8), new System.Drawing.Size(8, 8));
+                    Zoom(i, 258, 258, out i, ZoomType.NearestNeighborInterpolation);
+                    System.Drawing.Image img = i;
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                    IM.Source = BitmapToBitmapImage(i);
+                }
+                else
+                {
+                    await this.ShowMessageAsync("更换失败", "可能是网络错误\n错误信息:" + response.ErrorMessage);
+                }
+            }
+            else
+            {
+                MojangAPIResponse response = await mojangw.UploadSkin(Minecraft_Token, SkinType.Alex, Path);
+                if (response.IsSuccess)
+                {
+                    await this.ShowMessageAsync("更换成功!", "您可以使用新皮肤啦!");
+                    System.Drawing.Point point = new System.Drawing.Point(8, 8);
+                    System.Drawing.Size size = new System.Drawing.Size(8, 8);
+                    Bitmap bitmap = new Bitmap(Path);
+                    var i = crop(bitmap, new System.Drawing.Point(8, 8), new System.Drawing.Size(8, 8));
+                    Zoom(i, 258, 258, out i, ZoomType.NearestNeighborInterpolation);
+                    System.Drawing.Image img = i;
+                    BitmapImage bi = new BitmapImage();
+                    // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                    IM.Source = BitmapToBitmapImage(i);
+                }
+                else
+                {
+                    await this.ShowMessageAsync("更换失败", "可能是网络错误\n错误信息:" + response.ErrorMessage);
+                }
+            }
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            
+
+        }
+        public int DOWNLOADTHREAD = 0;
+
+        private void OnLineTab_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private async void Button_Click_46(object sender, RoutedEventArgs e)
+        {
+            String Password = await this.ShowInputAsync("请输入密码", "密码请勿泄露\n");
+            String QQ = await this.ShowInputAsync("请输入你的QQ", "请勿乱填\n");
+            String DK = await this.ShowInputAsync("请输入端口", "请勿乱填\n");
+            String JD;
+            if (HZ.IsChecked == true)
+            {
+                JD = "hz.qwq.one";
+            }
+            else
+            {
+                JD = "gz2.qwq.one";
+            }
+            WritePrivateProfileString("common", "server_addr", JD , FileOnlineServer + @"\frpc.ini");
+            WritePrivateProfileString("common", "server_port", "7000", FileOnlineServer + @"\frpc.ini");
+            WritePrivateProfileString("common", "user", QQ, FileOnlineServer + @"\frpc.ini");
+            WritePrivateProfileString("common", "meta_token", Password, FileOnlineServer + @"\frpc.ini");
+            WritePrivateProfileString(QQ, "type", "stcp", FileOnlineServer + @"\frpc.ini");
+            WritePrivateProfileString(QQ, "sk", "test", FileOnlineServer + @"\frpc.ini");
+            WritePrivateProfileString(QQ, "local_port", DK, FileOnlineServer + @"\frpc.ini");
+            WritePrivateProfileString(QQ, "remote_port", "32423", FileOnlineServer + @"\frpc.ini");
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.FileName = FileOnlineServer + @"\StartForFSM.exe";
+            info.Arguments = "";
+            info.WindowStyle = ProcessWindowStyle.Hidden;
+            Process pro = Process.Start(info);
+            String aw = EncryptDES(QQ + "|" + JD + "|" + Password, "1234567w");
+            byte[] b = System.Text.Encoding.Default.GetBytes(aw);
+            Clipboard.SetDataObject(Convert.ToBase64String(b));
+            await this.ShowMessageAsync("已复制链接", "分享给他人吧!");
+            FFC.IsEnabled = false;
+        }
+
+        private void Mouse(object sender, MouseButtonEventArgs e)
+        {
+            WritePrivateProfileString("Download", "Thread", DownLoadThread.Value.ToString(), FileS);
+            DOWNLOADTHREAD = (int)DownLoadThread.Value;
+        }
+
+        private void MouseRAM(object sender, MouseButtonEventArgs e)
+        {
+            Bit.Text = rams.Value.ToString();
+            WritePrivateProfileString("RAM", "RAMW", Bit.Text, FileS);
+        }
+
+        private void Button_Click_ChuMeng(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://blog.qwq.one/");
+        }
+
+        private void RadioButton_Checked_2(object sender, RoutedEventArgs e)
+        {
+            WritePrivateProfileString("ONLINE","TCPP2P","stcp",FileS);
+        }
+
+        private void RadioButton_Checked_3(object sender, RoutedEventArgs e)
+        {
+            WritePrivateProfileString("ONLINE", "TCPP2P", "xtcp", FileS);
+        }
+
+        private async void Button_Click_XXXXXXX(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                String yqm = await this.ShowInputAsync("请输入联机邀请码", "对方发来的邀请码");
+                String WWQ = await this.ShowInputAsync("请输入你的QQ", "QQ号码");
+                byte[] c = Convert.FromBase64String(yqm);
+                String ww = System.Text.Encoding.Default.GetString(c);
+                String JM = DecryptDES(ww,"1234567w");
+                after = JM.Split(new char[] { '|' });
+                WritePrivateProfileString("common", "server_addr", after[1], FileOnlineKEHU + @"\frpc.ini");
+                WritePrivateProfileString("common", "server_port", "7000", FileOnlineKEHU + @"\frpc.ini");
+                WritePrivateProfileString("common", "user", after[0], FileOnlineKEHU + @"\frpc.ini");
+                WritePrivateProfileString("common", "meta_token", after[2], FileOnlineKEHU + @"\frpc.ini");
+                WritePrivateProfileString(WWQ, "server_name", after[0], FileOnlineKEHU + @"\frpc.ini");
+                WritePrivateProfileString(WWQ, "type", "stcp", FileOnlineKEHU + @"\frpc.ini");
+                WritePrivateProfileString(WWQ, "bind_addr", "127.0.0.1", FileOnlineKEHU + @"\frpc.ini");
+                WritePrivateProfileString(WWQ, "bind_port", "32423", FileOnlineKEHU + @"\frpc.ini");
+                WritePrivateProfileString(WWQ, "role", "visitor", FileOnlineKEHU + @"\frpc.ini");
+                WritePrivateProfileString(WWQ, "sk", "test", FileOnlineKEHU + @"\frpc.ini");
+                ProcessStartInfo info = new ProcessStartInfo();
+                info.FileName = FileOnlineKEHU + @"\StartForFSM.exe";
+                info.Arguments = "";
+                info.WindowStyle = ProcessWindowStyle.Hidden;
+                Process pro = Process.Start(info);
+                File.Delete(FileOnlineKEHU + @"\frpc.ini");
+                await this.ShowMessageAsync("连接成功", "进入游戏吧!(若你或对方为校园网，有概率连接不成功，若连接不成功，请尝试用手机热点)");
+                FFJ.IsEnabled = false;
+            }
+            catch{
+
+            }
+        }
+
+        private async void Button_Click_4X(object sender, RoutedEventArgs e)
+        {
+            var show = await this.ShowProgressAsync("正在获取列表", "请稍后...");
+            List<CurseList> item1 = new List<CurseList>();
+            try
+            {
+                switch (CurseBoBox.SelectedIndex)
+                {
+                    case 0:
+                        show.SetIndeterminate();
+                        var item = await ModCurseForge.Search(SC.Text);
+                        foreach (var i in item)
+                        {
+                            cattecurse = i.categories[0];
+                            attcurse = i.attachments[0];
+                            //gamevcurse = i.gameVersionLatestFiles[0];
+                            //CurseForgeListw.Items.Add(i.name);
+                            CurseList itemw = new CurseList();
+                            itemw.CurseName.Content = i.name;
+                            //item.Dimage.Source = new BitmapImage(new Uri("pack://application:,,,/Image/0E8348D8.PNG"));
+                            BitmapImage bi = new BitmapImage();
+                            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                            bi.BeginInit();
+                            bi.UriSource = new Uri(attcurse.thumbnailUrl, UriKind.RelativeOrAbsolute);
+                            itemw.CurseLB.Content = cattecurse.name;
+                            bi.EndInit();
+                            itemw.CurseImage.Source = bi;
+                            item1.Add(itemw);
+                        }
+                        CurseForgeListw.ItemsSource = item1;
+                        await show.CloseAsync();
+                        break;
+                    case 1:
+                        show.SetIndeterminate();
+                        var item2 = await ModPackCurseForge.Search(SC.Text);
+                        foreach (var i in item2)
+                        {
+                            cattecurse = i.categories[0];
+                            attcurse = i.attachments[0];
+                            //CurseForgeListw.Items.Add(i.name);
+                            CurseList itemw = new CurseList();
+                            itemw.CurseName.Content = i.name;
+                            //item.Dimage.Source = new BitmapImage(new Uri("pack://application:,,,/Image/0E8348D8.PNG"));
+                            BitmapImage bi = new BitmapImage();
+                            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                            bi.BeginInit();
+                            bi.UriSource = new Uri(attcurse.thumbnailUrl, UriKind.RelativeOrAbsolute);
+                            itemw.CurseLB.Content = cattecurse.name;
+                            bi.EndInit();
+                            itemw.CurseImage.Source = bi;
+                            item1.Add(itemw);
+                        }
+                        CurseForgeListw.ItemsSource = item1;
+                        await show.CloseAsync();
+                        break;
+                    case 2:
+                        show.SetIndeterminate();
+                        var item3 = await resourcepackcurseforge.Search(SC.Text);
+                        foreach (var i in item3)
+                        {
+                            cattecurse = i.categories[0];
+                            attcurse = i.attachments[0];
+                            //CurseForgeListw.Items.Add(i.name);
+                            CurseList itemw = new CurseList();
+                            itemw.CurseName.Content = i.name;
+                            //item.Dimage.Source = new BitmapImage(new Uri("pack://application:,,,/Image/0E8348D8.PNG"));
+                            BitmapImage bi = new BitmapImage();
+                            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                            bi.BeginInit();
+                            bi.UriSource = new Uri(attcurse.thumbnailUrl, UriKind.RelativeOrAbsolute);
+                            itemw.CurseLB.Content = cattecurse.name;
+                            bi.EndInit();
+                            itemw.CurseImage.Source = bi;
+                            item1.Add(itemw);
+                        }
+                        CurseForgeListw.ItemsSource = item1;
+                        await show.CloseAsync();
+                        break;
+                    case 3:
+                        show.SetIndeterminate();
+                        var item4 = await MapCurseForge.Search(SC.Text);
+                        foreach (var i in item4)
+                        {
+                            //cattecurse = i.categories[item4];
+                            attcurse = i.attachments[0];
+
+                            //MCDownload CurseDown = CurseForgeImap.download(item4[0].gameVersionLatestFiles[0]);//下载
+                            //CurseForgeListw.Items.Add(i.name);
+                            CurseList itemw = new CurseList();
+                            itemw.CurseName.Content = i.name;
+                            //item.Dimage.Source = new BitmapImage(new Uri("pack://application:,,,/Image/0E8348D8.PNG"));
+                            BitmapImage bi = new BitmapImage();
+                            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+                            bi.BeginInit();
+                            bi.UriSource = new Uri(attcurse.thumbnailUrl, UriKind.RelativeOrAbsolute);
+                            itemw.CurseLB.Content = cattecurse.name;
+                            bi.EndInit();
+                            itemw.CurseImage.Source = bi;
+                            //Console.WriteLine(CurseDown.Url);
+                            item1.Add(itemw);
+                        }
+                        for (int i = 0; i < item4.Count; ++i)
+                        {
+                            //gamevcurse[i] = item4[i].gameVersionLatestFiles
+                        }
+
+                        CurseForgeListw.ItemsSource = item1;
+                        await show.CloseAsync();
+                        break;
+                    case -1:
+                        await show.CloseAsync();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                await show.CloseAsync();
+            }
+        }
+
+        private void Button_Click_2BJ(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();//提示用户打开文件窗体
+            fileDialog.Title = "选择FSM的背景";//文件对话框标题
+            fileDialog.Filter = "图片格式|*.png;*.jpg";//文件格式筛选字符串
+            if (fileDialog.ShowDialog() == true)//判断对话框返回值，点击打开
+            {
+
+                BJLJ.Text = fileDialog.FileName;
+                /////PlaySound(xzdyy.Text, 0, 1); //第3个形参，把1换为9，连续播放
+                WritePrivateProfileString("Image", "lj", BJLJ.Text, FileS);
+            }
+        }
+
+        private void Check1(object sender, RoutedEventArgs e)
+        {
+            if (BJAN.IsChecked == true)
+            {
+                ImageBrush b = new ImageBrush();
+                b.ImageSource = new BitmapImage(new Uri(BJLJ.Text));
+                b.Stretch = Stretch.Fill;
+                this.Background = b;
+                WritePrivateProfileString("Image","SF","1",FileS);
+            }
+            else
+            {
+                ImageBrush b = new ImageBrush();
+                b.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/3F4616C3F3B8E05D9AD8710DE44125B9.png"));
+                b.Stretch = Stretch.Fill;
+                this.Background = b;
+                WritePrivateProfileString("Image", "SF", "w", FileS);
+            }
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)

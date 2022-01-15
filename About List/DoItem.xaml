@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:fsmlauncher_3="clr-namespace:FSMLauncher_3"
              mc:Ignorable="d" 
-             d:DesignHeight="450" Height="34.02" Width="302.4">
+             d:DesignHeight="450" Height="34.02" Width="329.396">
     <Grid>
-        <Image x:Name="Dimage" HorizontalAlignment="Left" Height="34" Margin="6,1,0,-0.6" VerticalAlignment="Top" Width="40" Source="/FSMLauncher_3;component/Image/0E885BB0.PNG"/>
-        <Label x:Name="DverV" HorizontalAlignment="Left" Height="28" Margin="58,4,0,0" VerticalAlignment="Top" Width="167" FontSize="16"/>
+        <Image x:Name="Dimage" HorizontalAlignment="Left" Height="34" Margin="3,1,0,-0.6" VerticalAlignment="Top" Width="36" Source="/FSMLauncher_3;component/Image/0E885BB0.PNG"/>
+        <Label x:Name="DverV" HorizontalAlignment="Left" Height="31" Margin="58,2,0,0" VerticalAlignment="Top" Width="268" FontSize="18" Foreground="#DD232323"/>
 
     </Grid>
 </UserControl>

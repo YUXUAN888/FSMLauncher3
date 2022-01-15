@@ -13,16 +13,7 @@
             <mah:Tile.Background>
                 <SolidColorBrush Color="#CC3E7FB3" Opacity="0.88"/>
             </mah:Tile.Background>
-            <Image HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="43" Source="Image\登录 (1).png" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
+            
         </mah:Tile>
     </Grid>
 </UserControl>

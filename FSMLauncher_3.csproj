@@ -88,23 +88,28 @@
     <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
     </Reference>
+    <Reference Include="Downloader, Version=2.3.0.0, Culture=neutral, PublicKeyToken=844973e732f6cdf4, processorArchitecture=MSIL">
+      <HintPath>packages\Downloader.2.3.0\lib\net45\Downloader.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>packages\ICSharpCode.SharpZipLib.dll.0.85.4.369\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="KMCCC.Pro">
+      <HintPath>..\..\..\KMCCC-master\KMCCC-master\bin\Debug\KMCCC.Pro.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
       <HintPath>packages\MahApps.Metro.2.4.9\lib\net452\MahApps.Metro.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialDesignColors, Version=2.0.3.2, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
-      <HintPath>packages\MaterialDesignColors.2.0.3\lib\net452\MaterialDesignColors.dll</HintPath>
+    <Reference Include="MaterialDesignColors, Version=2.0.4.3, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignColors.2.0.4\lib\net452\MaterialDesignColors.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialDesignThemes.Wpf, Version=4.2.1.2, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
-      <HintPath>packages\MaterialDesignThemes.4.2.1\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=4.3.0.3, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>packages\MaterialDesignThemes.4.3.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+      <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ProjBobcat, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -113,8 +118,23 @@
     <Reference Include="SharpCompress, Version=0.24.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
       <HintPath>packages\SharpCompress.0.24.0\lib\net45\SharpCompress.dll</HintPath>
     </Reference>
+    <Reference Include="SharpGL, Version=3.1.1.0, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <HintPath>packages\SharpGL.3.1.1\lib\net45\SharpGL.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpGL.SceneGraph, Version=3.1.1.0, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <HintPath>packages\SharpGL.SceneGraph.3.1.1\lib\net45\SharpGL.SceneGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpGL.WinForms, Version=3.1.1.0, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <HintPath>packages\SharpGL.WinForms.3.1.1\lib\net45\SharpGL.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpGL.WPF, Version=3.1.1.0, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <HintPath>packages\SharpGL.WPF.3.1.1\lib\net45\SharpGL.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="SquareMinecraftLauncherCore">
       <HintPath>C:\Users\26903\Desktop\SquareMinecraftLauncherCore.dll</HintPath>
+    </Reference>
+    <Reference Include="SquareMinecraftLauncherSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SquareMinecraftLauncher.Skin.2.0.0\lib\net452\SquareMinecraftLauncherSkin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -150,11 +170,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="About List\CurseList.xaml.cs">
+      <DependentUpon>CurseList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="About List\DoItem.xaml.cs">
       <DependentUpon>DoItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="About List\PathItem.xaml.cs">
+      <DependentUpon>PathItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="About List\SetsItem.xaml.cs">
       <DependentUpon>SetsItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="About List\SkinList.xaml.cs">
+      <DependentUpon>SkinList.xaml</DependentUpon>
     </Compile>
     <Compile Include="About Message\OSMessage.xaml.cs">
       <DependentUpon>OSMessage.xaml</DependentUpon>
@@ -168,6 +197,36 @@
     <Compile Include="About List\Item.xaml.cs">
       <DependentUpon>Item.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MojangAPI\Cache\ICacheManager.cs" />
+    <Compile Include="MojangAPI\Cache\JsonFileCacheManager.cs" />
+    <Compile Include="MojangAPI\Cache\SessionFileCacheManager.cs" />
+    <Compile Include="MojangAPI\HttpAction\ActionResponse.cs" />
+    <Compile Include="MojangAPI\HttpAction\HttpAction.cs" />
+    <Compile Include="MojangAPI\HttpAction\HttpActionClient.cs" />
+    <Compile Include="MojangAPI\HttpAction\HttpHeaderCollection.cs" />
+    <Compile Include="MojangAPI\HttpAction\HttpQueryCollection.cs" />
+    <Compile Include="MojangAPI\HttpAction\HttpResponseHandlers.cs" />
+    <Compile Include="MojangAPI\HttpAction\JsonHttpContent.cs" />
+    <Compile Include="MojangAPI\Model\MicrosoftAuthResponse.cs" />
+    <Compile Include="MojangAPI\Model\MojangAPIResponse.cs" />
+    <Compile Include="MojangAPI\Model\MojangAuthResponse.cs" />
+    <Compile Include="MojangAPI\Model\MojangAuthResult.cs" />
+    <Compile Include="MojangAPI\Model\NameHistory.cs" />
+    <Compile Include="MojangAPI\Model\NameHistoryResponse.cs" />
+    <Compile Include="MojangAPI\Model\PlayerProfile.cs" />
+    <Compile Include="MojangAPI\Model\PlayerUUID.cs" />
+    <Compile Include="MojangAPI\Model\Session.cs" />
+    <Compile Include="MojangAPI\Model\Skin.cs" />
+    <Compile Include="MojangAPI\Model\SkinType.cs" />
+    <Compile Include="MojangAPI\Model\StatisticOptions.cs" />
+    <Compile Include="MojangAPI\Model\Statistics.cs" />
+    <Compile Include="MojangAPI\Mojang.cs" />
+    <Compile Include="MojangAPI\MojangAuth.cs" />
+    <Compile Include="MojangAPI\SecurityQuestion\Question.cs" />
+    <Compile Include="MojangAPI\SecurityQuestion\QuestionFlow.cs" />
+    <Compile Include="MojangAPI\SecurityQuestion\QuestionFlowResponse.cs" />
+    <Compile Include="MojangAPI\SecurityQuestion\QuestionList.cs" />
+    <Compile Include="MojangAPI\Util.cs" />
     <Compile Include="Start.xaml.cs">
       <DependentUpon>Start.xaml</DependentUpon>
     </Compile>
@@ -175,6 +234,10 @@
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="var.cs" />
+    <Page Include="About List\CurseList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="About List\DoItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -183,7 +246,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="About List\PathItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="About List\SetsItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="About List\SkinList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -281,17 +352,14 @@
   <ItemGroup>
     <Resource Include="Image\20140521134310.png" />
     <Resource Include="Image\22.jpg" />
-    <Resource Include="Image\222.jpg" />
     <Resource Include="Image\2222.jpg" />
     <Resource Include="Image\33.jpg" />
     <Resource Include="Image\3F4616C3F3B8E05D9AD8710DE44125B9.png" />
     <Resource Include="Image\44.jpg" />
-    <Resource Include="Image\C{%40A%24~~7_W%25IKVQYSRC~~W8.png" />
     <Resource Include="Image\Image1.png" />
     <Resource Include="Image\IMG_4304.PNG" />
     <Resource Include="Image\java.png" />
     <Resource Include="Image\MI82IUM36N{2L{N%40%25_9_Q26.png" />
-    <Resource Include="Image\QQ图片20210815151126.png" />
     <Resource Include="Image\SharpGL.png" />
     <Resource Include="Image\src=http___msdnshared.blob.core.windows.net_media_2015_12_MS-Logo-transparent-background.png&amp;refer=http___msdnshared.blob.core.windows.jpg" />
     <Resource Include="Image\src=http___www.underconsideration.com_brandnew_archives_mojang_studios_logo_stacked.png&amp;refer=http___www.underconsideration.png" />
@@ -299,13 +367,9 @@
     <Resource Include="Image\wxb账户.png" />
     <Resource Include="Image\云端,云,云服务.png" />
     <Resource Include="Image\完成.png" />
-    <Resource Include="Image\登录 %281%29.png" />
-    <Resource Include="Image\登录.png" />
     <Resource Include="Image\皮肤.png" />
     <Resource Include="Image\离线.png" />
     <Resource Include="Image\第三方.png" />
-    <Resource Include="Image\草方块.png" />
-    <Resource Include="Image\设置.png" />
     <Resource Include="Image\返回 %283%29.png" />
     <Resource Include="Image\返回 %284%29.png" />
     <Resource Include="Image\退出.png" />
@@ -326,16 +390,7 @@
     <Resource Include="Image\u=3699317021,3596778976&amp;fm=26&amp;fmt=auto.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\设置 %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\设置 %282%29.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Image\设置，更多.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Image\下载 %283%29.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\无线网.png" />
@@ -368,12 +423,25 @@
     <Resource Include="Image\语言.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="About List\CHUMENG.py" />
-    <Content Include="FFS.py" />
-    <Content Include="Hello!FSM.py" />
+    <Resource Include="Image\高性能.png" />
+    <Resource Include="Image\加入.png" />
+    <Resource Include="Image\创建.png" />
+    <Resource Include="SharpGL.ico" />
+    <Resource Include="SharpGL.png" />
     <Resource Include="Image\log-in-outline %282%29.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Image\草方块.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\SaltCones_ZH-CN4825397608_1920x1080.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\多文件夹.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Other L\CS.h" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -382,7 +450,9 @@
     <Error Condition="!Exists('packages\Fody.6.0.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Fody.6.0.0\build\Fody.targets'))" />
     <Error Condition="!Exists('packages\MaterialDesignThemes.4.2.1\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MaterialDesignThemes.4.2.1\build\MaterialDesignThemes.targets'))" />
     <Error Condition="!Exists('packages\Costura.Fody.4.1.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Costura.Fody.4.1.0\build\Costura.Fody.props'))" />
+    <Error Condition="!Exists('packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets'))" />
   </Target>
   <Import Project="packages\Fody.6.0.0\build\Fody.targets" Condition="Exists('packages\Fody.6.0.0\build\Fody.targets')" />
   <Import Project="packages\MaterialDesignThemes.4.2.1\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.2.1\build\MaterialDesignThemes.targets')" />
+  <Import Project="packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets')" />
 </Project>
