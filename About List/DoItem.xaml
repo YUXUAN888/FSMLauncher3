@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" Height="34.02" Width="329.396">
     <Grid>
-        <Image x:Name="Dimage" HorizontalAlignment="Left" Height="34" Margin="3,1,0,-0.6" VerticalAlignment="Top" Width="36" Source="/FSMLauncher_3;component/Image/0E885BB0.PNG"/>
+        <Image x:Name="Dimage" HorizontalAlignment="Left" Height="33" Margin="3,1,0,0" VerticalAlignment="Top" Width="34" Source="/FSMLauncher_3;component/Image/0E885BB0.PNG" Stretch="Fill" StretchDirection="DownOnly"/>
         <Label x:Name="DverV" HorizontalAlignment="Left" Height="31" Margin="58,2,0,0" VerticalAlignment="Top" Width="268" FontSize="18" Foreground="#DD232323"/>
 
     </Grid>

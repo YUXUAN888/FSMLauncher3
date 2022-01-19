@@ -12,11 +12,11 @@
     xmlns:About_Message="clr-namespace:FSMLauncher_3.About_Message" 
     mc:Ignorable="d"
         xmlns:SquareMinecraftLauncherSkin="clr-namespace:SquareMinecraftLauncherSkin;assembly=SquareMinecraftLauncherSkin" xmlns:wpf="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF" x:Class="FSMLauncher_3.MetroWindow" 
-                 
+
         
         Title="FSM" Height="444" Width="800" IsTabStop="False" Icon="Image\IMG_4304.PNG" Closing="MetroWindow_Closing" Loaded="load" WindowStartupLocation="CenterScreen" ShowMinButton="True" SizeChanged="Size" SizeToContent="WidthAndHeight" WindowStyle="None"  OpacityMask="White"  AllowsTransparency="True">
     <mah1:MetroWindow.Background>
-        <ImageBrush ImageSource="Image/3F4616C3F3B8E05D9AD8710DE44125B9.png"/>
+        <ImageBrush ImageSource="Image/3F4616C3F3B8E05D9AD8710DE44125B9.png" Opacity="0.95"/>
     </mah1:MetroWindow.Background>
 
 
@@ -70,6 +70,14 @@
                 <Grid.Background>
                     <ImageBrush/>
                 </Grid.Background>
+
+
+                <Border CornerRadius="8,8,8,8" BorderBrush="#FFD6E8FC" BorderThickness="1" HorizontalAlignment="Left" Height="97" Margin="363,24.4,0,0" VerticalAlignment="Top" Width="427" Grid.ColumnSpan="2" Grid.Row="2">
+                    <Border.Background>
+                        <SolidColorBrush Color="#FFF0EFEF" Opacity="0.66"/>
+                    </Border.Background>
+                    <StackPanel />
+                </Border>
 
 
                 <Button HorizontalAlignment="Left" Margin="14,0,0,10.6" Width="225" Style="{StaticResource MaterialDesignPaperDarkButton}"  FontSize="27" FontFamily="Microsoft YaHei UI Light" Click="Button_Click_start" Grid.Row="2" Height="86" VerticalAlignment="Bottom" Foreground="#FFEBEBEB" >
@@ -574,7 +582,7 @@ Height="85" Foreground="#FF4B4B4B" ><Run Text="请注意,免密登录指的是�
                             <Label Content="下载线程设置(建议128):" HorizontalAlignment="Left" Height="28" Margin="10,47,0,0" VerticalAlignment="Top" Width="178" Foreground="#DDFFFFFF" FontSize="16"/>
                             <Slider x:Name="DownLoadThread"
   Value="128"
-  Minimum="0"
+  Minimum="5"
   Maximum="256"
   Style="{StaticResource MaterialDesignDiscreteSlider}"
   
@@ -778,97 +786,6 @@ Height="85" Foreground="#FF4B4B4B" ><Run Text="请注意,免密登录指的是�
                             <Grid.Background>
                                 <ImageBrush/>
                             </Grid.Background>
-                            <materialDesign:Flipper
-  Style="{Binding MaterialDesignCardFlipper}"
-  VerticalAlignment="Top" Height="320" Margin="457,70,5,0" RenderTransformOrigin="0.5,0.5" Foreground="White">
-                                <materialDesign:Flipper.FrontContent>
-                                    <Button
-                                        
-                                        Style="{StaticResource MaterialDesignFlatButton}"
-      Command="{x:Static materialDesign:Flipper.FlipCommand}"
-      Margin="8"
-      Width="192"
-                                        
-      Content="RESIZING..." />
-                                </materialDesign:Flipper.FrontContent>
-                                <materialDesign:Flipper.BackContent>
-                                    <Grid
-      Height="256"
-      Width="200">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition
-          Height="Auto" />
-                                            <RowDefinition
-          Height="*" />
-                                        </Grid.RowDefinitions>
-                                        <materialDesign:ColorZone
-        Mode="SecondaryMid"
-        Padding="6">
-                                            <StackPanel
-          Orientation="Horizontal">
-                                                <Button
-            Style="{StaticResource MaterialDesignToolForegroundButton}"
-            Command="{x:Static materialDesign:Flipper.FlipCommand}"
-            HorizontalAlignment="Left">
-                                                    <materialDesign:PackIcon
-              Kind="ArrowLeft"
-              HorizontalAlignment="Right" />
-                                                </Button>
-                                                <TextBlock
-            Margin="8 0 0 0"
-            VerticalAlignment="Center"
-            Text="EDIT USER" />
-                                            </StackPanel>
-                                        </materialDesign:ColorZone>
-                                        <Grid
-        Grid.Row="1"
-        Margin="0 6 0 0"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Top"
-        Width="172">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition />
-                                                <RowDefinition />
-                                                <RowDefinition />
-                                                <RowDefinition />
-                                            </Grid.RowDefinitions>
-                                            <TextBox
-          materialDesign:HintAssist.Hint="First name"
-          materialDesign:HintAssist.IsFloating="True"
-          Margin="0 12 0 0"
-          Text="James" />
-                                            <TextBox
-          Grid.Row="1"
-          materialDesign:HintAssist.Hint="Last name"
-          materialDesign:HintAssist.IsFloating="True"
-          Margin="0 12 0 0"
-          Text="Willock" />
-                                            <StackPanel
-          Grid.Row="2"
-          Orientation="Horizontal"
-          Margin="0 12 0 0"
-          HorizontalAlignment="Right">
-                                                <TextBlock
-            VerticalAlignment="Center"
-            Text="Email Contact" />
-                                                <ToggleButton
-            Margin="8 0 0 0" />
-                                            </StackPanel>
-                                            <StackPanel
-          Grid.Row="3"
-          Orientation="Horizontal"
-          Margin="0 12 0 0"
-          HorizontalAlignment="Right">
-                                                <TextBlock
-            VerticalAlignment="Center"
-            Text="Telephone Contact" />
-                                                <ToggleButton
-            Margin="8 0 0 0" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </Grid>
-                                </materialDesign:Flipper.BackContent>
-                            </materialDesign:Flipper>
                         </Grid>
                     </TabItem>
                     <TabItem Header="反馈">
@@ -891,7 +808,7 @@ Height="85" Foreground="#FF4B4B4B" ><Run Text="请注意,免密登录指的是�
                                 <ImageBrush/>
                             </Grid.Background>
                             <Grid HorizontalAlignment="Left" Height="112" Margin="60,259,0,0" VerticalAlignment="Top" Width="616"/>
-                            <ScrollViewer HorizontalAlignment="Left" Height="1995" Margin="5,5,0,-1600.6" VerticalAlignment="Top" Width="683">
+                            <ScrollViewer HorizontalAlignment="Left" Height="390" Margin="5,5,0,0" VerticalAlignment="Top" Width="683">
                                 <Grid Height="2017" Width="676">
                                     <Image HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="190" Source="Image\IMG_4304.PNG" Margin="244,13,0,0" MouseDown="ImageMosedown"/>
                                     <Label Content="FSMLauncher3|Beta15" HorizontalAlignment="Left" Height="79" VerticalAlignment="Top" Width="550" Foreground="#FFD6D6D6" FontSize="43" FontFamily="Leelawadee UI" Margin="66,155,0,0" HorizontalContentAlignment="Center"/>
@@ -901,17 +818,17 @@ Height="85" Foreground="#FF4B4B4B" ><Run Text="请注意,免密登录指的是�
                                     <Label Content="联机服务:初梦和她的小伙伴们" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="342" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="136,310,0,0"/>
                                     <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image/ss.png" Margin="68,373,0,0"/>
                                     <Label Content="Core,支持:Baibao132" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="393" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="136,379,0,0"/>
-                                    <GroupBox Header="赞助名单(感谢你们!)" HorizontalAlignment="Left" Height="154" Margin="5,440,0,0" VerticalAlignment="Top" Width="651" FontSize="22">
-                                        <Label Content="战神福尔康,Nunzio520,Himcd,苦逼的老何,ShanZhiXiaoZhu,&#xA;MaverickPig,Bolen,爱发电用户_xJf4,爱发电用户_CqeR,&#xA;不吃剩饭的老剩饭,爱发电用户_SaeE,SakuraMoyi 感谢你们!" HorizontalAlignment="Left" Height="89" Margin="0,1,0,0" VerticalAlignment="Top" Width="628" Foreground="#FFF1F1F1"/>
+                                    <GroupBox Header="赞助名单(感谢你们!)" HorizontalAlignment="Left" Height="231" Margin="5,440,0,0" VerticalAlignment="Top" Width="651" FontSize="22">
+                                        <Label Content="战神福尔康,Nunzio520,Himcd,苦逼的老何,ShanZhiXiaoZhu,&#xD;&#xA;MaverickPig,Bolen,爱发电用户_xJf4,爱发电用户_CqeR,&#xA;不吃剩饭的老剩饭,爱发电用户_SaeE,SakuraMoyi,爱发电用户_eHSs,&#xD;&#xA;Ablazy 感谢你们!" HorizontalAlignment="Left" Height="171" Margin="0,1,0,-4" VerticalAlignment="Top" Width="628" Foreground="#FFF1F1F1" FontSize="20"/>
                                     </GroupBox>
-                                    <GroupBox Header="特别鸣谢" HorizontalAlignment="Left" Height="251" Margin="5,599,0,0" VerticalAlignment="Top" Width="651" FontSize="22"/>
-                                    <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image/44.jpg" Margin="18,648,0,0"/>
-                                    <Label Content="FanSh(提供了FSM网络服务)" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="529" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="86,655,0,0"/>
-                                    <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image/2222.jpg" Margin="18,716,0,0"/>
-                                    <Label Content="犹太郎(暑期的 好 管理)" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="529" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="86,723,0,0"/>
-                                    <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="IMG_4306.ico" Margin="18,784,0,0"/>
-                                    <Label Content="交流群内所有支持FSM的小伙伴们" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="529" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="86,791,0,0"/>
-                                    <GroupBox Header="开源与开源许可" HorizontalAlignment="Left" Height="716" Margin="5,852,0,0" VerticalAlignment="Top" Width="651" FontSize="22">
+                                    <GroupBox Header="特别鸣谢" HorizontalAlignment="Left" Height="251" Margin="5,674,0,0" VerticalAlignment="Top" Width="651" FontSize="22"/>
+                                    <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image/44.jpg" Margin="18,723,0,0"/>
+                                    <Label Content="FanSh(提供了FSM网络服务)" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="529" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="86,730,0,0"/>
+                                    <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="Image/2222.jpg" Margin="18,791,0,0"/>
+                                    <Label Content="犹太郎(暑期的 好 管理)" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="529" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="86,798,0,0"/>
+                                    <Image HorizontalAlignment="Left" Height="62" VerticalAlignment="Top" Width="63" Source="IMG_4306.ico" Margin="18,859,0,0"/>
+                                    <Label Content="交流群内所有支持FSM的小伙伴们" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="529" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="86,866,0,0"/>
+                                    <GroupBox Header="开源与开源许可" HorizontalAlignment="Left" Height="716" Margin="5,927,0,0" VerticalAlignment="Top" Width="651" FontSize="22">
                                         <Grid HorizontalAlignment="Left" Height="1145" Margin="0,-2,0,-490.2" VerticalAlignment="Top" Width="645">
                                             <Label Content="本软件GPL-3.0协议开源" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="336" Foreground="White" FontSize="24" FontFamily="Leelawadee UI" Margin="9,3,0,0"/>
                                             <mah1:Tile Content="仓库地址" HorizontalAlignment="Left" Height="32" Margin="354,9,0,0" VerticalAlignment="Top" Width="275" FontSize="20" VerticalTitleAlignment="Center" Click="Tile_Click_16"/>
@@ -1026,6 +943,18 @@ Height="85" Foreground="#FF4B4B4B" ><Run Text="请注意,免密登录指的是�
                 <Grid.Background>
                     <ImageBrush/>
                 </Grid.Background>
+                <Border CornerRadius="8,8,8,8" BorderBrush="#FFB3D4F7" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="3,11,0,0" VerticalAlignment="Top" Width="786">
+                    <Border.Background>
+                        <SolidColorBrush Color="#FFF4F4F4" Opacity="0.88"/>
+                    </Border.Background>
+                    <StackPanel />
+                </Border>
+                <Border CornerRadius="8,8,8,8" BorderBrush="#FFB3D4F7" BorderThickness="1" HorizontalAlignment="Left" Height="75" Margin="3,335,0,0" VerticalAlignment="Top" Width="786">
+                    <Border.Background>
+                        <SolidColorBrush Color="#FFF4F4F4" Opacity="0.88"/>
+                    </Border.Background>
+                    <StackPanel />
+                </Border>
                 <ProgressBar x:Name="DownPro" HorizontalAlignment="Left" Height="19" Margin="13,384,0,0" VerticalAlignment="Top" Width="768" Style="{DynamicResource MahApps.Styles.ProgressBar}" Background="#FFD5D5D9" Maximum="51"/>
                 <mah1:MetroProgressBar
             Width="767"
@@ -1036,6 +965,10 @@ Height="85" Foreground="#FF4B4B4B" ><Run Text="请注意,免密登录指的是�
             IsIndeterminate="True"
             Visibility="Visible" />
                 <Label Content="正在安装Minecraft" HorizontalAlignment="Left" Margin="26,24,0,0" VerticalAlignment="Top" Foreground="#DD000000" FontSize="22"/>
+                <Label Content="只需一杯咖啡的时间,您就能体验到Minecraft的快乐" HorizontalAlignment="Left" Height="27" Margin="25,60,0,0" VerticalAlignment="Top" Width="291" Foreground="#DD2C2C2C"/>
+                <Image x:Name="DownloadI" HorizontalAlignment="Left" Height="41" Margin="685,20,0,0" VerticalAlignment="Top" Width="41" Source="Image/0E885BB0.PNG" Stretch="UniformToFill"/>
+                <Label x:Name="DownloadL" Content="原版Minecraft" HorizontalAlignment="Left" Margin="455,67,0,0" VerticalAlignment="Top" Foreground="#DD252425" FontSize="22" Width="326" HorizontalContentAlignment="Right"/>
+                <Label x:Name="AZBZ" Content="当前步骤:安装Jar" HorizontalAlignment="Left" Height="27" Margin="285,338,0,0" VerticalAlignment="Top" Width="230" FontSize="13" Background="{x:Null}" Foreground="#DD494747" FontFamily="Segoe UI" HorizontalContentAlignment="Center"/>
             </Grid>
         </TabItem>
         <TabItem Header="皮肤库" Margin="229,-118,-229,152" MouseDoubleClick="TabItem_MouseDoubleClick">
@@ -1073,6 +1006,16 @@ Height="85" Foreground="#FF4B4B4B" ><Run Text="请注意,免密登录指的是�
                             <ListBox x:Name="OnLineSkinList" HorizontalAlignment="Left" Height="345" Margin="264,16,0,0" VerticalAlignment="Top" Width="510" SelectionChanged="OnLineSkinList_Skin"/>
                             <Button Content="删除一个皮肤" HorizontalAlignment="Left" Height="36" Margin="5,363,0,0" VerticalAlignment="Top" Width="249" Background="#FFCB040F" Click="Button_Click_41"/>
                             <Button x:Name="XZ" Content="新增一个皮肤" HorizontalAlignment="Left" Height="36" Margin="5,323,0,0" VerticalAlignment="Top" Width="249" Background="#FF3D9FEE" Click="Button_Click_4XXXX"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="TabItem" Margin="-491.6,42,491.4,-41.6">
+                        <TabItem.Background>
+                            <ImageBrush/>
+                        </TabItem.Background>
+                        <Grid Margin="0,-42,-0.4,-0.4">
+                            <Grid.Background>
+                                <ImageBrush/>
+                            </Grid.Background>
                         </Grid>
                     </TabItem>
                 </TabControl>

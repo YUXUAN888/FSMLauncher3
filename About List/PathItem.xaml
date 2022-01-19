@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:FSMLauncher_3.About_List" Height="41.02" Width="329.396">
     <Grid>
         <Image HorizontalAlignment="Left" Height="34" Margin="5,4,0,0" VerticalAlignment="Top" Width="35" Source="/FSMLauncher_3;component/Image/多文件夹.png"/>
-        <Label Content="一个游戏文件夹" HorizontalAlignment="Left" Height="25" Margin="44,2,0,0" VerticalAlignment="Top" Width="101" Foreground="#DD1D1C1C" FontSize="13"/>
+        <Label x:Name="WJJBT" Content="一个游戏文件夹" HorizontalAlignment="Left" Height="24" Margin="44,2,0,0" VerticalAlignment="Top" Width="156" Foreground="#DD1D1C1C" FontSize="13"/>
         <Label x:Name="Path" Content="一个游戏文件夹" HorizontalAlignment="Left" Height="19" Margin="44,22,0,-0.2" VerticalAlignment="Top" Width="283" Foreground="#DD151515" FontSize="9"/>
 
     </Grid>

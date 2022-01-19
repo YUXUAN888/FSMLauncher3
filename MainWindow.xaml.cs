@@ -40,6 +40,10 @@ using SquareMinecraftLauncher.Core.Curseforge;
 using MojangAPI.Model;
 using MojangAPI;
 using System.Net.Http;
+using SquareMinecraftLauncher.Minecraft.MCServerPing;
+using System.Windows.Interop;
+using Walterlv.Windows.Effects;
+using System.Linq;
 //using SquareMinecraftLauncherSkin;
 
 namespace FSMLauncher_3
@@ -112,7 +116,7 @@ namespace FSMLauncher_3
 
             }
         }
-
+        
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Close();
@@ -482,7 +486,7 @@ namespace FSMLauncher_3
             //Thread y = new Thread(yy);
             //y.Start();
             ServicePointManager.DefaultConnectionLimit = 512;
-            Update = "Beta14";///每次更新启动器设置，启动器当前版本号
+            Update = "Beta15";///每次更新启动器设置，启动器当前版本号
             Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + @"FSM");
             String File_ = System.AppDomain.CurrentDomain.BaseDirectory + @"FSM";
             StringBuilder temp = new StringBuilder();
@@ -506,6 +510,8 @@ namespace FSMLauncher_3
             WR = FSM.CreateSubKey("WR");
             XK = FSM.CreateSubKey("XK");
             */
+            //WindowAccentCompositor.BlurSupportedLevel le = new WindowAccentCompositor.BlurSupportedLevel();
+            //le = WindowAccentCompositor.BlurSupportedLevel.Aero;
             rams.Maximum = MemoryAvailable / 1024 / 1024;
             rams.Value = int.Parse(Bit.Text);
             dminecraft_text.Text = System.AppDomain.CurrentDomain.BaseDirectory + @".minecraft";
@@ -643,9 +649,15 @@ namespace FSMLauncher_3
 
             //DOWNLOADTHREAD = int.Parse(IniReadValue("Download", "Thread"));
 
+            List<PathItem> user1 = new List<PathItem>();
 
+            PathItem user = new PathItem();
+            // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
+            user.Path.Content = dminecraft_text.Text;
+            user.WJJBT.Content = "启动器目录文件夹";
+            pathlist.Items.Add(user);
 
-//Console.WriteLine("---------------------------------------------------");
+            //Console.WriteLine("---------------------------------------------------");
 
             //if (IniReadValueW("Start", "Start") == "1")
             //{
@@ -656,7 +668,7 @@ namespace FSMLauncher_3
             //    Main1.ShowDialog();
             //}
 
-            if(IniReadValue("Image","lj") != "")
+            if (IniReadValue("Image","lj") != "")
             {
                 if(IniReadValue("Image","SF") == "1")
                 {
@@ -2213,58 +2225,6 @@ namespace FSMLauncher_3
             {
 
                 str = "Error";
-            }
-            try
-            {
-                foreach (processId1 item in GetProcessId(criteriaOne))
-                {
-                    KillProcessid(item.processId01);
-                    str += "已结束   " + item.processId01 + "\n";
-                }
-            }
-            catch
-            {
-
-                str = "Error";
-            }
-            try
-            {
-                foreach (processId1 item in GetProcessId(criteriaOne))
-                {
-                    KillProcessid(item.processId01);
-                    str += "已结束   " + item.processId01 + "\n";
-                }
-            }
-            catch
-            {
-
-                str = "Error";
-            }
-            try
-            {
-                foreach (processId1 item in GetProcessId(criteriaOne))
-                {
-                    KillProcessid(item.processId01);
-                    str += "已结束   " + item.processId01 + "\n";
-                }
-            }
-            catch
-            {
-
-                str = "Error";
-            }
-            try
-            {
-                foreach (processId1 item in GetProcessId(criteriaOne))
-                {
-                    KillProcessid(item.processId01);
-                    str += "已结束   " + item.processId01 + "\n";
-                }
-            }
-            catch
-            {
-
-                str = "Error";
                 try
                 {
                     foreach (processId1 item in GetProcessId(criteriaOne))
@@ -2342,11 +2302,6 @@ namespace FSMLauncher_3
                 p.Kill();
             }
             System.Diagnostics.Process[] process122221 = System.Diagnostics.Process.GetProcessesByName("FSM3");
-            foreach (System.Diagnostics.Process p in process)
-            {
-                p.Kill();
-            }
-            System.Diagnostics.Process[] process2222121 = System.Diagnostics.Process.GetProcessesByName("frpc.exe");
             foreach (System.Diagnostics.Process p in process)
             {
                 p.Kill();
@@ -2969,9 +2924,9 @@ namespace FSMLauncher_3
                 {
                     AllTheExistingVersion[] t = new AllTheExistingVersion[0];
                     pathlist.SelectedIndex = int.Parse(IniReadValue("Vlist", "Path"));
-                    tools.SetMinecraftFilesPath(IniReadValue("VPath", IniReadValue("Vlist", "Path")));
+                    //tools.SetMinecraftFilesPath(IniReadValue("VPath", IniReadValue("Vlist", "Path")));
 
-                    t = tools.GetAllTheExistingVersion();
+                    //t = tools.GetAllTheExistingVersion();
 
 
                     vlist.SelectedIndex = int.Parse(IniReadValue("Vlist", "V"));
@@ -3999,7 +3954,7 @@ namespace FSMLauncher_3
                             BitmapImage bi = new BitmapImage();
                             // BitmapImage.UriSource must be in a BeginInit/EndInit block.  
                             bi.BeginInit();
-                            bi.UriSource = new Uri(@"\Image\20140521134310.png", UriKind.RelativeOrAbsolute);
+                            bi.UriSource = new Uri(@"\Image\ForgeN.png", UriKind.RelativeOrAbsolute);
                             bi.EndInit();
                             user.DverV.Content = t[i].version;
                             user.Dimage.Source = bi;
@@ -4357,7 +4312,7 @@ namespace FSMLauncher_3
                     foreach (var i in File)
                     {
                         int aa = Download(i.path, "补全", i.Url);
-                        //MessageBox.Show("w");
+                        AZBZ.Content = "补全Libraries";
                     }
                     //libraries2 = sz.id;
                     return false;
@@ -4541,6 +4496,16 @@ namespace FSMLauncher_3
             try
             {
                 Tab1.SelectedIndex = 8;
+                if(inforge == 1)
+                {
+                    DownloadL.Content = "Forge+Minecraft";
+                }else if(inopt == 1)
+                {
+                    DownloadL.Content = "Optifine+Minecraft";
+                }else if(infab == 1)
+                {
+                    DownloadL.Content = "Fabric+Minecraft";
+                }
                 tools.DownloadSourceInitialization(QJDown);
                 MCDownload download = MinecraftDownload.MCjarDownload(mcVersionLists[MCV.SelectedIndex].version);
                 JarID = Download(download.path, "", download.Url);
@@ -4576,7 +4541,7 @@ namespace FSMLauncher_3
         {
             // MessageBox.Show("2");
             Console.WriteLine(Log.FinishFile + "/" + Log.AllFile + "  " + Log.Progress + "  " + Log.Speed);
-
+            this.Dispatcher.Invoke(new Action(delegate { AZBZ.Content = "当前步骤:补全Assets"; }));
             this.Dispatcher.Invoke(new Action(delegate { DownPro.Value = Log.Progress; }));
             if (Log.Progress == 100)
             {
@@ -4616,6 +4581,7 @@ namespace FSMLauncher_3
                             Jarw.Stop();
                             ///Lod.SetIndeterminate();
                             //安装optifine和Forge
+                            AZBZ.Content = "当前步骤:安装Forge";
                             ddd = mcd.ForgeDownload(mcVersionLists[MCV.SelectedIndex].version, ForgeVer);
 
                             bbb = Download(ddd.path, "Forge", ddd.Url);
@@ -4630,6 +4596,7 @@ namespace FSMLauncher_3
                             //安装Forge
                             ///   Lod.SetIndeterminate();
                             ddd = mcd.ForgeDownload(mcVersionLists[MCV.SelectedIndex].version, ForgeVer);
+                            AZBZ.Content = "当前步骤:安装Forge";
                             await tools.ForgeInstallation(ddd.path, mcVersionLists[MCV.SelectedIndex].version, Java_list.Text);
                             bbb = Download(ddd.path, "Forge", ddd.Url);
                             UPDATEW = Core5.timer(ForgeI, 5555);
@@ -4641,6 +4608,7 @@ namespace FSMLauncher_3
                     {
                         Jarw.Stop();
                         //安装Fabric
+                        AZBZ.Content = "当前步骤:安装Fabric";
                         await fabricmc.FabricmcVersionInstall(mcVersionLists[MCV.SelectedIndex].version, FabVer);
                         AssetDownload assetDownload = new AssetDownload();//asset下载类
                         assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
@@ -4665,12 +4633,21 @@ namespace FSMLauncher_3
                         //UPDATEW = Core5.timer(OptifineI, 5555);
                         //UPDATEW.Start();
                         //OptiFineList[] opt = new OptiFineList[0];
-                        
-                        ddd = mcd.DownloadOptifine(mcVersionLists[MCV.SelectedIndex].version,OptifineList.SelectedItem.ToString());
-                        bbb = Download(System.AppDomain.CurrentDomain.BaseDirectory + @"SquareMinecraftLauncher\OptiFine\"+ OptifineList.SelectedItem.ToString(), "Optifine", ddd.Url);
-                        UPDATEW = Core5.timer(OptifineI, 5555);
-                        UPDATEW.Start();
 
+                        //ddd = mcd.DownloadOptifine(mcVersionLists[MCV.SelectedIndex].version,OptifineList.SelectedItem.ToString());
+                        //bbb = Download(System.AppDomain.CurrentDomain.BaseDirectory + @"SquareMinecraftLauncher\OptiFine\"+ OptifineList.SelectedItem.ToString(), "Optifine", ddd.Url);
+                        //UPDATEW = Core5.timer(OptifineI, 5555);
+                        //UPDATEW.Start();
+                        AZBZ.Content = "当前步骤:安装Optifine";
+                        if (await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, optpatch, Java_list.Text))
+                        {
+                            AssetDownload assetDownload = new AssetDownload();//asset下载类
+                            assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
+
+                            await libraries(mcVersionLists[MCV.SelectedIndex].version);
+
+                            await assetDownload.BuildAssetDownload(DOWNLOADTHREAD, mcVersionLists[MCV.SelectedIndex].version);//构建下载
+                        }
 
 
 
@@ -4772,7 +4749,7 @@ namespace FSMLauncher_3
             {
                 UPDATEW.Stop();
                 UPDATEW.Stop();
-                if (await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, optpatch))
+                if (await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, optpatch,Java_list.Text))
                 {
                     AssetDownload assetDownload = new AssetDownload();//asset下载类
                     assetDownload.DownloadProgressChanged += AssetDownload_DownloadProgressChanged;//事件
@@ -4804,6 +4781,7 @@ namespace FSMLauncher_3
             if (DIYvar.xzItems[bbb].xzwz == "完成")
             {
                 UPDATEW.Stop();
+                AZBZ.Content = "当前步骤:安装Optifine";
                 await tools.ForgeInstallation(ddd.path, mcVersionLists[MCV.SelectedIndex].version, Java_list.Text);
                 ddd = mcd.DownloadOptifine(mcVersionLists[MCV.SelectedIndex].version, OptVer);
                 Directory.CreateDirectory(pathlist.SelectedItem + @"\mods");
@@ -4919,10 +4897,7 @@ namespace FSMLauncher_3
                 WebClient MyWebClient = new WebClient();
                 MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
                 StringBuilder sb = new StringBuilder();
-                String pageData = MyWebClient.DownloadString("http://119.29.66.223/"); //从指定网站下载数据
-                pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://119.29.66.223/"));
-                byte[] buff = Convert.FromBase64String(pageData);
-                string decStr = System.Text.Encoding.Default.GetString(buff);
+                
                 if (lj == 1)
                 {
                     WritePrivateProfileString("common", "server_addr", "gz1.qwq.one", FileOnlineServer + @"\frpc.ini");
@@ -5032,11 +5007,7 @@ namespace FSMLauncher_3
                 {
                     WebClient MyWebClient = new WebClient();
                     MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
-                    StringBuilder sb = new StringBuilder();
-                    String pageData = MyWebClient.DownloadString("http://119.29.66.223/"); //从指定网站下载数据
-                    pageData = Encoding.UTF8.GetString(MyWebClient.DownloadData("http://119.29.66.223/"));
-                    byte[] buff = Convert.FromBase64String(pageData);
-                    string decStr = System.Text.Encoding.Default.GetString(buff);
+                    
                     String yqm = await this.ShowInputAsync("请输入联机邀请码", "对方发来的邀请码");
                     if(yqm == MFLJ)
                     {
@@ -5361,7 +5332,6 @@ namespace FSMLauncher_3
             Tab1.SelectedIndex = 4;
             MoreTab.SelectedIndex = 0;
         }
-
         private async void Button_Click_32(object sender, RoutedEventArgs e)
         {
 
@@ -5411,36 +5381,15 @@ namespace FSMLauncher_3
             WritePrivateProfileString("JSM", "Color", "Olive", FileS);
             ThemeManager.Current.ChangeTheme(this, "Light.Olive");
         }
-        public static string jiema(string s)
-        {
-            System.Text.RegularExpressions.CaptureCollection cs =
-               System.Text.RegularExpressions.Regex.Match(s, @"([01]{8})+").Groups[1].Captures;
-            byte[] data = new byte[cs.Count];
-            for (int i = 0; i < cs.Count; i++)
-            {
-                data[i] = Convert.ToByte(cs[i].Value, 2);
-            }
-            return Encoding.Unicode.GetString(data, 0, data.Length);
-        }
-        public static string bianma(string s)
-        {
-            byte[] data = Encoding.Unicode.GetBytes(s);
-            StringBuilder result = new StringBuilder(data.Length * 8);
-
-            foreach (byte b in data)
-            {
-                result.Append(Convert.ToString(b, 2).PadLeft(8, '0'));
-            }
-            return result.ToString();
-        }
+        
         private void Button_Click_36(object sender, RoutedEventArgs e)
         {
-             
+            
         }
 
         private void Button_Click_37(object sender, RoutedEventArgs e)
         {
-             
+            
         }
 
         private void Button_Click_38(object sender, RoutedEventArgs e)
@@ -5534,7 +5483,7 @@ namespace FSMLauncher_3
 
         private async void Button_Click_40(object sender, RoutedEventArgs e)
         {
-            await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, optpatch);
+            await tools.OptifineInstall(mcVersionLists[MCV.SelectedIndex].version, optpatch,Java_list.Text);
         }
 
         private void Button_Click_41(object sender, RoutedEventArgs e)
@@ -5719,7 +5668,7 @@ namespace FSMLauncher_3
                             //Console.WriteLine(CurseDown.Url);
                             item1.Add(itemw);
                         }
-                        for (int i = 0; i < item4.Count; ++i)
+                        for (int i = 0; i < item4.Length; ++i)
                         {
                             //gamevcurse[i] = item4[i].gameVersionLatestFiles
                         }
@@ -6198,7 +6147,7 @@ namespace FSMLauncher_3
                             //Console.WriteLine(CurseDown.Url);
                             item1.Add(itemw);
                         }
-                        for (int i = 0; i < item4.Count; ++i)
+                        for (int i = 0; i < item4.Length; ++i)
                         {
                             //gamevcurse[i] = item4[i].gameVersionLatestFiles
                         }
@@ -6251,6 +6200,8 @@ namespace FSMLauncher_3
                 WritePrivateProfileString("Image", "SF", "w", FileS);
             }
         }
+
+        
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {

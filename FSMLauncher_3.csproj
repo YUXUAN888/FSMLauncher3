@@ -234,6 +234,7 @@
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="var.cs" />
+    <Compile Include="WindowAccentCompositor.cs" />
     <Page Include="About List\CurseList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -440,6 +441,7 @@
     <Resource Include="Image\多文件夹.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\ForgeN.png" />
     <Content Include="Other L\CS.h" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
