@@ -1,4 +1,4 @@
-# FSMLauncher3
+# FSMLauncher3(已废弃，请移步到UI重构版：https://github.com/YUXUAN888/FSM3)
 A Minecraft Launcher!
 
 此项目开源目的在于学习，错误排查，公开安全策略  
